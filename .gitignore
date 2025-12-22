@@ -1,0 +1,40 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+.codex
+.trash
+.utgen
+# Ignore Gradle build output directory
+
+# IDE
+.idea
+.vscode
+*.iml
+.classpath
+.project
+.settings
+
+# Python
+.venv
+__pycache__
+*.pyc
+
+# Build outputs
+build/
+app/build/
+bin
+target
+out
+logs
+app/logs/
+
+# Generated files
+analysis.json
+tasks.jsonl
+results.jsonl
+*.log
+run_log.txt
+
+# Temp
+.attach_pid*
+
+
