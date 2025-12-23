@@ -8,94 +8,117 @@ import static org.junit.jupiter.api.Assertions.*;
 class ComplexInvoiceService_InvoiceItem_InvoiceItemGeneratedTest {
 
     @Test
-    void shouldCreateInvoiceItemWithValidInputs() {
+    void shouldCreateInvoiceItem_withValidInputs() {
         // arrange
         String itemId = "item123";
         String category = "ELECTRONICS";
-        double unitPrice = 99.99;
+        double unitPrice = 299.99;
         int quantity = 5;
         boolean isTaxable = true;
         boolean isDiscountable = false;
 
         // act
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(itemId, category, unitPrice, quantity, isTaxable, isDiscountable);
+        ComplexInvoiceService.InvoiceItem invoiceItem = new ComplexInvoiceService.InvoiceItem(
+                itemId, category, unitPrice, quantity, isTaxable, isDiscountable);
 
         // assert
-        assertEquals(itemId, item.getItemId());
-        assertEquals(category, item.getCategory());
-        assertEquals(unitPrice, item.getUnitPrice());
-        assertEquals(quantity, item.getQuantity());
-        assertEquals(isTaxable, item.isTaxable());
-        assertEquals(isDiscountable, item.isDiscountable());
+        assertEquals(itemId, invoiceItem.getItemId());
+        assertEquals(category, invoiceItem.getCategory());
+        assertEquals(unitPrice, invoiceItem.getUnitPrice());
+        assertEquals(quantity, invoiceItem.getQuantity());
+        assertEquals(isTaxable, invoiceItem.isTaxable());
+        assertEquals(isDiscountable, invoiceItem.isDiscountable());
     }
 
     @Test
-    void shouldHandleZeroQuantity() {
+    void shouldCreateInvoiceItem_withZeroQuantity() {
         // arrange
-        String itemId = "itemZero";
-        String category = "BOOKS";
-        double unitPrice = 10.0;
+        String itemId = "item124";
+        String category = "GROCERY";
+        double unitPrice = 19.99;
         int quantity = 0;
         boolean isTaxable = false;
         boolean isDiscountable = true;
 
         // act
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(itemId, category, unitPrice, quantity, isTaxable, isDiscountable);
+        ComplexInvoiceService.InvoiceItem invoiceItem = new ComplexInvoiceService.InvoiceItem(
+                itemId, category, unitPrice, quantity, isTaxable, isDiscountable);
 
         // assert
-        assertEquals(quantity, item.getQuantity());
+        assertEquals(itemId, invoiceItem.getItemId());
+        assertEquals(category, invoiceItem.getCategory());
+        assertEquals(unitPrice, invoiceItem.getUnitPrice());
+        assertEquals(quantity, invoiceItem.getQuantity());
+        assertEquals(isTaxable, invoiceItem.isTaxable());
+        assertEquals(isDiscountable, invoiceItem.isDiscountable());
     }
 
     @Test
-    void shouldHandleNegativeUnitPrice() {
+    void shouldCreateInvoiceItem_withNegativePrice() {
         // arrange
-        String itemId = "itemNegative";
-        String category = "FOOD";
-        double unitPrice = -5.0;
-        int quantity = 1;
+        String itemId = "item125";
+        String category = "CLOTHING";
+        double unitPrice = -10.00;
+        int quantity = 3;
         boolean isTaxable = true;
         boolean isDiscountable = false;
 
         // act
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(itemId, category, unitPrice, quantity, isTaxable, isDiscountable);
+        ComplexInvoiceService.InvoiceItem invoiceItem = new ComplexInvoiceService.InvoiceItem(
+                itemId, category, unitPrice, quantity, isTaxable, isDiscountable);
 
         // assert
-        assertEquals(unitPrice, item.getUnitPrice());
+        assertEquals(itemId, invoiceItem.getItemId());
+        assertEquals(category, invoiceItem.getCategory());
+        assertEquals(unitPrice, invoiceItem.getUnitPrice());
+        assertEquals(quantity, invoiceItem.getQuantity());
+        assertEquals(isTaxable, invoiceItem.isTaxable());
+        assertEquals(isDiscountable, invoiceItem.isDiscountable());
     }
 
     @Test
-    void shouldCreateNonTaxableAndNonDiscountableItem() {
+    void shouldCreateInvoiceItem_withHighQuantity() {
         // arrange
-        String itemId = "itemNonTaxNonDisc";
-        String category = "CLOTHING";
-        double unitPrice = 50.0;
-        int quantity = 3;
+        String itemId = "item126";
+        String category = "OFFICE_SUPPLIES";
+        double unitPrice = 1.50;
+        int quantity = 100;
+        boolean isTaxable = false;
+        boolean isDiscountable = true;
+
+        // act
+        ComplexInvoiceService.InvoiceItem invoiceItem = new ComplexInvoiceService.InvoiceItem(
+                itemId, category, unitPrice, quantity, isTaxable, isDiscountable);
+
+        // assert
+        assertEquals(itemId, invoiceItem.getItemId());
+        assertEquals(category, invoiceItem.getCategory());
+        assertEquals(unitPrice, invoiceItem.getUnitPrice());
+        assertEquals(quantity, invoiceItem.getQuantity());
+        assertEquals(isTaxable, invoiceItem.isTaxable());
+        assertEquals(isDiscountable, invoiceItem.isDiscountable());
+    }
+
+    @Test
+    void shouldCreateInvoiceItem_withNonDiscountableAndNonTaxable() {
+        // arrange
+        String itemId = "item127";
+        String category = "BOOKS";
+        double unitPrice = 15.00;
+        int quantity = 2;
         boolean isTaxable = false;
         boolean isDiscountable = false;
 
         // act
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(itemId, category, unitPrice, quantity, isTaxable, isDiscountable);
+        ComplexInvoiceService.InvoiceItem invoiceItem = new ComplexInvoiceService.InvoiceItem(
+                itemId, category, unitPrice, quantity, isTaxable, isDiscountable);
 
         // assert
-        assertFalse(item.isTaxable());
-        assertFalse(item.isDiscountable());
-    }
-
-    @Test
-    void shouldCreateTaxableAndDiscountableItem() {
-        // arrange
-        String itemId = "itemTaxDisc";
-        String category = "GIFT";
-        double unitPrice = 20.0;
-        int quantity = 2;
-        boolean isTaxable = true;
-        boolean isDiscountable = true;
-
-        // act
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(itemId, category, unitPrice, quantity, isTaxable, isDiscountable);
-
-        // assert
-        assertTrue(item.isTaxable());
-        assertTrue(item.isDiscountable());
+        assertEquals(itemId, invoiceItem.getItemId());
+        assertEquals(category, invoiceItem.getCategory());
+        assertEquals(unitPrice, invoiceItem.getUnitPrice());
+        assertEquals(quantity, invoiceItem.getQuantity());
+        assertEquals(isTaxable, invoiceItem.isTaxable());
+        assertEquals(isDiscountable, invoiceItem.isDiscountable());
     }
 }

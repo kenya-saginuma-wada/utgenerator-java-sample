@@ -10,9 +10,10 @@ class StringUtil_toUpperCaseGeneratedTest {
     void shouldReturnNullWhenInputIsNull() {
         // arrange
         String input = null;
+        StringUtil stringUtil = new StringUtil();
 
         // act
-        String result = StringUtil.toUpperCase(input);
+        String result = stringUtil.toUpperCase(input);
 
         // assert
         assertNull(result);
@@ -22,45 +23,49 @@ class StringUtil_toUpperCaseGeneratedTest {
     void shouldReturnUpperCaseWhenInputIsLowerCase() {
         // arrange
         String input = "hello";
+        StringUtil stringUtil = new StringUtil();
 
         // act
-        String result = StringUtil.toUpperCase(input);
+        String result = stringUtil.toUpperCase(input);
 
         // assert
         assertEquals("HELLO", result);
     }
 
     @Test
-    void shouldReturnSameStringWhenInputIsAlreadyUpperCase() {
-        // arrange
-        String input = "WORLD";
-
-        // act
-        String result = StringUtil.toUpperCase(input);
-
-        // assert
-        assertEquals("WORLD", result);
-    }
-
-    @Test
-    void shouldHandleMixedCaseInput() {
+    void shouldReturnUpperCaseWhenInputIsMixedCase() {
         // arrange
         String input = "HeLLo WoRLd";
+        StringUtil stringUtil = new StringUtil();
 
         // act
-        String result = StringUtil.toUpperCase(input);
+        String result = stringUtil.toUpperCase(input);
 
         // assert
         assertEquals("HELLO WORLD", result);
     }
 
     @Test
-    void shouldHandleEmptyString() {
+    void shouldReturnSameStringWhenInputIsAlreadyUpperCase() {
         // arrange
-        String input = "";
+        String input = "HELLO";
+        StringUtil stringUtil = new StringUtil();
 
         // act
-        String result = StringUtil.toUpperCase(input);
+        String result = stringUtil.toUpperCase(input);
+
+        // assert
+        assertEquals("HELLO", result);
+    }
+
+    @Test
+    void shouldReturnEmptyStringWhenInputIsEmpty() {
+        // arrange
+        String input = "";
+        StringUtil stringUtil = new StringUtil();
+
+        // act
+        String result = stringUtil.toUpperCase(input);
 
         // assert
         assertEquals("", result);

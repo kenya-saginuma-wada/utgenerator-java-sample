@@ -7,61 +7,51 @@ import static org.junit.jupiter.api.Assertions.*;
 class StringUtil_isEmptyGeneratedTest {
 
     @Test
-    void shouldReturnTrueForNullInput() {
+    void shouldReturnTrueWhenStringIsNull() {
         // arrange
         String input = null;
-
         // act
         boolean result = StringUtil.isEmpty(input);
-
         // assert
         assertTrue(result);
     }
 
     @Test
-    void shouldReturnTrueForEmptyString() {
+    void shouldReturnTrueWhenStringIsEmpty() {
         // arrange
         String input = "";
-
         // act
         boolean result = StringUtil.isEmpty(input);
-
         // assert
         assertTrue(result);
     }
 
     @Test
-    void shouldReturnTrueForStringWithOnlySpaces() {
+    void shouldReturnTrueWhenStringIsWhitespace() {
         // arrange
         String input = "   ";
-
         // act
         boolean result = StringUtil.isEmpty(input);
-
         // assert
         assertTrue(result);
     }
 
     @Test
-    void shouldReturnFalseForNonEmptyString() {
+    void shouldReturnFalseWhenStringIsNotEmpty() {
         // arrange
         String input = "abc";
-
         // act
         boolean result = StringUtil.isEmpty(input);
-
         // assert
         assertFalse(result);
     }
 
     @Test
-    void shouldReturnFalseForStringWithLeadingAndTrailingSpaces() {
+    void shouldReturnFalseWhenStringHasNonWhitespaceCharacters() {
         // arrange
-        String input = "  abc  ";
-
+        String input = " a ";
         // act
         boolean result = StringUtil.isEmpty(input);
-
         // assert
         assertFalse(result);
     }

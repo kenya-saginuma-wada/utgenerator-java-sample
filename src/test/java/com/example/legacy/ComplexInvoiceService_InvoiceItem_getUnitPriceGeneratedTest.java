@@ -8,21 +8,23 @@ import static org.junit.jupiter.api.Assertions.*;
 class ComplexInvoiceService_InvoiceItem_getUnitPriceGeneratedTest {
 
     @Test
-    void getUnitPriceShouldReturnCorrectValueForPositivePrice() {
+    void shouldReturnCorrectUnitPrice_whenValidInput() {
         // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem("item1", "category1", 100.0, 1, true, true);
+        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
+                "item1", "category1", 99.99, 10, true, false);
 
         // act
         double unitPrice = item.getUnitPrice();
 
         // assert
-        assertEquals(100.0, unitPrice);
+        assertEquals(99.99, unitPrice);
     }
 
     @Test
-    void getUnitPriceShouldReturnCorrectValueForZeroPrice() {
+    void shouldReturnZeroUnitPrice_whenZeroPriceInput() {
         // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem("item2", "category2", 0.0, 1, false, false);
+        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
+                "item2", "category2", 0.0, 5, false, true);
 
         // act
         double unitPrice = item.getUnitPrice();
@@ -32,9 +34,10 @@ class ComplexInvoiceService_InvoiceItem_getUnitPriceGeneratedTest {
     }
 
     @Test
-    void getUnitPriceShouldReturnCorrectValueForNegativePrice() {
+    void shouldReturnNegativeUnitPrice_whenNegativePriceInput() {
         // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem("item3", "category3", -50.0, 1, false, true);
+        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
+                "item3", "category3", -50.0, 3, true, true);
 
         // act
         double unitPrice = item.getUnitPrice();
@@ -44,9 +47,10 @@ class ComplexInvoiceService_InvoiceItem_getUnitPriceGeneratedTest {
     }
 
     @Test
-    void getUnitPriceShouldReturnCorrectValueForHighPrecisionPrice() {
+    void shouldReturnCorrectUnitPrice_whenHighPrecisionPriceInput() {
         // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem("item4", "category4", 123.456789, 1, true, false);
+        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
+                "item4", "category4", 123.456789, 7, false, false);
 
         // act
         double unitPrice = item.getUnitPrice();
@@ -56,14 +60,15 @@ class ComplexInvoiceService_InvoiceItem_getUnitPriceGeneratedTest {
     }
 
     @Test
-    void getUnitPriceShouldReturnCorrectValueForLargePrice() {
+    void shouldReturnCorrectUnitPrice_whenSmallFractionalPriceInput() {
         // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem("item5", "category5", 1_000_000.0, 1, true, true);
+        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
+                "item5", "category5", 0.0001, 1, false, true);
 
         // act
         double unitPrice = item.getUnitPrice();
 
         // assert
-        assertEquals(1_000_000.0, unitPrice);
+        assertEquals(0.0001, unitPrice);
     }
 }

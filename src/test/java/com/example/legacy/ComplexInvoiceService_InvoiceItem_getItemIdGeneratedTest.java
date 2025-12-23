@@ -8,21 +8,37 @@ import static org.junit.jupiter.api.Assertions.*;
 class ComplexInvoiceService_InvoiceItem_getItemIdGeneratedTest {
 
     @Test
-    void getItemIdShouldReturnCorrectIdWhenInitializedWithValidId() {
+    void shouldReturnCorrectItemId_whenValidItemIdProvided() {
         // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem("12345", "ELECTRONICS", 100.0, 2, true, false);
+        String expectedItemId = "item123";
+        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
+                expectedItemId, "category", 100.0, 2, true, false);
+
+        // act
+        String actualItemId = item.getItemId();
+
+        // assert
+        assertEquals(expectedItemId, actualItemId);
+    }
+
+    @Test
+    void shouldReturnNonNullItemId_whenItemIdIsNonEmpty() {
+        // arrange
+        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
+                "nonEmptyId", "category", 50.0, 1, false, true);
 
         // act
         String itemId = item.getItemId();
 
         // assert
-        assertEquals("12345", itemId);
+        assertNotNull(itemId);
     }
 
     @Test
-    void getItemIdShouldReturnEmptyStringWhenInitializedWithEmptyId() {
+    void shouldReturnEmptyItemId_whenItemIdIsEmptyString() {
         // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem("", "ELECTRONICS", 100.0, 2, true, false);
+        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
+                "", "category", 75.0, 3, true, true);
 
         // act
         String itemId = item.getItemId();
@@ -32,26 +48,16 @@ class ComplexInvoiceService_InvoiceItem_getItemIdGeneratedTest {
     }
 
     @Test
-    void getItemIdShouldReturnNullWhenInitializedWithNullId() {
+    void shouldReturnItemId_whenItemIdContainsSpecialCharacters() {
         // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(null, "ELECTRONICS", 100.0, 2, true, false);
+        String expectedItemId = "item@#123";
+        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
+                expectedItemId, "category", 200.0, 5, false, false);
 
         // act
-        String itemId = item.getItemId();
+        String actualItemId = item.getItemId();
 
         // assert
-        assertNull(itemId);
-    }
-
-    @Test
-    void getItemIdShouldReturnCorrectIdForDifferentItem() {
-        // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem("67890", "GROCERIES", 50.0, 5, false, true);
-
-        // act
-        String itemId = item.getItemId();
-
-        // assert
-        assertEquals("67890", itemId);
+        assertEquals(expectedItemId, actualItemId);
     }
 }

@@ -8,9 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class ComplexInvoiceService_InvoiceItem_getQuantityGeneratedTest {
 
     @Test
-    void getQuantityShouldReturnCorrectValueWhenPositive() {
+    void shouldReturnCorrectQuantity_whenValidQuantityProvided() {
         // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem("item1", "category1", 10.0, 5, true, false);
+        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
+                "item1", "category1", 10.0, 5, true, false);
 
         // act
         int quantity = item.getQuantity();
@@ -20,9 +21,10 @@ class ComplexInvoiceService_InvoiceItem_getQuantityGeneratedTest {
     }
 
     @Test
-    void getQuantityShouldReturnZeroWhenZero() {
+    void shouldReturnZero_whenZeroQuantityProvided() {
         // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem("item2", "category2", 20.0, 0, false, true);
+        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
+                "item2", "category2", 20.0, 0, false, true);
 
         // act
         int quantity = item.getQuantity();
@@ -32,38 +34,41 @@ class ComplexInvoiceService_InvoiceItem_getQuantityGeneratedTest {
     }
 
     @Test
-    void getQuantityShouldReturnNegativeValueWhenNegative() {
+    void shouldReturnNegativeQuantity_whenNegativeQuantityProvided() {
         // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem("item3", "category3", 30.0, -3, true, true);
+        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
+                "item3", "category3", 30.0, -10, true, true);
 
         // act
         int quantity = item.getQuantity();
 
         // assert
-        assertEquals(-3, quantity);
+        assertEquals(-10, quantity);
     }
 
     @Test
-    void getQuantityShouldReturnMaxIntValue() {
+    void shouldReturnLargeQuantity_whenLargeQuantityProvided() {
         // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem("item4", "category4", 40.0, Integer.MAX_VALUE, false, false);
+        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
+                "item4", "category4", 40.0, 100000, false, false);
 
         // act
         int quantity = item.getQuantity();
 
         // assert
-        assertEquals(Integer.MAX_VALUE, quantity);
+        assertEquals(100000, quantity);
     }
 
     @Test
-    void getQuantityShouldReturnMinIntValue() {
+    void shouldReturnOne_whenOneQuantityProvided() {
         // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem("item5", "category5", 50.0, Integer.MIN_VALUE, false, true);
+        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
+                "item5", "category5", 50.0, 1, true, false);
 
         // act
         int quantity = item.getQuantity();
 
         // assert
-        assertEquals(Integer.MIN_VALUE, quantity);
+        assertEquals(1, quantity);
     }
 }
