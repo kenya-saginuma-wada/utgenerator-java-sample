@@ -11,51 +11,67 @@ class ComplexInvoiceService_InvoiceItem_getItemIdGeneratedTest {
     void shouldReturnCorrectItemId_whenValidItemIdProvided() {
         // arrange
         String expectedItemId = "item123";
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
-                expectedItemId, "category", 100.0, 2, true, false);
+        ComplexInvoiceService.InvoiceItem invoiceItem = new ComplexInvoiceService.InvoiceItem(
+                expectedItemId, "category", 10.0, 1, true, false);
 
         // act
-        String actualItemId = item.getItemId();
+        String actualItemId = invoiceItem.getItemId();
 
         // assert
         assertEquals(expectedItemId, actualItemId);
     }
 
     @Test
-    void shouldReturnNonNullItemId_whenItemIdIsNonEmpty() {
+    void shouldReturnNonNullItemId_whenItemIdIsEmptyString() {
         // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
-                "nonEmptyId", "category", 50.0, 1, false, true);
+        String expectedItemId = "";
+        ComplexInvoiceService.InvoiceItem invoiceItem = new ComplexInvoiceService.InvoiceItem(
+                expectedItemId, "category", 10.0, 1, true, false);
 
         // act
-        String itemId = item.getItemId();
+        String actualItemId = invoiceItem.getItemId();
 
         // assert
-        assertNotNull(itemId);
+        assertNotNull(actualItemId);
+        assertEquals(expectedItemId, actualItemId);
     }
 
     @Test
-    void shouldReturnEmptyItemId_whenItemIdIsEmptyString() {
+    void shouldReturnNonNullItemId_whenItemIdIsNull() {
         // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
-                "", "category", 75.0, 3, true, true);
+        ComplexInvoiceService.InvoiceItem invoiceItem = new ComplexInvoiceService.InvoiceItem(
+                null, "category", 10.0, 1, true, false);
 
         // act
-        String itemId = item.getItemId();
+        String actualItemId = invoiceItem.getItemId();
 
         // assert
-        assertEquals("", itemId);
+        assertNull(actualItemId);
     }
 
     @Test
-    void shouldReturnItemId_whenItemIdContainsSpecialCharacters() {
+    void shouldReturnCorrectItemId_whenItemIdContainsSpecialCharacters() {
         // arrange
         String expectedItemId = "item@#123";
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
-                expectedItemId, "category", 200.0, 5, false, false);
+        ComplexInvoiceService.InvoiceItem invoiceItem = new ComplexInvoiceService.InvoiceItem(
+                expectedItemId, "category", 10.0, 1, true, false);
 
         // act
-        String actualItemId = item.getItemId();
+        String actualItemId = invoiceItem.getItemId();
+
+        // assert
+        assertEquals(expectedItemId, actualItemId);
+    }
+
+    @Test
+    void shouldReturnCorrectItemId_whenItemIdContainsWhitespace() {
+        // arrange
+        String expectedItemId = "item 123";
+        ComplexInvoiceService.InvoiceItem invoiceItem = new ComplexInvoiceService.InvoiceItem(
+                expectedItemId, "category", 10.0, 1, true, false);
+
+        // act
+        String actualItemId = invoiceItem.getItemId();
 
         // assert
         assertEquals(expectedItemId, actualItemId);

@@ -1,63 +1,235 @@
-/*
- * ⚠️ UTGenerator WARNING: This test failed during generation execution.
- * Manual intervention is required. The test has been disabled.
- *
- * Last Error:
- * 
- * 122 tests completed, 1 failed
- * 
- * FAILURE: Build failed with an exception.
- * 
- * * What went wrong:
- * Execution failed for task ':test'.
- * > There were failing tests. See the report at: file:///tmp/utgen_iso_ComplexInvoiceService_calculateInvoiceGeneratedTest_20251223_234056_13628348903956688435/build/reports/tests/test/index.html
- * 
- * * Try:
- */
 package com.example.legacy;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-@Disabled("Generated test failed execution")
-class ComplexInvoiceServiceTest {
-
-    @Test
-    void calculateInvoice_basicFunctionality() {
-        ComplexInvoiceService service = new ComplexInvoiceService();
-        SimpleCustomerData customer = new SimpleCustomerData("email@example.com", "John", "123");
-        List<ComplexInvoiceService.InvoiceItem> items = List.of(
-                new ComplexInvoiceService.InvoiceItem("item1", "CATEGORY", 10.0, 1, false, false)
-        );
-        String regionCode = "US";
-        boolean isExpedited = false;
-        LocalDate processingDate = LocalDate.of(2024, 1, 1);
-
-        ComplexInvoiceService.CalculationResult result = service.calculateInvoice(customer, items, regionCode, isExpedited, processingDate);
-
-        assertNotNull(result);
-        assertEquals(true, result.success);
-        assertEquals(new BigDecimal("10.00"), result.totalAmount);
-    }
+class ComplexInvoiceService_calculateInvoiceGeneratedTest {
 
     @Test
-    void calculateInvoice_nullCustomer() {
+    void shouldFailWhenCustomerIsNull() {
+        // arrange
         ComplexInvoiceService service = new ComplexInvoiceService();
-        List<ComplexInvoiceService.InvoiceItem> items = List.of(
-                new ComplexInvoiceService.InvoiceItem("item1", "CATEGORY", 10.0, 1, false, false)
-        );
-        String regionCode = "US";
+        List<ComplexInvoiceService.InvoiceItem> items = new ArrayList<>();
+        items.add(new ComplexInvoiceService.InvoiceItem("item1", "category1", 100.0, 1, true, true));
+        String regionCode = "US_CA";
         boolean isExpedited = false;
-        LocalDate processingDate = LocalDate.of(2024, 1, 1);
+        LocalDate processingDate = LocalDate.of(2024, 1, 15);
 
+        // act
         ComplexInvoiceService.CalculationResult result = service.calculateInvoice(null, items, regionCode, isExpedited, processingDate);
 
-        assertNotNull(result);
-        assertEquals(false, result.success);
-        assertEquals("Customer cannot be null", result.errorMessages.get(0));
+        // assert
+        assertFalse(result.success);
+        assertTrue(result.errorMessages.contains("Customer cannot be null"));
     }
+
+    @Test
+    void shouldFailWhenItemsListIsNull() {
+        // arrange
+        ComplexInvoiceService service = new ComplexInvoiceService();
+        SimpleCustomerData customer = mock(SimpleCustomerData.class);
+        String regionCode = "US_CA";
+        boolean isExpedited = false;
+        LocalDate processingDate = LocalDate.of(2024, 1, 15);
+
+        // act
+        ComplexInvoiceService.CalculationResult result = service.calculateInvoice(customer, null, regionCode, isExpedited, processingDate);
+
+        // assert
+        assertFalse(result.success);
+        assertTrue(result.errorMessages.contains("Item list cannot be empty"));
+    }
+
+    @Test
+    void shouldFailWhenItemsListIsEmpty() {
+        // arrange
+        ComplexInvoiceService service = new ComplexInvoiceService();
+        SimpleCustomerData customer = mock(SimpleCustomerData.class);
+        List<ComplexInvoiceService.InvoiceItem> items = new ArrayList<>();
+        String regionCode = "US_CA";
+        boolean isExpedited = false;
+        LocalDate processingDate = LocalDate.of(2024, 1, 15);
+
+        // act
+        ComplexInvoiceService.CalculationResult result = service.calculateInvoice(customer, items, regionCode, isExpedited, processingDate);
+
+        // assert
+        assertFalse(result.success);
+        assertTrue(result.errorMessages.contains("Item list cannot be empty"));
+    }
+
+    @Test
+    void shouldFailWhenRegionCodeIsNull() {
+        // arrange
+        ComplexInvoiceService service = new ComplexInvoiceService();
+        SimpleCustomerData customer = mock(SimpleCustomerData.class);
+        List<ComplexInvoiceService.InvoiceItem> items = new ArrayList<>();
+        items.add(new ComplexInvoiceService.InvoiceItem("item1", "category1", 100.0, 1, true, true));
+        boolean isExpedited = false;
+        LocalDate processingDate = LocalDate.of(2024, 1, 15);
+
+        // act
+        ComplexInvoiceService.CalculationResult result = service.calculateInvoice(customer, items, null, isExpedited, processingDate);
+
+        // assert
+        assertFalse(result.success);
+        assertTrue(result.errorMessages.contains("Invalid region code"));
+    }
+
+    @Test
+    void shouldFailWhenRegionCodeIsEmpty() {
+        // arrange
+        ComplexInvoiceService service = new ComplexInvoiceService();
+        SimpleCustomerData customer = mock(SimpleCustomerData.class);
+        List<ComplexInvoiceService.InvoiceItem> items = new ArrayList<>();
+        items.add(new ComplexInvoiceService.InvoiceItem("item1", "category1", 100.0, 1, true, true));
+        String regionCode = "";
+        boolean isExpedited = false;
+        LocalDate processingDate = LocalDate.of(2024, 1, 15);
+
+        // act
+        ComplexInvoiceService.CalculationResult result = service.calculateInvoice(customer, items, regionCode, isExpedited, processingDate);
+
+        // assert
+        assertFalse(result.success);
+        assertTrue(result.errorMessages.contains("Invalid region code"));
+    }
+
+    @Test
+    void calculateInvoice_successForStandardCustomer() {
+        // arrange
+        ComplexInvoiceService service = new ComplexInvoiceService();
+        SimpleCustomerData customer = new SimpleCustomerData("john.doe@example.com", "John", "Standard");
+        List<ComplexInvoiceService.InvoiceItem> items = List.of(
+                new ComplexInvoiceService.InvoiceItem("item1", "ELECTRONICS", 100.0, 5, true, true)
+        );
+        String regionCode = "US_CA";
+        boolean isExpedited = false;
+        LocalDate processingDate = LocalDate.of(2024, 1, 15);
+
+        // act
+        ComplexInvoiceService.CalculationResult result = service.calculateInvoice(customer, items, regionCode, isExpedited, processingDate);
+
+        // assert
+        assertNotNull(result);
+        assertTrue(result.success);
+        assertTrue(result.totalAmount.compareTo(BigDecimal.ZERO) > 0);
+        assertNotNull(result.taxAmount);
+        assertTrue(result.taxAmount.compareTo(BigDecimal.ZERO) >= 0);
+        assertNotNull(result.discountAmount);
+        assertTrue(result.discountAmount.compareTo(BigDecimal.ZERO) >= 0);
+    }
+
+    @Test
+    void calculateInvoice_successForGoldCustomerWithExpeditedShipping() {
+        // arrange
+        ComplexInvoiceService service = new ComplexInvoiceService();
+        SimpleCustomerData customer = new SimpleCustomerData("vip.partner@partner.com", "VIP Customer", "Gold");
+        List<ComplexInvoiceService.InvoiceItem> items = List.of(
+                new ComplexInvoiceService.InvoiceItem("item2", "GIFT", 200.0, 15, true, true)
+        );
+        String regionCode = "JP";
+        boolean isExpedited = true;
+        LocalDate processingDate = LocalDate.of(2024, 12, 20);
+
+        // act
+        ComplexInvoiceService.CalculationResult result = service.calculateInvoice(customer, items, regionCode, isExpedited, processingDate);
+
+        // assert
+        assertNotNull(result);
+        assertTrue(result.success);
+        assertTrue(result.totalAmount.compareTo(BigDecimal.ZERO) > 0);
+        assertNotNull(result.taxAmount);
+        assertTrue(result.taxAmount.compareTo(BigDecimal.ZERO) >= 0);
+        assertNotNull(result.discountAmount);
+        assertTrue(result.discountAmount.compareTo(BigDecimal.ZERO) >= 0);
+    }
+
+    @Test
+    void calculateInvoice_successForSilverCustomerWithBulkDiscount() {
+        // arrange
+        ComplexInvoiceService service = new ComplexInvoiceService();
+        SimpleCustomerData customer = new SimpleCustomerData("silver.customer@example.com", "VIP Silver", "Silver");
+        List<ComplexInvoiceService.InvoiceItem> items = List.of(
+                new ComplexInvoiceService.InvoiceItem("item3", "FOOD", 50.0, 20, true, true)
+        );
+        String regionCode = "EU_DE";
+        boolean isExpedited = false;
+        LocalDate processingDate = LocalDate.of(2024, 6, 10);
+
+        // act
+        ComplexInvoiceService.CalculationResult result = service.calculateInvoice(customer, items, regionCode, isExpedited, processingDate);
+
+        // assert
+        assertNotNull(result);
+        assertTrue(result.success);
+        assertTrue(result.totalAmount.compareTo(BigDecimal.ZERO) > 0);
+        assertNotNull(result.taxAmount);
+        assertTrue(result.taxAmount.compareTo(BigDecimal.ZERO) >= 0);
+        assertNotNull(result.discountAmount);
+        assertTrue(result.discountAmount.compareTo(BigDecimal.ZERO) >= 0);
+    }
+
+    @Test
+    void shouldHandleNegativeUnitPriceGracefully() {
+        // arrange
+        ComplexInvoiceService service = new ComplexInvoiceService();
+        SimpleCustomerData customer = new SimpleCustomerData("john.doe@example.com", "John", "Standard");
+        List<ComplexInvoiceService.InvoiceItem> items = new ArrayList<>();
+        items.add(new ComplexInvoiceService.InvoiceItem("item1", "ELECTRONICS", -50.0, 1, true, true));
+        String regionCode = "US_CA";
+        LocalDate processingDate = LocalDate.of(2024, 1, 15);
+
+        // act
+        ComplexInvoiceService.CalculationResult result = service.calculateInvoice(customer, items, regionCode, false, processingDate);
+
+        // assert
+        assertFalse(result.success);
+        assertTrue(result.errorMessages.contains("Critical Error: Negative price for item item1"));
+    }
+
+    @Test
+    void shouldContinueProcessingWithZeroQuantityItem() {
+        // arrange
+        ComplexInvoiceService service = new ComplexInvoiceService();
+        SimpleCustomerData customer = new SimpleCustomerData("jane.doe@example.com", "Jane", "Standard");
+        List<ComplexInvoiceService.InvoiceItem> items = new ArrayList<>();
+        items.add(new ComplexInvoiceService.InvoiceItem("item1", "ELECTRONICS", 100.0, 0, true, true));
+        items.add(new ComplexInvoiceService.InvoiceItem("item2", "ELECTRONICS", 100.0, 1, true, true));
+        String regionCode = "US_CA";
+        LocalDate processingDate = LocalDate.of(2024, 1, 15);
+
+        // act
+        ComplexInvoiceService.CalculationResult result = service.calculateInvoice(customer, items, regionCode, false, processingDate);
+
+        // assert
+        assertTrue(result.success);
+        assertTrue(result.errorMessages.contains("Item item1 (Index: 0) has invalid quantity."));
+        assertNotNull(result.totalAmount);
+    }
+
+    @Test
+    void shouldApplyCorrectTaxForRegionCodeJP() {
+        // arrange
+        ComplexInvoiceService service = new ComplexInvoiceService();
+        SimpleCustomerData customer = new SimpleCustomerData("vip.customer@partner.com", "VIP Customer", "Gold");
+        List<ComplexInvoiceService.InvoiceItem> items = new ArrayList<>();
+        items.add(new ComplexInvoiceService.InvoiceItem("item1", "FOOD", 100.0, 1, true, true));
+        String regionCode = "JP";
+        LocalDate processingDate = LocalDate.of(2024, 1, 15);
+
+        // act
+        ComplexInvoiceService.CalculationResult result = service.calculateInvoice(customer, items, regionCode, false, processingDate);
+
+        // assert
+        assertTrue(result.success);
+        assertNotNull(result.taxAmount);
+        assertEquals(0, result.taxAmount.compareTo(new BigDecimal("8.00"))); // 8% tax for FOOD in JP
+    }
+
 }

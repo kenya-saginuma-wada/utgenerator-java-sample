@@ -11,64 +11,51 @@ class ComplexInvoiceService_InvoiceItem_getUnitPriceGeneratedTest {
     void shouldReturnCorrectUnitPrice_whenValidInput() {
         // arrange
         ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
-                "item1", "category1", 99.99, 10, true, false);
+                "item1", "category1", 100.0, 5, true, true);
 
         // act
-        double unitPrice = item.getUnitPrice();
+        double result = item.getUnitPrice();
 
         // assert
-        assertEquals(99.99, unitPrice);
+        assertEquals(100.0, result);
     }
 
     @Test
-    void shouldReturnZeroUnitPrice_whenZeroPriceInput() {
+    void shouldReturnZeroUnitPrice_whenUnitPriceIsZero() {
         // arrange
         ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
-                "item2", "category2", 0.0, 5, false, true);
+                "item2", "category2", 0.0, 10, false, false);
 
         // act
-        double unitPrice = item.getUnitPrice();
+        double result = item.getUnitPrice();
 
         // assert
-        assertEquals(0.0, unitPrice);
+        assertEquals(0.0, result);
     }
 
     @Test
-    void shouldReturnNegativeUnitPrice_whenNegativePriceInput() {
+    void shouldReturnNegativeUnitPrice_whenUnitPriceIsNegative() {
         // arrange
         ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
-                "item3", "category3", -50.0, 3, true, true);
+                "item3", "category3", -50.0, 2, true, false);
 
         // act
-        double unitPrice = item.getUnitPrice();
+        double result = item.getUnitPrice();
 
         // assert
-        assertEquals(-50.0, unitPrice);
+        assertEquals(-50.0, result);
     }
 
     @Test
-    void shouldReturnCorrectUnitPrice_whenHighPrecisionPriceInput() {
+    void shouldReturnCorrectUnitPrice_whenUnitPriceIsDecimal() {
         // arrange
         ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
-                "item4", "category4", 123.456789, 7, false, false);
+                "item4", "category4", 99.99, 1, false, true);
 
         // act
-        double unitPrice = item.getUnitPrice();
+        double result = item.getUnitPrice();
 
         // assert
-        assertEquals(123.456789, unitPrice);
-    }
-
-    @Test
-    void shouldReturnCorrectUnitPrice_whenSmallFractionalPriceInput() {
-        // arrange
-        ComplexInvoiceService.InvoiceItem item = new ComplexInvoiceService.InvoiceItem(
-                "item5", "category5", 0.0001, 1, false, true);
-
-        // act
-        double unitPrice = item.getUnitPrice();
-
-        // assert
-        assertEquals(0.0001, unitPrice);
+        assertEquals(99.99, result);
     }
 }
