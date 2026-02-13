@@ -1,0 +1,750 @@
+{
+  "analysis_errors" : [ ],
+  "classes" : [ {
+    "abstract" : false,
+    "annotations" : [ ],
+    "anonymous" : false,
+    "deadCode" : false,
+    "extends_types" : [ ],
+    "fields" : [ {
+      "is_final" : true,
+      "is_injectable" : true,
+      "is_static" : false,
+      "mock_hint" : "required",
+      "name" : "paymentGateway",
+      "type" : "com.example.legacy.PaymentService.PaymentGateway",
+      "visibility" : "private"
+    }, {
+      "is_final" : true,
+      "is_injectable" : true,
+      "is_static" : false,
+      "mock_hint" : "required",
+      "name" : "notificationService",
+      "type" : "com.example.legacy.PaymentService.NotificationService",
+      "visibility" : "private"
+    }, {
+      "is_final" : true,
+      "is_injectable" : true,
+      "is_static" : false,
+      "mock_hint" : "required",
+      "name" : "paymentRepository",
+      "type" : "com.example.legacy.PaymentService.PaymentRepository",
+      "visibility" : "private"
+    } ],
+    "file_path" : "src/main/java/com/example/legacy/PaymentService.java",
+    "fqn" : "com.example.legacy.PaymentService",
+    "has_nested_classes" : true,
+    "implements_types" : [ ],
+    "imports" : [ "java.math.BigDecimal", "java.time.LocalDateTime", "java.util.List", "java.util.Optional" ],
+    "interface" : false,
+    "is_abstract" : false,
+    "is_anonymous" : false,
+    "is_dead_code" : false,
+    "is_interface" : false,
+    "is_nested_class" : false,
+    "loc" : 300,
+    "method_count" : 6,
+    "methods" : [ {
+      "annotations" : [ ],
+      "branch_summary" : {
+        "guards" : [ ],
+        "predicates" : [ ],
+        "switches" : [ ]
+      },
+      "brittle" : false,
+      "brittleness_signals" : [ ],
+      "called_method_refs" : [ ],
+      "called_methods" : [ ],
+      "code_hash" : "72dc88a5f1aeb38e19ddf02ede66e20351939800899f2cd17f050537cc39db87",
+      "cyclomatic_complexity" : 1,
+      "dead_code" : false,
+      "duplicate" : false,
+      "duplicate_group" : null,
+      "dynamicFeatureTotal" : 0,
+      "dynamic_feature_has_service_loader" : false,
+      "dynamic_feature_high" : 0,
+      "dynamic_feature_low" : 0,
+      "dynamic_feature_medium" : 0,
+      "dynamic_resolutions" : [ ],
+      "has_conditionals" : false,
+      "has_loops" : false,
+      "is_static" : false,
+      "loc" : 7,
+      "max_nesting_depth" : 0,
+      "method_id" : "com.example.legacy.PaymentService#PaymentService(com.example.legacy.PaymentGateway,com.example.legacy.NotificationService,com.example.legacy.PaymentRepository)",
+      "name" : "PaymentService",
+      "parameter_count" : 3,
+      "part_of_cycle" : false,
+      "raw_signatures" : [ "PaymentService(PaymentGateway, NotificationService, PaymentRepository)" ],
+      "representative_paths" : [ ],
+      "signature" : "PaymentService(PaymentGateway, NotificationService, PaymentRepository)",
+      "source_code" : "public PaymentService(PaymentGateway paymentGateway, NotificationService notificationService, PaymentRepository paymentRepository) {\n    this.paymentGateway = paymentGateway;\n    this.notificationService = notificationService;\n    this.paymentRepository = paymentRepository;\n}",
+      "static" : false,
+      "thrown_exceptions" : [ ],
+      "usage_count" : 0,
+      "uses_removed_apis" : false,
+      "visibility" : "public"
+    }, {
+      "annotations" : [ ],
+      "branch_summary" : {
+        "guards" : [ {
+          "condition" : "orderId == null || orderId.isBlank()",
+          "effects" : [ ],
+          "location" : "13:5",
+          "message_literal" : null,
+          "type" : "FAIL_GUARD"
+        }, {
+          "condition" : "amount == null || amount.compareTo(BigDecimal.ZERO) <= 0",
+          "effects" : [ ],
+          "location" : "16:5",
+          "message_literal" : null,
+          "type" : "FAIL_GUARD"
+        }, {
+          "condition" : "customerId == null || customerId.isBlank()",
+          "effects" : [ ],
+          "location" : "19:5",
+          "message_literal" : null,
+          "type" : "FAIL_GUARD"
+        }, {
+          "condition" : "!isValidPaymentMethod(paymentMethod)",
+          "effects" : [ ],
+          "location" : "22:5",
+          "message_literal" : null,
+          "type" : "FAIL_GUARD"
+        } ],
+        "predicates" : [ "amount == null", "amount.compareTo(BigDecimal.ZERO) <= 0", "customerId == null", "orderId == null" ],
+        "switches" : [ ]
+      },
+      "brittle" : false,
+      "brittleness_signals" : [ ],
+      "called_method_refs" : [ {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.util.Optional#get()",
+        "resolved" : "java.util.Optional#get()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.GatewayResponse#getTransactionId()",
+        "resolved" : "com.example.legacy.PaymentService.GatewayResponse#getTransactionId()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.lang.String#isBlank()",
+        "resolved" : "java.lang.String#isBlank()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.Payment#getStatus()",
+        "resolved" : "com.example.legacy.PaymentService.Payment#getStatus()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.PaymentRepository#save(com.example.legacy.PaymentService.Payment)",
+        "resolved" : "com.example.legacy.PaymentService.PaymentRepository#save(com.example.legacy.PaymentService.Payment)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ "\"COMPLETED\"" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.Payment#Payment(java.lang.String, java.lang.String, java.lang.String, java.math.BigDecimal, java.lang.String, java.lang.String, java.time.LocalDateTime)",
+        "resolved" : "com.example.legacy.PaymentService.Payment#Payment(java.lang.String, java.lang.String, java.lang.String, java.math.BigDecimal, java.lang.String, java.lang.String, java.time.LocalDateTime)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ "\"COMPLETED\"" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.lang.String#equals(java.lang.Object)",
+        "resolved" : "java.lang.String#equals(java.lang.Object)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.GatewayResponse#getErrorMessage()",
+        "resolved" : "com.example.legacy.PaymentService.GatewayResponse#getErrorMessage()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.math.BigDecimal#compareTo(java.math.BigDecimal)",
+        "resolved" : "java.math.BigDecimal#compareTo(java.math.BigDecimal)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.NotificationService#sendPaymentConfirmation(java.lang.String, java.lang.String, java.math.BigDecimal)",
+        "resolved" : "com.example.legacy.PaymentService.NotificationService#sendPaymentConfirmation(java.lang.String, java.lang.String, java.math.BigDecimal)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.PaymentRepository#findByOrderId(java.lang.String)",
+        "resolved" : "com.example.legacy.PaymentService.PaymentRepository#findByOrderId(java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ "\"Order ID is required\"", "\"Amount must be positive\"", "\"Customer ID is required\"" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.PaymentResult#failure(java.lang.String)",
+        "resolved" : "com.example.legacy.PaymentService.PaymentResult#failure(java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.util.Optional#isPresent()",
+        "resolved" : "java.util.Optional#isPresent()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService#isValidPaymentMethod(java.lang.String)",
+        "resolved" : "com.example.legacy.PaymentService#isValidPaymentMethod(java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.GatewayResponse#isSuccess()",
+        "resolved" : "com.example.legacy.PaymentService.GatewayResponse#isSuccess()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.time.LocalDateTime#now()",
+        "resolved" : "java.time.LocalDateTime#now()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.PaymentGateway#charge(java.lang.String, java.math.BigDecimal, java.lang.String)",
+        "resolved" : "com.example.legacy.PaymentService.PaymentGateway#charge(java.lang.String, java.math.BigDecimal, java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.PaymentResult#success(java.lang.String, java.math.BigDecimal)",
+        "resolved" : "com.example.legacy.PaymentService.PaymentResult#success(java.lang.String, java.math.BigDecimal)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService$Payment#com.example.legacy.PaymentService$Payment(java.lang.String,java.lang.String,java.lang.String,java.math.BigDecimal,java.lang.String,java.lang.String,java.time.LocalDateTime)",
+        "resolved" : "com.example.legacy.PaymentService$Payment#com.example.legacy.PaymentService$Payment(java.lang.String,java.lang.String,java.lang.String,java.math.BigDecimal,java.lang.String,java.lang.String,java.time.LocalDateTime)",
+        "source" : "spoon",
+        "status" : "RESOLVED"
+      } ],
+      "called_methods" : [ "java.util.Optional#get()", "com.example.legacy.PaymentService.GatewayResponse#getTransactionId()", "java.lang.String#isBlank()", "com.example.legacy.PaymentService.Payment#getStatus()", "com.example.legacy.PaymentService.PaymentRepository#save(com.example.legacy.PaymentService.Payment)", "com.example.legacy.PaymentService.Payment#Payment(java.lang.String, java.lang.String, java.lang.String, java.math.BigDecimal, java.lang.String, java.lang.String, java.time.LocalDateTime)", "java.lang.String#equals(java.lang.Object)", "com.example.legacy.PaymentService.GatewayResponse#getErrorMessage()", "java.math.BigDecimal#compareTo(java.math.BigDecimal)", "com.example.legacy.PaymentService.NotificationService#sendPaymentConfirmation(java.lang.String, java.lang.String, java.math.BigDecimal)", "com.example.legacy.PaymentService.PaymentRepository#findByOrderId(java.lang.String)", "com.example.legacy.PaymentService.PaymentResult#failure(java.lang.String)", "java.util.Optional#isPresent()", "com.example.legacy.PaymentService#isValidPaymentMethod(java.lang.String)", "com.example.legacy.PaymentService.GatewayResponse#isSuccess()", "java.time.LocalDateTime#now()", "com.example.legacy.PaymentService.PaymentGateway#charge(java.lang.String, java.math.BigDecimal, java.lang.String)", "com.example.legacy.PaymentService.PaymentResult#success(java.lang.String, java.math.BigDecimal)", "com.example.legacy.PaymentService$Payment#com.example.legacy.PaymentService$Payment(java.lang.String,java.lang.String,java.lang.String,java.math.BigDecimal,java.lang.String,java.lang.String,java.time.LocalDateTime)" ],
+      "code_hash" : "4182d887ec53695459f6f50dbff4d90edb116e64774f7718ed352d5c34fb2a75",
+      "cyclomatic_complexity" : 7,
+      "dead_code" : false,
+      "duplicate" : false,
+      "duplicate_group" : null,
+      "dynamicFeatureTotal" : 0,
+      "dynamic_feature_has_service_loader" : false,
+      "dynamic_feature_high" : 0,
+      "dynamic_feature_low" : 0,
+      "dynamic_feature_medium" : 0,
+      "dynamic_resolutions" : [ ],
+      "has_conditionals" : true,
+      "has_loops" : false,
+      "is_static" : false,
+      "loc" : 45,
+      "max_nesting_depth" : 1,
+      "method_id" : "com.example.legacy.PaymentService#processPayment(java.lang.String,java.math.BigDecimal,java.lang.String,java.lang.String)",
+      "name" : "processPayment",
+      "parameter_count" : 4,
+      "part_of_cycle" : false,
+      "raw_signatures" : [ "processPayment(String, BigDecimal, String, String)", "processPayment(java.lang.String,java.math.BigDecimal,java.lang.String,java.lang.String)" ],
+      "representative_paths" : [ {
+        "description" : "Early return path",
+        "expected_outcome_hint" : "early-return",
+        "id" : "path-1",
+        "required_conditions" : [ "orderId == null || orderId.isBlank()" ]
+      }, {
+        "description" : "Early return path",
+        "expected_outcome_hint" : "early-return",
+        "id" : "path-2",
+        "required_conditions" : [ "amount == null || amount.compareTo(BigDecimal.ZERO) <= 0" ]
+      }, {
+        "description" : "Early return path",
+        "expected_outcome_hint" : "early-return",
+        "id" : "path-3",
+        "required_conditions" : [ "customerId == null || customerId.isBlank()" ]
+      }, {
+        "description" : "Early return path",
+        "expected_outcome_hint" : "early-return",
+        "id" : "path-4",
+        "required_conditions" : [ "!isValidPaymentMethod(paymentMethod)" ]
+      }, {
+        "description" : "Main success path",
+        "expected_outcome_hint" : "success",
+        "id" : "path-9",
+        "required_conditions" : [ ]
+      }, {
+        "description" : "Boundary condition amount == null",
+        "expected_outcome_hint" : "boundary",
+        "id" : "path-5",
+        "required_conditions" : [ "amount == null" ]
+      }, {
+        "description" : "Boundary condition amount.compareTo(BigDecimal.ZERO) <= 0",
+        "expected_outcome_hint" : "boundary",
+        "id" : "path-6",
+        "required_conditions" : [ "amount.compareTo(BigDecimal.ZERO) <= 0" ]
+      }, {
+        "description" : "Boundary condition customerId == null",
+        "expected_outcome_hint" : "boundary",
+        "id" : "path-7",
+        "required_conditions" : [ "customerId == null" ]
+      }, {
+        "description" : "Boundary condition orderId == null",
+        "expected_outcome_hint" : "boundary",
+        "id" : "path-8",
+        "required_conditions" : [ "orderId == null" ]
+      } ],
+      "signature" : "processPayment(String, BigDecimal, String, String)",
+      "source_code" : "/**\n * Process a payment for an order.\n *\n * @param orderId       The order ID\n * @param amount        The payment amount\n * @param customerId    The customer ID\n * @param paymentMethod The payment method (CREDIT_CARD, DEBIT_CARD,\n *                      BANK_TRANSFER)\n * @return PaymentResult containing success status and transaction details\n */\npublic PaymentResult processPayment(String orderId, BigDecimal amount, String customerId, String paymentMethod) {\n    // Validate inputs\n    if (orderId == null || orderId.isBlank()) {\n        return PaymentResult.failure(\"Order ID is required\");\n    }\n    if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {\n        return PaymentResult.failure(\"Amount must be positive\");\n    }\n    if (customerId == null || customerId.isBlank()) {\n        return PaymentResult.failure(\"Customer ID is required\");\n    }\n    if (!isValidPaymentMethod(paymentMethod)) {\n        return PaymentResult.failure(\"Invalid payment method: \" + paymentMethod);\n    }\n    // Check for duplicate payment\n    Optional<Payment> existingPayment = paymentRepository.findByOrderId(orderId);\n    if (existingPayment.isPresent() && existingPayment.get().getStatus().equals(\"COMPLETED\")) {\n        return PaymentResult.failure(\"Payment already processed for order: \" + orderId);\n    }\n    // Process payment through gateway\n    GatewayResponse gatewayResponse = paymentGateway.charge(customerId, amount, paymentMethod);\n    if (!gatewayResponse.isSuccess()) {\n        return PaymentResult.failure(\"Payment gateway error: \" + gatewayResponse.getErrorMessage());\n    }\n    // Save payment record\n    Payment payment = new Payment(gatewayResponse.getTransactionId(), orderId, customerId, amount, paymentMethod, \"COMPLETED\", LocalDateTime.now());\n    paymentRepository.save(payment);\n    // Send notification\n    notificationService.sendPaymentConfirmation(customerId, orderId, amount);\n    return PaymentResult.success(gatewayResponse.getTransactionId(), amount);\n}",
+      "static" : false,
+      "thrown_exceptions" : [ ],
+      "usage_count" : 0,
+      "uses_removed_apis" : false,
+      "visibility" : "public"
+    }, {
+      "annotations" : [ ],
+      "branch_summary" : {
+        "guards" : [ {
+          "condition" : "transactionId == null || transactionId.isBlank()",
+          "effects" : [ ],
+          "location" : "9:5",
+          "message_literal" : null,
+          "type" : "FAIL_GUARD"
+        }, {
+          "condition" : "paymentOpt.isEmpty()",
+          "effects" : [ ],
+          "location" : "13:5",
+          "message_literal" : null,
+          "type" : "FAIL_GUARD"
+        } ],
+        "predicates" : [ "actualRefundAmount.compareTo(payment.getAmount()) > 0", "refundAmount != null", "transactionId == null" ],
+        "switches" : [ ]
+      },
+      "brittle" : false,
+      "brittleness_signals" : [ ],
+      "called_method_refs" : [ {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.Payment#getCustomerId()",
+        "resolved" : "com.example.legacy.PaymentService.Payment#getCustomerId()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.PaymentGateway#refund(java.lang.String, java.math.BigDecimal)",
+        "resolved" : "com.example.legacy.PaymentService.PaymentGateway#refund(java.lang.String, java.math.BigDecimal)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.RefundResult#success(java.lang.String, java.math.BigDecimal)",
+        "resolved" : "com.example.legacy.PaymentService.RefundResult#success(java.lang.String, java.math.BigDecimal)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.util.Optional#get()",
+        "resolved" : "java.util.Optional#get()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ "\"REFUNDED\"" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.Payment#setStatus(java.lang.String)",
+        "resolved" : "com.example.legacy.PaymentService.Payment#setStatus(java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ "\"Transaction ID is required\"", "\"Refund amount exceeds original payment\"" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.RefundResult#failure(java.lang.String)",
+        "resolved" : "com.example.legacy.PaymentService.RefundResult#failure(java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.Payment#getOrderId()",
+        "resolved" : "com.example.legacy.PaymentService.Payment#getOrderId()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.util.Optional#isEmpty()",
+        "resolved" : "java.util.Optional#isEmpty()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.GatewayResponse#getTransactionId()",
+        "resolved" : "com.example.legacy.PaymentService.GatewayResponse#getTransactionId()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.lang.String#isBlank()",
+        "resolved" : "java.lang.String#isBlank()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.PaymentRepository#save(com.example.legacy.PaymentService.Payment)",
+        "resolved" : "com.example.legacy.PaymentService.PaymentRepository#save(com.example.legacy.PaymentService.Payment)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.NotificationService#sendRefundConfirmation(java.lang.String, java.lang.String, java.math.BigDecimal)",
+        "resolved" : "com.example.legacy.PaymentService.NotificationService#sendRefundConfirmation(java.lang.String, java.lang.String, java.math.BigDecimal)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.GatewayResponse#getErrorMessage()",
+        "resolved" : "com.example.legacy.PaymentService.GatewayResponse#getErrorMessage()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.PaymentRepository#findByTransactionId(java.lang.String)",
+        "resolved" : "com.example.legacy.PaymentService.PaymentRepository#findByTransactionId(java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.math.BigDecimal#compareTo(java.math.BigDecimal)",
+        "resolved" : "java.math.BigDecimal#compareTo(java.math.BigDecimal)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.Payment#getAmount()",
+        "resolved" : "com.example.legacy.PaymentService.Payment#getAmount()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.GatewayResponse#isSuccess()",
+        "resolved" : "com.example.legacy.PaymentService.GatewayResponse#isSuccess()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      } ],
+      "called_methods" : [ "com.example.legacy.PaymentService.Payment#getCustomerId()", "com.example.legacy.PaymentService.PaymentGateway#refund(java.lang.String, java.math.BigDecimal)", "com.example.legacy.PaymentService.RefundResult#success(java.lang.String, java.math.BigDecimal)", "java.util.Optional#get()", "com.example.legacy.PaymentService.Payment#setStatus(java.lang.String)", "com.example.legacy.PaymentService.RefundResult#failure(java.lang.String)", "com.example.legacy.PaymentService.Payment#getOrderId()", "java.util.Optional#isEmpty()", "com.example.legacy.PaymentService.GatewayResponse#getTransactionId()", "java.lang.String#isBlank()", "com.example.legacy.PaymentService.PaymentRepository#save(com.example.legacy.PaymentService.Payment)", "com.example.legacy.PaymentService.NotificationService#sendRefundConfirmation(java.lang.String, java.lang.String, java.math.BigDecimal)", "com.example.legacy.PaymentService.GatewayResponse#getErrorMessage()", "com.example.legacy.PaymentService.PaymentRepository#findByTransactionId(java.lang.String)", "java.math.BigDecimal#compareTo(java.math.BigDecimal)", "com.example.legacy.PaymentService.Payment#getAmount()", "com.example.legacy.PaymentService.GatewayResponse#isSuccess()" ],
+      "code_hash" : "03e96d87826025dcf89d74a745895c1f1a7deb058a95cf831c2208fbdb77c6c1",
+      "cyclomatic_complexity" : 6,
+      "dead_code" : false,
+      "duplicate" : false,
+      "duplicate_group" : null,
+      "dynamicFeatureTotal" : 0,
+      "dynamic_feature_has_service_loader" : false,
+      "dynamic_feature_high" : 0,
+      "dynamic_feature_low" : 0,
+      "dynamic_feature_medium" : 0,
+      "dynamic_resolutions" : [ ],
+      "has_conditionals" : true,
+      "has_loops" : false,
+      "is_static" : false,
+      "loc" : 30,
+      "max_nesting_depth" : 1,
+      "method_id" : "com.example.legacy.PaymentService#refundPayment(java.lang.String,java.math.BigDecimal)",
+      "name" : "refundPayment",
+      "parameter_count" : 2,
+      "part_of_cycle" : false,
+      "raw_signatures" : [ "refundPayment(String, BigDecimal)", "refundPayment(java.lang.String,java.math.BigDecimal)" ],
+      "representative_paths" : [ {
+        "description" : "Early return path",
+        "expected_outcome_hint" : "early-return",
+        "id" : "path-1",
+        "required_conditions" : [ "transactionId == null || transactionId.isBlank()" ]
+      }, {
+        "description" : "Early return path",
+        "expected_outcome_hint" : "early-return",
+        "id" : "path-2",
+        "required_conditions" : [ "paymentOpt.isEmpty()" ]
+      }, {
+        "description" : "Main success path",
+        "expected_outcome_hint" : "success",
+        "id" : "path-4",
+        "required_conditions" : [ ]
+      }, {
+        "description" : "Boundary condition transactionId == null",
+        "expected_outcome_hint" : "boundary",
+        "id" : "path-3",
+        "required_conditions" : [ "transactionId == null" ]
+      } ],
+      "signature" : "refundPayment(String, BigDecimal)",
+      "source_code" : "/**\n * Refund a payment.\n *\n * @param transactionId The original transaction ID\n * @param refundAmount  The amount to refund (null for full refund)\n * @return RefundResult containing success status\n */\npublic RefundResult refundPayment(String transactionId, BigDecimal refundAmount) {\n    if (transactionId == null || transactionId.isBlank()) {\n        return RefundResult.failure(\"Transaction ID is required\");\n    }\n    Optional<Payment> paymentOpt = paymentRepository.findByTransactionId(transactionId);\n    if (paymentOpt.isEmpty()) {\n        return RefundResult.failure(\"Payment not found: \" + transactionId);\n    }\n    Payment payment = paymentOpt.get();\n    BigDecimal actualRefundAmount = refundAmount != null ? refundAmount : payment.getAmount();\n    if (actualRefundAmount.compareTo(payment.getAmount()) > 0) {\n        return RefundResult.failure(\"Refund amount exceeds original payment\");\n    }\n    GatewayResponse refundResponse = paymentGateway.refund(transactionId, actualRefundAmount);\n    if (!refundResponse.isSuccess()) {\n        return RefundResult.failure(\"Refund failed: \" + refundResponse.getErrorMessage());\n    }\n    payment.setStatus(\"REFUNDED\");\n    paymentRepository.save(payment);\n    notificationService.sendRefundConfirmation(payment.getCustomerId(), payment.getOrderId(), actualRefundAmount);\n    return RefundResult.success(refundResponse.getTransactionId(), actualRefundAmount);\n}",
+      "static" : false,
+      "thrown_exceptions" : [ ],
+      "usage_count" : 0,
+      "uses_removed_apis" : false,
+      "visibility" : "public"
+    }, {
+      "annotations" : [ ],
+      "branch_summary" : {
+        "guards" : [ {
+          "condition" : "customerId == null || customerId.isBlank()",
+          "effects" : [ ],
+          "location" : "5:5",
+          "message_literal" : null,
+          "type" : "FAIL_GUARD"
+        } ],
+        "predicates" : [ "customerId == null" ],
+        "switches" : [ ]
+      },
+      "brittle" : false,
+      "brittleness_signals" : [ ],
+      "called_method_refs" : [ {
+        "argument_literals" : [ "\"Customer ID is required\"" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.lang.IllegalArgumentException#IllegalArgumentException(java.lang.String)",
+        "resolved" : "java.lang.IllegalArgumentException#IllegalArgumentException(java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.lang.String#isBlank()",
+        "resolved" : "java.lang.String#isBlank()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.PaymentService.PaymentRepository#findByCustomerId(java.lang.String)",
+        "resolved" : "com.example.legacy.PaymentService.PaymentRepository#findByCustomerId(java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.lang.IllegalArgumentException#java.lang.IllegalArgumentException(java.lang.String)",
+        "resolved" : "java.lang.IllegalArgumentException#java.lang.IllegalArgumentException(java.lang.String)",
+        "source" : "spoon",
+        "status" : "RESOLVED"
+      } ],
+      "called_methods" : [ "java.lang.IllegalArgumentException#IllegalArgumentException(java.lang.String)", "java.lang.String#isBlank()", "com.example.legacy.PaymentService.PaymentRepository#findByCustomerId(java.lang.String)", "java.lang.IllegalArgumentException#java.lang.IllegalArgumentException(java.lang.String)" ],
+      "code_hash" : "df5a5eb5782f8a6cb3b0fa41ddd726f92add4948a714e750755d80bed38f6449",
+      "cyclomatic_complexity" : 2,
+      "dead_code" : false,
+      "duplicate" : false,
+      "duplicate_group" : null,
+      "dynamicFeatureTotal" : 0,
+      "dynamic_feature_has_service_loader" : false,
+      "dynamic_feature_high" : 0,
+      "dynamic_feature_low" : 0,
+      "dynamic_feature_medium" : 0,
+      "dynamic_resolutions" : [ ],
+      "has_conditionals" : true,
+      "has_loops" : false,
+      "is_static" : false,
+      "loc" : 6,
+      "max_nesting_depth" : 1,
+      "method_id" : "com.example.legacy.PaymentService#getPaymentHistory(java.lang.String)",
+      "name" : "getPaymentHistory",
+      "parameter_count" : 1,
+      "part_of_cycle" : false,
+      "raw_signatures" : [ "getPaymentHistory(String)", "getPaymentHistory(java.lang.String)" ],
+      "representative_paths" : [ {
+        "description" : "Exception throw path",
+        "expected_outcome_hint" : "failure",
+        "id" : "path-1",
+        "required_conditions" : [ "customerId == null || customerId.isBlank()" ]
+      }, {
+        "description" : "Main success path",
+        "expected_outcome_hint" : "success",
+        "id" : "path-3",
+        "required_conditions" : [ ]
+      }, {
+        "description" : "Boundary condition customerId == null",
+        "expected_outcome_hint" : "boundary",
+        "id" : "path-2",
+        "required_conditions" : [ "customerId == null" ]
+      } ],
+      "signature" : "getPaymentHistory(String)",
+      "source_code" : "/**\n * Get payment history for a customer.\n */\npublic List<Payment> getPaymentHistory(String customerId) {\n    if (customerId == null || customerId.isBlank()) {\n        throw new IllegalArgumentException(\"Customer ID is required\");\n    }\n    return paymentRepository.findByCustomerId(customerId);\n}",
+      "static" : false,
+      "thrown_exceptions" : [ "java.lang.IllegalArgumentException" ],
+      "usage_count" : 0,
+      "uses_removed_apis" : false,
+      "visibility" : "public"
+    }, {
+      "annotations" : [ ],
+      "branch_summary" : {
+        "guards" : [ ],
+        "predicates" : [ "method != null" ],
+        "switches" : [ ]
+      },
+      "brittle" : false,
+      "brittleness_signals" : [ ],
+      "called_method_refs" : [ {
+        "argument_literals" : [ "\"CREDIT_CARD\"", "\"DEBIT_CARD\"", "\"BANK_TRANSFER\"" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.lang.String#equals(java.lang.Object)",
+        "resolved" : "java.lang.String#equals(java.lang.Object)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      } ],
+      "called_methods" : [ "java.lang.String#equals(java.lang.Object)" ],
+      "code_hash" : "03c1775a7931120357b6228abede687915d818e0c82c7df314ae74903b5db0d4",
+      "cyclomatic_complexity" : 1,
+      "dead_code" : false,
+      "duplicate" : false,
+      "duplicate_group" : null,
+      "dynamicFeatureTotal" : 0,
+      "dynamic_feature_has_service_loader" : false,
+      "dynamic_feature_high" : 0,
+      "dynamic_feature_low" : 0,
+      "dynamic_feature_medium" : 0,
+      "dynamic_resolutions" : [ ],
+      "has_conditionals" : false,
+      "has_loops" : false,
+      "is_static" : false,
+      "loc" : 6,
+      "max_nesting_depth" : 0,
+      "method_id" : "com.example.legacy.PaymentService#isValidPaymentMethod(java.lang.String)",
+      "name" : "isValidPaymentMethod",
+      "parameter_count" : 1,
+      "part_of_cycle" : false,
+      "raw_signatures" : [ "isValidPaymentMethod(String)", "isValidPaymentMethod(java.lang.String)" ],
+      "representative_paths" : [ ],
+      "signature" : "isValidPaymentMethod(String)",
+      "source_code" : "private boolean isValidPaymentMethod(String method) {\n    return method != null && (method.equals(\"CREDIT_CARD\") || method.equals(\"DEBIT_CARD\") || method.equals(\"BANK_TRANSFER\"));\n}",
+      "static" : false,
+      "thrown_exceptions" : [ ],
+      "usage_count" : 1,
+      "uses_removed_apis" : false,
+      "visibility" : "private"
+    }, {
+      "annotations" : [ ],
+      "branch_summary" : {
+        "guards" : [ ],
+        "predicates" : [ ],
+        "switches" : [ ]
+      },
+      "brittle" : false,
+      "brittleness_signals" : [ ],
+      "called_method_refs" : [ {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.lang.Object#java.lang.Object()",
+        "resolved" : "java.lang.Object#java.lang.Object()",
+        "source" : "spoon",
+        "status" : "RESOLVED"
+      } ],
+      "called_methods" : [ "java.lang.Object#java.lang.Object()" ],
+      "code_hash" : "72dc88a5f1aeb38e19ddf02ede66e20351939800899f2cd17f050537cc39db87",
+      "cyclomatic_complexity" : 1,
+      "dead_code" : false,
+      "duplicate" : false,
+      "duplicate_group" : null,
+      "dynamicFeatureTotal" : 0,
+      "dynamic_feature_has_service_loader" : false,
+      "dynamic_feature_high" : 0,
+      "dynamic_feature_low" : 0,
+      "dynamic_feature_medium" : 0,
+      "dynamic_resolutions" : [ ],
+      "has_conditionals" : false,
+      "has_loops" : false,
+      "is_static" : false,
+      "loc" : 7,
+      "max_nesting_depth" : 0,
+      "method_id" : "com.example.legacy.PaymentService#<init>(com.example.legacy.PaymentService.PaymentGateway,com.example.legacy.PaymentService.NotificationService,com.example.legacy.PaymentService.PaymentRepository)",
+      "name" : "<init>",
+      "parameter_count" : 3,
+      "part_of_cycle" : false,
+      "raw_signatures" : [ "com.example.legacy.PaymentService(com.example.legacy.PaymentService$PaymentGateway,com.example.legacy.PaymentService$NotificationService,com.example.legacy.PaymentService$PaymentRepository)" ],
+      "representative_paths" : [ ],
+      "signature" : "com.example.legacy.PaymentService(com.example.legacy.PaymentService$PaymentGateway,com.example.legacy.PaymentService$NotificationService,com.example.legacy.PaymentService$PaymentRepository)",
+      "source_code" : "public PaymentService(com.example.legacy.PaymentService.PaymentGateway paymentGateway, com.example.legacy.PaymentService.NotificationService notificationService, com.example.legacy.PaymentService.PaymentRepository paymentRepository) {\n    this.paymentGateway = paymentGateway;\n    this.notificationService = notificationService;\n    this.paymentRepository = paymentRepository;\n}",
+      "static" : false,
+      "thrown_exceptions" : [ ],
+      "usage_count" : 0,
+      "uses_removed_apis" : false,
+      "visibility" : "public"
+    } ],
+    "nestedClass" : false
+  } ],
+  "commit_hash" : null,
+  "project_id" : "my-project"
+}

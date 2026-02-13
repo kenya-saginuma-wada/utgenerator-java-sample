@@ -1,0 +1,343 @@
+{
+  "analysis_errors" : [ ],
+  "classes" : [ {
+    "abstract" : false,
+    "annotations" : [ ],
+    "anonymous" : false,
+    "deadCode" : false,
+    "extends_types" : [ ],
+    "fields" : [ {
+      "is_final" : true,
+      "is_injectable" : true,
+      "is_static" : false,
+      "mock_hint" : "recommended",
+      "name" : "orderRepository",
+      "type" : "com.example.legacy.service.OrderRepository",
+      "visibility" : "private"
+    }, {
+      "is_final" : true,
+      "is_injectable" : true,
+      "is_static" : false,
+      "mock_hint" : "recommended",
+      "name" : "notificationService",
+      "type" : "com.example.legacy.service.NotificationService",
+      "visibility" : "private"
+    } ],
+    "file_path" : "src/main/java/com/example/legacy/service/OrderService.java",
+    "fqn" : "com.example.legacy.service.OrderService",
+    "has_nested_classes" : false,
+    "implements_types" : [ ],
+    "imports" : [ ],
+    "interface" : false,
+    "is_abstract" : false,
+    "is_anonymous" : false,
+    "is_dead_code" : false,
+    "is_interface" : false,
+    "is_nested_class" : false,
+    "loc" : 59,
+    "method_count" : 4,
+    "methods" : [ {
+      "annotations" : [ ],
+      "branch_summary" : {
+        "guards" : [ ],
+        "predicates" : [ ],
+        "switches" : [ ]
+      },
+      "brittle" : false,
+      "brittleness_signals" : [ ],
+      "called_method_refs" : [ ],
+      "called_methods" : [ ],
+      "code_hash" : "f0c8e258ac1173a88da9ccb8fc1c985ddeae3d83f8b8b8ccd16bda19df94d25b",
+      "cyclomatic_complexity" : 1,
+      "dead_code" : false,
+      "duplicate" : false,
+      "duplicate_group" : null,
+      "dynamicFeatureTotal" : 0,
+      "dynamic_feature_has_service_loader" : false,
+      "dynamic_feature_high" : 0,
+      "dynamic_feature_low" : 0,
+      "dynamic_feature_medium" : 0,
+      "dynamic_resolutions" : [ ],
+      "has_conditionals" : false,
+      "has_loops" : false,
+      "is_static" : false,
+      "loc" : 4,
+      "max_nesting_depth" : 0,
+      "method_id" : "com.example.legacy.service.OrderService#OrderService(com.example.legacy.service.OrderRepository,com.example.legacy.service.NotificationService)",
+      "name" : "OrderService",
+      "parameter_count" : 2,
+      "part_of_cycle" : false,
+      "raw_signatures" : [ "OrderService(OrderRepository, NotificationService)" ],
+      "representative_paths" : [ ],
+      "signature" : "OrderService(OrderRepository, NotificationService)",
+      "source_code" : "public OrderService(OrderRepository orderRepository, NotificationService notificationService) {\n    this.orderRepository = orderRepository;\n    this.notificationService = notificationService;\n}",
+      "static" : false,
+      "thrown_exceptions" : [ ],
+      "usage_count" : 0,
+      "uses_removed_apis" : false,
+      "visibility" : "public"
+    }, {
+      "annotations" : [ ],
+      "branch_summary" : {
+        "guards" : [ {
+          "condition" : "orderId == null || orderId.isBlank()",
+          "effects" : [ ],
+          "location" : "8:5",
+          "message_literal" : null,
+          "type" : "FAIL_GUARD"
+        }, {
+          "condition" : "order == null",
+          "effects" : [ ],
+          "location" : "12:5",
+          "message_literal" : null,
+          "type" : "FAIL_GUARD"
+        } ],
+        "predicates" : [ "order == null", "orderId == null" ],
+        "switches" : [ ]
+      },
+      "brittle" : false,
+      "brittleness_signals" : [ ],
+      "called_method_refs" : [ {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.service.OrderRepository#save(com.example.legacy.service.Order)",
+        "resolved" : "com.example.legacy.service.OrderRepository#save(com.example.legacy.service.Order)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ "\"Order is being processed\"" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.service.NotificationService#sendNotification(java.lang.String, java.lang.String)",
+        "resolved" : "com.example.legacy.service.NotificationService#sendNotification(java.lang.String, java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.service.OrderRepository#findById(java.lang.String)",
+        "resolved" : "com.example.legacy.service.OrderRepository#findById(java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.lang.String#isBlank()",
+        "resolved" : "java.lang.String#isBlank()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ "\"PROCESSING\"" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.service.Order#setStatus(java.lang.String)",
+        "resolved" : "com.example.legacy.service.Order#setStatus(java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      } ],
+      "called_methods" : [ "com.example.legacy.service.OrderRepository#save(com.example.legacy.service.Order)", "com.example.legacy.service.NotificationService#sendNotification(java.lang.String, java.lang.String)", "com.example.legacy.service.OrderRepository#findById(java.lang.String)", "java.lang.String#isBlank()", "com.example.legacy.service.Order#setStatus(java.lang.String)" ],
+      "code_hash" : "2bfc0af3a42208e466b70dfbd88821f97be72c6c0757126caf3ab6acff1fcac3",
+      "cyclomatic_complexity" : 3,
+      "dead_code" : false,
+      "duplicate" : false,
+      "duplicate_group" : null,
+      "dynamicFeatureTotal" : 0,
+      "dynamic_feature_has_service_loader" : false,
+      "dynamic_feature_high" : 0,
+      "dynamic_feature_low" : 0,
+      "dynamic_feature_medium" : 0,
+      "dynamic_resolutions" : [ ],
+      "has_conditionals" : true,
+      "has_loops" : false,
+      "is_static" : false,
+      "loc" : 19,
+      "max_nesting_depth" : 1,
+      "method_id" : "com.example.legacy.service.OrderService#processOrder(java.lang.String)",
+      "name" : "processOrder",
+      "parameter_count" : 1,
+      "part_of_cycle" : false,
+      "raw_signatures" : [ "processOrder(String)", "processOrder(java.lang.String)" ],
+      "representative_paths" : [ {
+        "description" : "Early return path",
+        "expected_outcome_hint" : "early-return",
+        "id" : "path-1",
+        "required_conditions" : [ "orderId == null || orderId.isBlank()" ]
+      }, {
+        "description" : "Early return path",
+        "expected_outcome_hint" : "early-return",
+        "id" : "path-2",
+        "required_conditions" : [ "order == null" ]
+      }, {
+        "description" : "Main success path",
+        "expected_outcome_hint" : "success",
+        "id" : "path-4",
+        "required_conditions" : [ ]
+      }, {
+        "description" : "Boundary condition orderId == null",
+        "expected_outcome_hint" : "boundary",
+        "id" : "path-3",
+        "required_conditions" : [ "orderId == null" ]
+      } ],
+      "signature" : "processOrder(String)",
+      "source_code" : "/**\n * Process an order by ID.\n *\n * @param orderId the order ID\n * @return true if processing succeeded\n */\npublic boolean processOrder(String orderId) {\n    if (orderId == null || orderId.isBlank()) {\n        return false;\n    }\n    var order = orderRepository.findById(orderId);\n    if (order == null) {\n        return false;\n    }\n    // Process the order\n    order.setStatus(\"PROCESSING\");\n    orderRepository.save(order);\n    // Send notification\n    notificationService.sendNotification(orderId, \"Order is being processed\");\n    return true;\n}",
+      "static" : false,
+      "thrown_exceptions" : [ ],
+      "usage_count" : 0,
+      "uses_removed_apis" : false,
+      "visibility" : "public"
+    }, {
+      "annotations" : [ ],
+      "branch_summary" : {
+        "guards" : [ {
+          "condition" : "orderId == null",
+          "effects" : [ ],
+          "location" : "8:5",
+          "message_literal" : null,
+          "type" : "FAIL_GUARD"
+        }, {
+          "condition" : "order == null",
+          "effects" : [ ],
+          "location" : "12:5",
+          "message_literal" : null,
+          "type" : "FAIL_GUARD"
+        } ],
+        "predicates" : [ "order == null", "orderId == null" ],
+        "switches" : [ ]
+      },
+      "brittle" : false,
+      "brittleness_signals" : [ ],
+      "called_method_refs" : [ {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.service.OrderRepository#save(com.example.legacy.service.Order)",
+        "resolved" : "com.example.legacy.service.OrderRepository#save(com.example.legacy.service.Order)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ "\"Order has been cancelled\"" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.service.NotificationService#sendNotification(java.lang.String, java.lang.String)",
+        "resolved" : "com.example.legacy.service.NotificationService#sendNotification(java.lang.String, java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.service.OrderRepository#findById(java.lang.String)",
+        "resolved" : "com.example.legacy.service.OrderRepository#findById(java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ "\"CANCELLED\"" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.service.Order#setStatus(java.lang.String)",
+        "resolved" : "com.example.legacy.service.Order#setStatus(java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      } ],
+      "called_methods" : [ "com.example.legacy.service.OrderRepository#save(com.example.legacy.service.Order)", "com.example.legacy.service.NotificationService#sendNotification(java.lang.String, java.lang.String)", "com.example.legacy.service.OrderRepository#findById(java.lang.String)", "com.example.legacy.service.Order#setStatus(java.lang.String)" ],
+      "code_hash" : "b5f8df001b02907b288741106f5e32b335d5aadee11c170d9eb72f1056d900db",
+      "cyclomatic_complexity" : 3,
+      "dead_code" : false,
+      "duplicate" : false,
+      "duplicate_group" : null,
+      "dynamicFeatureTotal" : 0,
+      "dynamic_feature_has_service_loader" : false,
+      "dynamic_feature_high" : 0,
+      "dynamic_feature_low" : 0,
+      "dynamic_feature_medium" : 0,
+      "dynamic_resolutions" : [ ],
+      "has_conditionals" : true,
+      "has_loops" : false,
+      "is_static" : false,
+      "loc" : 16,
+      "max_nesting_depth" : 1,
+      "method_id" : "com.example.legacy.service.OrderService#cancelOrder(java.lang.String)",
+      "name" : "cancelOrder",
+      "parameter_count" : 1,
+      "part_of_cycle" : false,
+      "raw_signatures" : [ "cancelOrder(String)", "cancelOrder(java.lang.String)" ],
+      "representative_paths" : [ {
+        "description" : "Early return path",
+        "expected_outcome_hint" : "early-return",
+        "id" : "path-1",
+        "required_conditions" : [ "orderId == null" ]
+      }, {
+        "description" : "Early return path",
+        "expected_outcome_hint" : "early-return",
+        "id" : "path-2",
+        "required_conditions" : [ "order == null" ]
+      }, {
+        "description" : "Main success path",
+        "expected_outcome_hint" : "success",
+        "id" : "path-3",
+        "required_conditions" : [ ]
+      } ],
+      "signature" : "cancelOrder(String)",
+      "source_code" : "/**\n * Cancel an order by ID.\n *\n * @param orderId the order ID\n * @return true if cancellation succeeded\n */\npublic boolean cancelOrder(String orderId) {\n    if (orderId == null) {\n        return false;\n    }\n    var order = orderRepository.findById(orderId);\n    if (order == null) {\n        return false;\n    }\n    order.setStatus(\"CANCELLED\");\n    orderRepository.save(order);\n    notificationService.sendNotification(orderId, \"Order has been cancelled\");\n    return true;\n}",
+      "static" : false,
+      "thrown_exceptions" : [ ],
+      "usage_count" : 0,
+      "uses_removed_apis" : false,
+      "visibility" : "public"
+    }, {
+      "annotations" : [ ],
+      "branch_summary" : {
+        "guards" : [ ],
+        "predicates" : [ ],
+        "switches" : [ ]
+      },
+      "brittle" : false,
+      "brittleness_signals" : [ ],
+      "called_method_refs" : [ {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.lang.Object#java.lang.Object()",
+        "resolved" : "java.lang.Object#java.lang.Object()",
+        "source" : "spoon",
+        "status" : "RESOLVED"
+      } ],
+      "called_methods" : [ "java.lang.Object#java.lang.Object()" ],
+      "code_hash" : "f0c8e258ac1173a88da9ccb8fc1c985ddeae3d83f8b8b8ccd16bda19df94d25b",
+      "cyclomatic_complexity" : 1,
+      "dead_code" : false,
+      "duplicate" : false,
+      "duplicate_group" : null,
+      "dynamicFeatureTotal" : 0,
+      "dynamic_feature_has_service_loader" : false,
+      "dynamic_feature_high" : 0,
+      "dynamic_feature_low" : 0,
+      "dynamic_feature_medium" : 0,
+      "dynamic_resolutions" : [ ],
+      "has_conditionals" : false,
+      "has_loops" : false,
+      "is_static" : false,
+      "loc" : 4,
+      "max_nesting_depth" : 0,
+      "method_id" : "com.example.legacy.service.OrderService#<init>(com.example.legacy.service.OrderRepository,com.example.legacy.service.NotificationService)",
+      "name" : "<init>",
+      "parameter_count" : 2,
+      "part_of_cycle" : false,
+      "raw_signatures" : [ "com.example.legacy.service.OrderService(com.example.legacy.service.OrderRepository,com.example.legacy.service.NotificationService)" ],
+      "representative_paths" : [ ],
+      "signature" : "com.example.legacy.service.OrderService(com.example.legacy.service.OrderRepository,com.example.legacy.service.NotificationService)",
+      "source_code" : "public OrderService(com.example.legacy.service.OrderRepository orderRepository, com.example.legacy.service.NotificationService notificationService) {\n    this.orderRepository = orderRepository;\n    this.notificationService = notificationService;\n}",
+      "static" : false,
+      "thrown_exceptions" : [ ],
+      "usage_count" : 0,
+      "uses_removed_apis" : false,
+      "visibility" : "public"
+    } ],
+    "nestedClass" : false
+  } ],
+  "commit_hash" : null,
+  "project_id" : "my-project"
+}

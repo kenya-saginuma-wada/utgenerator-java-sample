@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PaymentService - Documentation</title>
+  <style>
+:root {
+  /* Color Palette: Slate & Indigo */
+  --bg-body: #f8fafc;
+  --bg-card: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+
+  --primary-50: #eef2ff;
+  --primary-100: #e0e7ff;
+  --primary-500: #6366f1;
+  --primary-600: #4f46e5;
+  --primary-700: #4338ca;
+
+  --success-bg: #dcfce7;
+  --success-text: #166534;
+  --failure-bg: #fee2e2;
+  --failure-text: #991b1b;
+  --warning-bg: #fef3c7;
+  --warning-text: #92400e;
+  --info-bg: #dbeafe;
+  --info-text: #1e40af;
+  --neutral-bg: #f1f5f9;
+  --neutral-text: #475569;
+
+  /* Spacing */
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Base Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+      "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 4rem;
+}
+
+/* Layout */
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* Header */
+header {
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, var(--primary-700), var(--primary-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.meta {
+  display: flex;
+  gap: 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+/* Grid for Stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: center;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.stat-value.success {
+  color: #15803d;
+}
+
+.stat-value.failure {
+  color: #b91c1c;
+}
+
+/* General Card */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+}
+
+.card-header {
+  margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background: #fdfdfd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  margin-bottom: 1rem;
+}
+
+th {
+  text-align: left;
+  padding: 0.875rem 1.5rem;
+  background-color: #f8fafc;
+  color: var(--text-secondary);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-color);
+}
+
+td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: top;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background-color: #f8fafc;
+}
+
+table.sortable th[data-sort] {
+  cursor: pointer;
+  user-select: none;
+}
+
+table.sortable th.sort-asc::after {
+  content: " ^";
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+table.sortable th.sort-desc::after {
+  content: " v";
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+tr.attention-row td {
+  background-color: var(--warning-bg);
+}
+
+tr.attention-row td:first-child {
+  border-left: 4px solid var(--warning-text);
+}
+
+tr.attention-row:hover td {
+  background-color: #fde68a;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.badge-success {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.badge-failure {
+  background: var(--failure-bg);
+  color: var(--failure-text);
+}
+
+.badge-warning {
+  background: var(--warning-bg);
+  color: var(--warning-text);
+}
+
+.badge-info {
+  background: var(--info-bg);
+  color: var(--info-text);
+}
+
+.badge-neutral {
+  background: var(--neutral-bg);
+  color: var(--neutral-text);
+}
+
+/* Code Block */
+pre {
+  background: #0b1220;
+  color: #e2e8f0;
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  font-family: "JetBrains Mono", "Fira Code", "Menlo", "Monaco", "Consolas", monospace;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  tab-size: 2;
+}
+
+.code-panel {
+  border: 1px solid #334155;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin: 0.75rem 0 1rem;
+  background: #0f172a;
+  box-shadow: var(--shadow-sm);
+}
+
+.code-header {
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid #334155;
+  color: #cbd5e1;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+.code-panel pre {
+  margin: 0;
+  background: #0b1220;
+  color: #e2e8f0;
+  padding: 0.75rem 0.75rem 0.75rem 0;
+  overflow-x: auto;
+  font-family: "JetBrains Mono", "Fira Code", "Menlo", "Monaco", "Consolas", monospace;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  tab-size: 2;
+}
+
+.code-panel code {
+  display: block;
+}
+
+.code-line {
+  display: flex;
+  min-width: max-content;
+}
+
+.code-line-no {
+  width: 3.5rem;
+  padding-right: 0.75rem;
+  text-align: right;
+  color: #94a3b8;
+  user-select: none;
+  flex: 0 0 auto;
+}
+
+.code-line-text {
+  white-space: pre;
+}
+
+code {
+  font-family: "JetBrains Mono", "Fira Code", "Menlo", "Monaco", "Consolas", monospace;
+}
+
+p code {
+  background: var(--neutral-bg);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+  color: var(--text-primary);
+}
+
+/* Details/Summary */
+details {
+  margin: 1rem 0;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+summary:hover {
+  background-color: var(--neutral-bg);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-top: 4rem;
+  border-top: 1px dashed var(--border-color);
+  padding-top: 1rem;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-top">
+        <h1>PaymentService</h1>
+        <span class="badge badge-neutral">Doc</span>
+      </div>
+    </header>
+    <main class="markdown-content">
+      <h1 id="paymentservice">PaymentService</h1>
+<h2 id="analysis-summary">Analysis Summary</h2>
+<p><strong>How to read</strong>: Start with high complexity, dead code, duplicate, and brittleness counts to prioritize risky areas.</p>
+<table><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody>
+<tr><td>Type</td><td>Class</td></tr>
+<tr><td>Lines</td><td>300</td></tr>
+<tr><td>Fields</td><td>3</td></tr>
+<tr><td>Methods</td><td>4</td></tr>
+<tr><td>High Complexity (&gt;=15)</td><td>0</td></tr>
+<tr><td>Dead Code Candidates</td><td>0</td></tr>
+<tr><td>Duplicate Code Candidates</td><td>0</td></tr>
+<tr><td>Removed API Usage</td><td>0</td></tr>
+<tr><td>Cycle Involvement</td><td>0</td></tr>
+<tr><td>Brittleness Signals</td><td>0</td></tr>
+</tbody></table>
+<h2 id="class-overview">Class Overview</h2>
+<p><strong>How to read</strong>: Check package/file location and class traits first to understand context before method-level details.</p>
+<p><strong>Type</strong>: Class</p>
+<p><strong>Attributes</strong>: Has inner classes</p>
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>Package</td><td><code>com.example.legacy</code></td></tr>
+<tr><td>File</td><td><code>src/main/java/com/example/legacy/PaymentService.java</code></td></tr>
+<tr><td>Lines</td><td>300</td></tr>
+<tr><td>Methods</td><td>4</td></tr>
+<tr><td>Fields</td><td>3</td></tr>
+</tbody></table>
+<h2 id="fields">Fields</h2>
+<p><strong>How to read</strong>: Review field types and visibility to understand state ownership and dependency boundaries.</p>
+<table><thead><tr><th>Name</th><th>Type</th><th>Visibility</th></tr></thead><tbody>
+<tr><td><code>paymentGateway</code></td><td><code>com.example.legacy.PaymentService.PaymentGateway</code></td><td>Private</td></tr>
+<tr><td><code>notificationService</code></td><td><code>com.example.legacy.PaymentService.NotificationService</code></td><td>Private</td></tr>
+<tr><td><code>paymentRepository</code></td><td><code>com.example.legacy.PaymentService.PaymentRepository</code></td><td>Private</td></tr>
+</tbody></table>
+<h2 id="methods">Methods</h2>
+<p><strong>How to read</strong>: Use this table to find longer or more complex methods, then jump to the detailed sections.</p>
+<table><thead><tr><th>Method</th><th>Visibility</th><th>Lines</th><th>Complexity</th><th>Notes</th></tr></thead><tbody>
+<tr><td><a href="#paymentservice-paymentgateway-notificationservice-paymentrepository"><code>PaymentService(PaymentGateway, NotificationService, PaymentRepository)</code></a></td><td>Public</td><td>7</td><td>1 (Low)</td><td>-</td></tr>
+<tr><td><a href="#processpayment-string-bigdecimal-string-string"><code>processPayment(String, BigDecimal, String, String)</code></a></td><td>Public</td><td>45</td><td>7 (Medium)</td><td>-</td></tr>
+<tr><td><a href="#refundpayment-string-bigdecimal"><code>refundPayment(String, BigDecimal)</code></a></td><td>Public</td><td>30</td><td>6 (Medium)</td><td>-</td></tr>
+<tr><td><a href="#getpaymenthistory-string"><code>getPaymentHistory(String)</code></a></td><td>Public</td><td>6</td><td>2 (Low)</td><td>-</td></tr>
+</tbody></table>
+<hr>
+<h3 id="paymentservice-paymentgateway-notificationservice-paymentrepository">PaymentService(PaymentGateway, NotificationService, PaymentRepository)</h3>
+<p><strong>Summary</strong>: Public / Parameters 3</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">PaymentService(PaymentGateway, NotificationService, PaymentRepository)</span></span>
+</code></pre></div>
+<p><strong>Method Contract</strong>:</p>
+<p><strong>How to read</strong>: Use this contract as the specification baseline for I/O, constraints, and dependency behavior.</p>
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>Inputs</td><td>PaymentGateway paymentGateway / NotificationService notificationService / PaymentRepository paymentRepository</td></tr>
+<tr><td>Output</td><td>Constructs instance</td></tr>
+<tr><td>Preconditions</td><td>None</td></tr>
+<tr><td>Postconditions</td><td>Instance is initialized.</td></tr>
+<tr><td>Error/Boundary</td><td>None</td></tr>
+<tr><td>Dependencies</td><td>None</td></tr>
+</tbody></table>
+<p><strong>Source Code</strong>:</p>
+<p><strong>How to read</strong>: Read control flow and side effects carefully, especially input guards, external calls, and state changes.</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">public PaymentService(PaymentGateway paymentGateway, NotificationService notificationService, PaymentRepository paymentRepository) {</span></span>
+<span class="code-line"><span class="code-line-no">2</span><span class="code-line-text">    this.paymentGateway = paymentGateway;</span></span>
+<span class="code-line"><span class="code-line-no">3</span><span class="code-line-text">    this.notificationService = notificationService;</span></span>
+<span class="code-line"><span class="code-line-no">4</span><span class="code-line-text">    this.paymentRepository = paymentRepository;</span></span>
+<span class="code-line"><span class="code-line-no">5</span><span class="code-line-text">}</span></span>
+</code></pre></div>
+<table><thead><tr><th>Metrics</th><th>Value</th></tr></thead><tbody>
+<tr><td>Lines</td><td>7</td></tr>
+<tr><td>Complexity</td><td>1 (Low)</td></tr>
+<tr><td>Nesting Depth</td><td>0</td></tr>
+<tr><td>Parameters</td><td>3</td></tr>
+<tr><td>Call Count</td><td>0</td></tr>
+</tbody></table>
+<h3 id="processpayment-string-bigdecimal-string-string">processPayment(String, BigDecimal, String, String)</h3>
+<p><strong>Summary</strong>: Public / Parameters 4</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">processPayment(String, BigDecimal, String, String)</span></span>
+</code></pre></div>
+<p><strong>Method Contract</strong>:</p>
+<p><strong>How to read</strong>: Use this contract as the specification baseline for I/O, constraints, and dependency behavior.</p>
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>Inputs</td><td>String orderId / BigDecimal amount / String customerId / and 1 more</td></tr>
+<tr><td>Output</td><td>PaymentResult</td></tr>
+<tr><td>Preconditions</td><td>orderId == null || orderId.isBlank() / amount == null || amount.compareTo(BigDecimal.ZERO) &lt;= 0 / customerId == null || customerId.isBlank() / and 1 more</td></tr>
+<tr><td>Postconditions</td><td>Main success path -&gt; success</td></tr>
+<tr><td>Error/Boundary</td><td>orderId == null || orderId.isBlank() =&gt; early-return / amount == null || amount.compareTo(BigDecimal.ZERO) &lt;= 0 =&gt; early-return / customerId == null || customerId.isBlank() =&gt; early-return / and 5 more</td></tr>
+<tr><td>Dependencies</td><td>GatewayResponse#getTransactionId / Payment#getStatus / PaymentRepository#save</td></tr>
+</tbody></table>
+<p><strong>Source Code</strong>:</p>
+<p><strong>How to read</strong>: Read control flow and side effects carefully, especially input guards, external calls, and state changes.</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">public PaymentResult processPayment(String orderId, BigDecimal amount, String customerId, String paymentMethod) {</span></span>
+<span class="code-line"><span class="code-line-no">2</span><span class="code-line-text"></span></span>
+<span class="code-line"><span class="code-line-no">3</span><span class="code-line-text">    if (orderId == null || orderId.isBlank()) {</span></span>
+<span class="code-line"><span class="code-line-no">4</span><span class="code-line-text">        return PaymentResult.failure(&quot;Order ID is required&quot;);</span></span>
+<span class="code-line"><span class="code-line-no">5</span><span class="code-line-text">    }</span></span>
+<span class="code-line"><span class="code-line-no">6</span><span class="code-line-text">    if (amount == null || amount.compareTo(BigDecimal.ZERO) &lt;= 0) {</span></span>
+<span class="code-line"><span class="code-line-no">7</span><span class="code-line-text">        return PaymentResult.failure(&quot;Amount must be positive&quot;);</span></span>
+<span class="code-line"><span class="code-line-no">8</span><span class="code-line-text">    }</span></span>
+<span class="code-line"><span class="code-line-no">9</span><span class="code-line-text">    if (customerId == null || customerId.isBlank()) {</span></span>
+<span class="code-line"><span class="code-line-no">10</span><span class="code-line-text">        return PaymentResult.failure(&quot;Customer ID is required&quot;);</span></span>
+<span class="code-line"><span class="code-line-no">11</span><span class="code-line-text">    }</span></span>
+<span class="code-line"><span class="code-line-no">12</span><span class="code-line-text">    if (!isValidPaymentMethod(paymentMethod)) {</span></span>
+<span class="code-line"><span class="code-line-no">13</span><span class="code-line-text">        return PaymentResult.failure(&quot;Invalid payment method: &quot; + paymentMethod);</span></span>
+<span class="code-line"><span class="code-line-no">14</span><span class="code-line-text">    }</span></span>
+<span class="code-line"><span class="code-line-no">15</span><span class="code-line-text"></span></span>
+<span class="code-line"><span class="code-line-no">16</span><span class="code-line-text">    Optional&lt;Payment&gt; existingPayment = paymentRepository.findByOrderId(orderId);</span></span>
+<span class="code-line"><span class="code-line-no">17</span><span class="code-line-text">    if (existingPayment.isPresent() &amp;&amp; existingPayment.get().getStatus().equals(&quot;COMPLETED&quot;)) {</span></span>
+<span class="code-line"><span class="code-line-no">18</span><span class="code-line-text">        return PaymentResult.failure(&quot;Payment already processed for order: &quot; + orderId);</span></span>
+<span class="code-line"><span class="code-line-no">19</span><span class="code-line-text">    }</span></span>
+<span class="code-line"><span class="code-line-no">20</span><span class="code-line-text"></span></span>
+<span class="code-line"><span class="code-line-no">21</span><span class="code-line-text">    GatewayResponse gatewayResponse = paymentGateway.charge(customerId, amount, paymentMethod);</span></span>
+<span class="code-line"><span class="code-line-no">22</span><span class="code-line-text">    if (!gatewayResponse.isSuccess()) {</span></span>
+<span class="code-line"><span class="code-line-no">23</span><span class="code-line-text">        return PaymentResult.failure(&quot;Payment gateway error: &quot; + gatewayResponse.getErrorMessage());</span></span>
+<span class="code-line"><span class="code-line-no">24</span><span class="code-line-text">    }</span></span>
+<span class="code-line"><span class="code-line-no">25</span><span class="code-line-text"></span></span>
+<span class="code-line"><span class="code-line-no">26</span><span class="code-line-text">    Payment payment = new Payment(gatewayResponse.getTransactionId(), orderId, customerId, amount, paymentMethod, &quot;COMPLETED&quot;, LocalDateTime.now());</span></span>
+<span class="code-line"><span class="code-line-no">27</span><span class="code-line-text">    paymentRepository.save(payment);</span></span>
+<span class="code-line"><span class="code-line-no">28</span><span class="code-line-text"></span></span>
+<span class="code-line"><span class="code-line-no">29</span><span class="code-line-text">    notificationService.sendPaymentConfirmation(customerId, orderId, amount);</span></span>
+<span class="code-line"><span class="code-line-no">30</span><span class="code-line-text">    return PaymentResult.success(gatewayResponse.getTransactionId(), amount);</span></span>
+<span class="code-line"><span class="code-line-no">31</span><span class="code-line-text">}</span></span>
+</code></pre></div>
+<table><thead><tr><th>Metrics</th><th>Value</th></tr></thead><tbody>
+<tr><td>Lines</td><td>45</td></tr>
+<tr><td>Complexity</td><td>7 (Medium)</td></tr>
+<tr><td>Nesting Depth</td><td>1</td></tr>
+<tr><td>Parameters</td><td>4</td></tr>
+<tr><td>Call Count</td><td>0</td></tr>
+<tr><td>Structure</td><td>Has conditionals</td></tr>
+</tbody></table>
+<p><strong>Branches/Guards</strong>:</p>
+<p><strong>How to read</strong>: Focus on guard conditions and notes to identify missing edge-case tests and early-return paths.</p>
+<table><thead><tr><th>Type</th><th>Condition</th><th>Notes</th></tr></thead><tbody>
+<tr><td>fail-guard</td><td>orderId == null || orderId.isBlank()</td><td>13:5</td></tr>
+<tr><td>fail-guard</td><td>amount == null || amount.compareTo(BigDecimal.ZERO) &lt;= 0</td><td>16:5</td></tr>
+<tr><td>fail-guard</td><td>customerId == null || customerId.isBlank()</td><td>19:5</td></tr>
+<tr><td>fail-guard</td><td>!isValidPaymentMethod(paymentMethod)</td><td>22:5</td></tr>
+<tr><td>predicate</td><td>amount == null</td><td>-</td></tr>
+<tr><td>predicate</td><td>amount.compareTo(BigDecimal.ZERO) &lt;= 0</td><td>-</td></tr>
+<tr><td>predicate</td><td>customerId == null</td><td>-</td></tr>
+<tr><td>predicate</td><td>orderId == null</td><td>-</td></tr>
+</tbody></table>
+<p><strong>Representative Paths</strong>:</p>
+<p><strong>How to read</strong>: Use path type, condition, and expected result to design explicit test scenarios.</p>
+<table><thead><tr><th>ID</th><th>Type</th><th>Condition</th><th>Description</th><th>Notes</th></tr></thead><tbody>
+<tr><td>path-1</td><td>early-return</td><td>orderId == null || orderId.isBlank()</td><td>Early return path</td><td>early-return</td></tr>
+<tr><td>path-2</td><td>early-return</td><td>amount == null || amount.compareTo(BigDecimal.ZERO) &lt;= 0</td><td>Early return path</td><td>early-return</td></tr>
+<tr><td>path-3</td><td>early-return</td><td>customerId == null || customerId.isBlank()</td><td>Early return path</td><td>early-return</td></tr>
+<tr><td>path-4</td><td>early-return</td><td>!isValidPaymentMethod(paymentMethod)</td><td>Early return path</td><td>early-return</td></tr>
+<tr><td>path-9</td><td>success</td><td>-</td><td>Main success path</td><td>success</td></tr>
+<tr><td>path-5</td><td>boundary</td><td>amount == null</td><td>Boundary condition amount == null</td><td>boundary</td></tr>
+<tr><td>path-6</td><td>boundary</td><td>amount.compareTo(BigDecimal.ZERO) &lt;= 0</td><td>Boundary condition amount.compareTo(BigDecimal.ZERO) &lt;= 0</td><td>boundary</td></tr>
+<tr><td>path-7</td><td>boundary</td><td>customerId == null</td><td>Boundary condition customerId == null</td><td>boundary</td></tr>
+<tr><td>...</td><td>...</td><td>...</td><td>...</td><td>and 1 more</td></tr>
+</tbody></table>
+<p><strong>Called Methods</strong>:</p>
+<p><strong>How to read</strong>: Check owners and signatures to understand coupling, mock targets, and integration impact.</p>
+<table><thead><tr><th>#</th><th>Owner</th><th>Method</th><th>Signature</th></tr></thead><tbody>
+<tr><td>1</td><td>Optional</td><td>get</td><td>get()</td></tr>
+<tr><td>2</td><td>GatewayResponse</td><td>getTransactionId</td><td>getTransactionId()</td></tr>
+<tr><td>3</td><td>String</td><td>isBlank</td><td>isBlank()</td></tr>
+<tr><td>4</td><td>Payment</td><td>getStatus</td><td>getStatus()</td></tr>
+<tr><td>5</td><td>PaymentRepository</td><td>save</td><td>save(Payment)</td></tr>
+<tr><td>6</td><td>Payment</td><td>Payment</td><td>Payment(String, String, String, BigDecimal, ...)</td></tr>
+<tr><td>7</td><td>String</td><td>equals</td><td>equals(Object)</td></tr>
+<tr><td>8</td><td>GatewayResponse</td><td>getErrorMessage</td><td>getErrorMessage()</td></tr>
+<tr><td>9</td><td>BigDecimal</td><td>compareTo</td><td>compareTo(BigDecimal)</td></tr>
+<tr><td>10</td><td>NotificationService</td><td>sendPaymentConfirmation</td><td>sendPaymentConfirmation(String, String, BigDecimal)</td></tr>
+<tr><td>...</td><td>...</td><td>...</td><td>and 8 more</td></tr>
+</tbody></table>
+<p><strong>Test Viewpoints</strong>:</p>
+<p><strong>How to read</strong>: Turn each path and signal into explicit test scenarios for normal, error, and boundary behavior.</p>
+<ul>
+<li>Path: Early return path / Condition: orderId == null || orderId.isBlank() / Expected: early-return</li>
+<li>Path: Early return path / Condition: amount == null || amount.compareTo(BigDecimal.ZERO) &lt;= 0 / Expected: early-return</li>
+<li>Path: Early return path / Condition: customerId == null || customerId.isBlank() / Expected: early-return</li>
+<li>Path: Early return path / Condition: !isValidPaymentMethod(paymentMethod) / Expected: early-return</li>
+<li>Path: Main success path / Condition: - / Expected: success</li>
+<li>Path: Boundary condition amount == null / Condition: amount == null / Expected: boundary</li>
+<li>Path: Boundary condition amount.compareTo(BigDecimal.ZERO) &lt;= 0 / Condition: amount.compareTo(BigDecimal.ZERO) &lt;= 0 / Expected: boundary</li>
+<li>Path: Boundary condition customerId == null / Condition: customerId == null / Expected: boundary</li>
+<li>and 1 more</li>
+</ul>
+<h3 id="refundpayment-string-bigdecimal">refundPayment(String, BigDecimal)</h3>
+<p><strong>Summary</strong>: Public / Parameters 2</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">refundPayment(String, BigDecimal)</span></span>
+</code></pre></div>
+<p><strong>Method Contract</strong>:</p>
+<p><strong>How to read</strong>: Use this contract as the specification baseline for I/O, constraints, and dependency behavior.</p>
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>Inputs</td><td>String transactionId / BigDecimal refundAmount</td></tr>
+<tr><td>Output</td><td>RefundResult</td></tr>
+<tr><td>Preconditions</td><td>transactionId == null || transactionId.isBlank() / paymentOpt.isEmpty()</td></tr>
+<tr><td>Postconditions</td><td>Main success path -&gt; success</td></tr>
+<tr><td>Error/Boundary</td><td>transactionId == null || transactionId.isBlank() =&gt; early-return / paymentOpt.isEmpty() =&gt; early-return / transactionId == null =&gt; boundary</td></tr>
+<tr><td>Dependencies</td><td>Payment#getCustomerId / PaymentGateway#refund / RefundResult#success</td></tr>
+</tbody></table>
+<p><strong>Source Code</strong>:</p>
+<p><strong>How to read</strong>: Read control flow and side effects carefully, especially input guards, external calls, and state changes.</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">public RefundResult refundPayment(String transactionId, BigDecimal refundAmount) {</span></span>
+<span class="code-line"><span class="code-line-no">2</span><span class="code-line-text">    if (transactionId == null || transactionId.isBlank()) {</span></span>
+<span class="code-line"><span class="code-line-no">3</span><span class="code-line-text">        return RefundResult.failure(&quot;Transaction ID is required&quot;);</span></span>
+<span class="code-line"><span class="code-line-no">4</span><span class="code-line-text">    }</span></span>
+<span class="code-line"><span class="code-line-no">5</span><span class="code-line-text">    Optional&lt;Payment&gt; paymentOpt = paymentRepository.findByTransactionId(transactionId);</span></span>
+<span class="code-line"><span class="code-line-no">6</span><span class="code-line-text">    if (paymentOpt.isEmpty()) {</span></span>
+<span class="code-line"><span class="code-line-no">7</span><span class="code-line-text">        return RefundResult.failure(&quot;Payment not found: &quot; + transactionId);</span></span>
+<span class="code-line"><span class="code-line-no">8</span><span class="code-line-text">    }</span></span>
+<span class="code-line"><span class="code-line-no">9</span><span class="code-line-text">    Payment payment = paymentOpt.get();</span></span>
+<span class="code-line"><span class="code-line-no">10</span><span class="code-line-text">    BigDecimal actualRefundAmount = refundAmount != null ? refundAmount : payment.getAmount();</span></span>
+<span class="code-line"><span class="code-line-no">11</span><span class="code-line-text">    if (actualRefundAmount.compareTo(payment.getAmount()) &gt; 0) {</span></span>
+<span class="code-line"><span class="code-line-no">12</span><span class="code-line-text">        return RefundResult.failure(&quot;Refund amount exceeds original payment&quot;);</span></span>
+<span class="code-line"><span class="code-line-no">13</span><span class="code-line-text">    }</span></span>
+<span class="code-line"><span class="code-line-no">14</span><span class="code-line-text">    GatewayResponse refundResponse = paymentGateway.refund(transactionId, actualRefundAmount);</span></span>
+<span class="code-line"><span class="code-line-no">15</span><span class="code-line-text">    if (!refundResponse.isSuccess()) {</span></span>
+<span class="code-line"><span class="code-line-no">16</span><span class="code-line-text">        return RefundResult.failure(&quot;Refund failed: &quot; + refundResponse.getErrorMessage());</span></span>
+<span class="code-line"><span class="code-line-no">17</span><span class="code-line-text">    }</span></span>
+<span class="code-line"><span class="code-line-no">18</span><span class="code-line-text">    payment.setStatus(&quot;REFUNDED&quot;);</span></span>
+<span class="code-line"><span class="code-line-no">19</span><span class="code-line-text">    paymentRepository.save(payment);</span></span>
+<span class="code-line"><span class="code-line-no">20</span><span class="code-line-text">    notificationService.sendRefundConfirmation(payment.getCustomerId(), payment.getOrderId(), actualRefundAmount);</span></span>
+<span class="code-line"><span class="code-line-no">21</span><span class="code-line-text">    return RefundResult.success(refundResponse.getTransactionId(), actualRefundAmount);</span></span>
+<span class="code-line"><span class="code-line-no">22</span><span class="code-line-text">}</span></span>
+</code></pre></div>
+<table><thead><tr><th>Metrics</th><th>Value</th></tr></thead><tbody>
+<tr><td>Lines</td><td>30</td></tr>
+<tr><td>Complexity</td><td>6 (Medium)</td></tr>
+<tr><td>Nesting Depth</td><td>1</td></tr>
+<tr><td>Parameters</td><td>2</td></tr>
+<tr><td>Call Count</td><td>0</td></tr>
+<tr><td>Structure</td><td>Has conditionals</td></tr>
+</tbody></table>
+<p><strong>Branches/Guards</strong>:</p>
+<p><strong>How to read</strong>: Focus on guard conditions and notes to identify missing edge-case tests and early-return paths.</p>
+<table><thead><tr><th>Type</th><th>Condition</th><th>Notes</th></tr></thead><tbody>
+<tr><td>fail-guard</td><td>transactionId == null || transactionId.isBlank()</td><td>9:5</td></tr>
+<tr><td>fail-guard</td><td>paymentOpt.isEmpty()</td><td>13:5</td></tr>
+<tr><td>predicate</td><td>actualRefundAmount.compareTo(payment.getAmount()) &gt; 0</td><td>-</td></tr>
+<tr><td>predicate</td><td>refundAmount != null</td><td>-</td></tr>
+<tr><td>predicate</td><td>transactionId == null</td><td>-</td></tr>
+</tbody></table>
+<p><strong>Representative Paths</strong>:</p>
+<p><strong>How to read</strong>: Use path type, condition, and expected result to design explicit test scenarios.</p>
+<table><thead><tr><th>ID</th><th>Type</th><th>Condition</th><th>Description</th><th>Notes</th></tr></thead><tbody>
+<tr><td>path-1</td><td>early-return</td><td>transactionId == null || transactionId.isBlank()</td><td>Early return path</td><td>early-return</td></tr>
+<tr><td>path-2</td><td>early-return</td><td>paymentOpt.isEmpty()</td><td>Early return path</td><td>early-return</td></tr>
+<tr><td>path-4</td><td>success</td><td>-</td><td>Main success path</td><td>success</td></tr>
+<tr><td>path-3</td><td>boundary</td><td>transactionId == null</td><td>Boundary condition transactionId == null</td><td>boundary</td></tr>
+</tbody></table>
+<p><strong>Called Methods</strong>:</p>
+<p><strong>How to read</strong>: Check owners and signatures to understand coupling, mock targets, and integration impact.</p>
+<table><thead><tr><th>#</th><th>Owner</th><th>Method</th><th>Signature</th></tr></thead><tbody>
+<tr><td>1</td><td>Payment</td><td>getCustomerId</td><td>getCustomerId()</td></tr>
+<tr><td>2</td><td>PaymentGateway</td><td>refund</td><td>refund(String, BigDecimal)</td></tr>
+<tr><td>3</td><td>RefundResult</td><td>success</td><td>success(String, BigDecimal)</td></tr>
+<tr><td>4</td><td>Optional</td><td>get</td><td>get()</td></tr>
+<tr><td>5</td><td>Payment</td><td>setStatus</td><td>setStatus(String)</td></tr>
+<tr><td>6</td><td>RefundResult</td><td>failure</td><td>failure(String)</td></tr>
+<tr><td>7</td><td>Payment</td><td>getOrderId</td><td>getOrderId()</td></tr>
+<tr><td>8</td><td>Optional</td><td>isEmpty</td><td>isEmpty()</td></tr>
+<tr><td>9</td><td>GatewayResponse</td><td>getTransactionId</td><td>getTransactionId()</td></tr>
+<tr><td>10</td><td>String</td><td>isBlank</td><td>isBlank()</td></tr>
+<tr><td>...</td><td>...</td><td>...</td><td>and 7 more</td></tr>
+</tbody></table>
+<p><strong>Test Viewpoints</strong>:</p>
+<p><strong>How to read</strong>: Turn each path and signal into explicit test scenarios for normal, error, and boundary behavior.</p>
+<ul>
+<li>Path: Early return path / Condition: transactionId == null || transactionId.isBlank() / Expected: early-return</li>
+<li>Path: Early return path / Condition: paymentOpt.isEmpty() / Expected: early-return</li>
+<li>Path: Main success path / Condition: - / Expected: success</li>
+<li>Path: Boundary condition transactionId == null / Condition: transactionId == null / Expected: boundary</li>
+</ul>
+<h3 id="getpaymenthistory-string">getPaymentHistory(String)</h3>
+<p><strong>Summary</strong>: Public / Parameters 1</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">getPaymentHistory(String)</span></span>
+</code></pre></div>
+<p><strong>Method Contract</strong>:</p>
+<p><strong>How to read</strong>: Use this contract as the specification baseline for I/O, constraints, and dependency behavior.</p>
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>Inputs</td><td>String customerId</td></tr>
+<tr><td>Output</td><td>List&lt;Payment&gt;</td></tr>
+<tr><td>Preconditions</td><td>customerId == null || customerId.isBlank()</td></tr>
+<tr><td>Postconditions</td><td>Main success path -&gt; success</td></tr>
+<tr><td>Error/Boundary</td><td>customerId == null =&gt; boundary / throws IllegalArgumentException</td></tr>
+<tr><td>Dependencies</td><td>PaymentRepository#findByCustomerId / String#isBlank</td></tr>
+</tbody></table>
+<p><strong>Source Code</strong>:</p>
+<p><strong>How to read</strong>: Read control flow and side effects carefully, especially input guards, external calls, and state changes.</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">public List&lt;Payment&gt; getPaymentHistory(String customerId) {</span></span>
+<span class="code-line"><span class="code-line-no">2</span><span class="code-line-text">    if (customerId == null || customerId.isBlank()) {</span></span>
+<span class="code-line"><span class="code-line-no">3</span><span class="code-line-text">        throw new IllegalArgumentException(&quot;Customer ID is required&quot;);</span></span>
+<span class="code-line"><span class="code-line-no">4</span><span class="code-line-text">    }</span></span>
+<span class="code-line"><span class="code-line-no">5</span><span class="code-line-text">    return paymentRepository.findByCustomerId(customerId);</span></span>
+<span class="code-line"><span class="code-line-no">6</span><span class="code-line-text">}</span></span>
+</code></pre></div>
+<table><thead><tr><th>Metrics</th><th>Value</th></tr></thead><tbody>
+<tr><td>Lines</td><td>6</td></tr>
+<tr><td>Complexity</td><td>2 (Low)</td></tr>
+<tr><td>Nesting Depth</td><td>1</td></tr>
+<tr><td>Parameters</td><td>1</td></tr>
+<tr><td>Call Count</td><td>0</td></tr>
+<tr><td>Structure</td><td>Has conditionals</td></tr>
+</tbody></table>
+<p><strong>Branches/Guards</strong>:</p>
+<p><strong>How to read</strong>: Focus on guard conditions and notes to identify missing edge-case tests and early-return paths.</p>
+<table><thead><tr><th>Type</th><th>Condition</th><th>Notes</th></tr></thead><tbody>
+<tr><td>fail-guard</td><td>customerId == null || customerId.isBlank()</td><td>5:5</td></tr>
+<tr><td>predicate</td><td>customerId == null</td><td>-</td></tr>
+</tbody></table>
+<p><strong>Representative Paths</strong>:</p>
+<p><strong>How to read</strong>: Use path type, condition, and expected result to design explicit test scenarios.</p>
+<table><thead><tr><th>ID</th><th>Type</th><th>Condition</th><th>Description</th><th>Notes</th></tr></thead><tbody>
+<tr><td>path-1</td><td>failure</td><td>customerId == null || customerId.isBlank()</td><td>Exception throw path</td><td>failure</td></tr>
+<tr><td>path-3</td><td>success</td><td>-</td><td>Main success path</td><td>success</td></tr>
+<tr><td>path-2</td><td>boundary</td><td>customerId == null</td><td>Boundary condition customerId == null</td><td>boundary</td></tr>
+</tbody></table>
+<p><strong>Called Methods</strong>:</p>
+<p><strong>How to read</strong>: Check owners and signatures to understand coupling, mock targets, and integration impact.</p>
+<table><thead><tr><th>#</th><th>Owner</th><th>Method</th><th>Signature</th></tr></thead><tbody>
+<tr><td>1</td><td>IllegalArgumentException</td><td>IllegalArgumentException</td><td>IllegalArgumentException(String)</td></tr>
+<tr><td>2</td><td>String</td><td>isBlank</td><td>isBlank()</td></tr>
+<tr><td>3</td><td>PaymentRepository</td><td>findByCustomerId</td><td>findByCustomerId(String)</td></tr>
+</tbody></table>
+<p><strong>Exceptions</strong>:</p>
+<p><strong>How to read</strong>: Use exception lists to verify negative scenarios and expected failure behavior.</p>
+<ul>
+<li><code>IllegalArgumentException</code></li>
+</ul>
+<p><strong>Test Viewpoints</strong>:</p>
+<p><strong>How to read</strong>: Turn each path and signal into explicit test scenarios for normal, error, and boundary behavior.</p>
+<ul>
+<li>Path: Exception throw path / Condition: customerId == null || customerId.isBlank() / Expected: failure</li>
+<li>Path: Main success path / Condition: - / Expected: success</li>
+<li>Path: Boundary condition customerId == null / Condition: customerId == null / Expected: boundary</li>
+<li>Verify exception scenarios and messages.</li>
+</ul>
+
+      <div class="footer">
+        <p>Generated by FUL Document Command</p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

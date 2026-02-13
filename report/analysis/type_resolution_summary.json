@@ -1,0 +1,34 @@
+{
+  "per_source" : {
+    "javaparser" : {
+      "ambiguous" : 0,
+      "resolution_rate" : 1.0,
+      "resolved" : 129,
+      "unresolved" : 0
+    },
+    "other" : {
+      "ambiguous" : 1,
+      "resolution_rate" : 0.0,
+      "resolved" : 0,
+      "unresolved" : 0
+    },
+    "spoon" : {
+      "ambiguous" : 0,
+      "resolution_rate" : 1.0,
+      "resolved" : 37,
+      "unresolved" : 0
+    }
+  },
+  "project_root" : "/home/wada/workspaces/utgenerator-java-sample",
+  "timestamp" : "2026-02-13T03:35:08.464707268Z",
+  "top_ambiguous_examples" : [ "java.util.List#isEmpty()" ],
+  "top_unresolved_examples" : [ ],
+  "type_resolution" : {
+    "ambiguous" : 1,
+    "partial" : 0,
+    "resolution_rate" : 0.99,
+    "resolved" : 166,
+    "total" : 167,
+    "unresolved" : 0
+  }
+}

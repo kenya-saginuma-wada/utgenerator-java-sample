@@ -29,6 +29,14 @@ tasks.jacocoTestReport {
         xml.required.set(true)
         html.required.set(true)
     }
+    doLast {
+        val xmlReport = reports.xml.outputLocation.asFile.get()
+        if (xmlReport.exists()) {
+            val cleaned = xmlReport.readText()
+                .replace(Regex("<!DOCTYPE[^>]*>\\s*"), "")
+            xmlReport.writeText(cleaned)
+        }
+    }
 }
 
 java {

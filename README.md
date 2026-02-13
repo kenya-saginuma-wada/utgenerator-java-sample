@@ -24,3 +24,5 @@ You can try running the UTGenerator CLI against this directory from the project 
 (Requires an LLM API key set in your environment if you go beyond analysis)
 
 rm -rf  ./sample-legacy-project/.utgen/cache
+
+rm -rf /home/wada/workspaces/utgenerator-java-sample/logs /home/wada/workspaces/utgenerator-java-sample/reports

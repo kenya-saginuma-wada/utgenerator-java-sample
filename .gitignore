@@ -4,6 +4,7 @@
 .trash
 .utgen
 # Ignore Gradle build output directory
+.ful
 
 # IDE
 .idea

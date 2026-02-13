@@ -1,0 +1,459 @@
+{
+  "analysis_errors" : [ ],
+  "classes" : [ {
+    "abstract" : false,
+    "annotations" : [ ],
+    "anonymous" : false,
+    "deadCode" : false,
+    "extends_types" : [ ],
+    "fields" : [ ],
+    "file_path" : "src/main/java/com/example/legacy/ComplexInvoiceService.java",
+    "fqn" : "com.example.legacy.ComplexInvoiceService",
+    "has_nested_classes" : true,
+    "implements_types" : [ ],
+    "imports" : [ "java.math.BigDecimal", "java.math.RoundingMode", "java.time.DayOfWeek", "java.time.LocalDate", "java.util.ArrayList", "java.util.List" ],
+    "interface" : false,
+    "is_abstract" : false,
+    "is_anonymous" : false,
+    "is_dead_code" : false,
+    "is_interface" : false,
+    "is_nested_class" : false,
+    "loc" : 225,
+    "method_count" : 2,
+    "methods" : [ {
+      "annotations" : [ ],
+      "branch_summary" : {
+        "guards" : [ {
+          "condition" : "customer == null",
+          "effects" : [ "success=false", "addErrorMessage" ],
+          "location" : "12:5",
+          "message_literal" : "Customer cannot be null",
+          "type" : "FAIL_GUARD"
+        }, {
+          "condition" : "items == null || items.isEmpty()",
+          "effects" : [ "success=false", "addErrorMessage" ],
+          "location" : "13:9",
+          "message_literal" : "Item list cannot be empty",
+          "type" : "FAIL_GUARD"
+        }, {
+          "condition" : "regionCode == null || regionCode.isEmpty()",
+          "effects" : [ "success=false", "addErrorMessage" ],
+          "location" : "14:13",
+          "message_literal" : "Invalid region code",
+          "type" : "FAIL_GUARD"
+        }, {
+          "condition" : "item.getQuantity() <= 0",
+          "effects" : [ "continue" ],
+          "location" : "27:21",
+          "message_literal" : null,
+          "type" : "LOOP_GUARD_CONTINUE"
+        }, {
+          "condition" : "item.getUnitPrice() < 0",
+          "effects" : [ "break", "success=false" ],
+          "location" : "32:21",
+          "message_literal" : null,
+          "type" : "LOOP_GUARD_BREAK"
+        } ],
+        "predicates" : [ "customer != null", "customer.getEmail() != null", "customer.getFirstName() != null", "customerTier == 1", "customerTier == 2", "i < items.size()", "item.getQuantity() <= 0", "item.getQuantity() >= 10", "item.getUnitPrice() < 0", "itemBasePrice.compareTo(new BigDecimal(\"1000\")) > 0", "itemDiscount.compareTo(itemBasePrice.multiply(new BigDecimal(\"0.5\"))) > 0", "items != null", "logSummary.length() > 200", "priceAfterDiscount.compareTo(new BigDecimal(\"110\")) < 0", "processingDate.getDayOfWeek() == DayOfWeek.FRIDAY", "processingDate.getMonthValue() == 12", "regionCode != null", "result.totalAmount != null", "subTotal.compareTo(new BigDecimal(\"10000\")) > 0" ],
+        "switches" : [ "regionCode: \"JP\"/\"US_CA\"/\"US_NY\"/\"EU_DE\"/default" ]
+      },
+      "brittle" : false,
+      "brittleness_signals" : [ ],
+      "called_method_refs" : [ {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.util.List#get(int)",
+        "resolved" : "java.util.List#get(int)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ "\"Warning: Suspiciously large log entry\"" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.io.PrintStream#println(java.lang.String)",
+        "resolved" : "java.io.PrintStream#println(java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.ComplexInvoiceService.InvoiceItem#getItemId()",
+        "resolved" : "com.example.legacy.ComplexInvoiceService.InvoiceItem#getItemId()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.math.BigDecimal#multiply(java.math.BigDecimal)",
+        "resolved" : "java.math.BigDecimal#multiply(java.math.BigDecimal)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.math.BigDecimal#valueOf(double)",
+        "resolved" : "java.math.BigDecimal#valueOf(double)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.ComplexInvoiceService.InvoiceItem#getUnitPrice()",
+        "resolved" : "com.example.legacy.ComplexInvoiceService.InvoiceItem#getUnitPrice()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.util.List#size()",
+        "resolved" : "java.util.List#size()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ "\"Invalid region code\"", "\"Item list cannot be empty\"", "\"Customer cannot be null\"" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.util.List#add(E)",
+        "resolved" : "java.util.List#add(E)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.SimpleCustomerData#getEmail()",
+        "resolved" : "com.example.legacy.SimpleCustomerData#getEmail()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ "\"0.15\"", "\"1000\"", "\"0.10\"", "\"0.05\"", "\"0.02\"", "\"0.03\"", "\"0.5\"", "\"110\"", "\"500\"", "\"10000\"" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.math.BigDecimal#BigDecimal(java.lang.String)",
+        "resolved" : "java.math.BigDecimal#BigDecimal(java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.ComplexInvoiceService.InvoiceItem#getQuantity()",
+        "resolved" : "com.example.legacy.ComplexInvoiceService.InvoiceItem#getQuantity()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.ComplexInvoiceService.CalculationResult#CalculationResult()",
+        "resolved" : "com.example.legacy.ComplexInvoiceService.CalculationResult#CalculationResult()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ "\"VIP\"", "\"JP\"" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.lang.String#startsWith(java.lang.String)",
+        "resolved" : "java.lang.String#startsWith(java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.lang.String#length()",
+        "resolved" : "java.lang.String#length()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.ComplexInvoiceService.InvoiceItem#isDiscountable()",
+        "resolved" : "com.example.legacy.ComplexInvoiceService.InvoiceItem#isDiscountable()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.SimpleCustomerData#getFirstName()",
+        "resolved" : "com.example.legacy.SimpleCustomerData#getFirstName()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.math.BigDecimal#add(java.math.BigDecimal)",
+        "resolved" : "java.math.BigDecimal#add(java.math.BigDecimal)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ "0", "2" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.math.BigDecimal#setScale(int, java.math.RoundingMode)",
+        "resolved" : "java.math.BigDecimal#setScale(int, java.math.RoundingMode)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.time.LocalDate#getDayOfWeek()",
+        "resolved" : "java.time.LocalDate#getDayOfWeek()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.ComplexInvoiceService.InvoiceItem#getCategory()",
+        "resolved" : "com.example.legacy.ComplexInvoiceService.InvoiceItem#getCategory()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ "java.util.List#isEmpty()", "java.lang.String#isEmpty()" ],
+        "confidence" : 0.5,
+        "raw" : "java.util.List#isEmpty()",
+        "resolved" : null,
+        "source" : "merge",
+        "status" : "AMBIGUOUS"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.lang.String#equals(java.lang.Object)",
+        "resolved" : "java.lang.String#equals(java.lang.Object)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.math.BigDecimal#valueOf(long)",
+        "resolved" : "java.math.BigDecimal#valueOf(long)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.math.BigDecimal#compareTo(java.math.BigDecimal)",
+        "resolved" : "java.math.BigDecimal#compareTo(java.math.BigDecimal)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ "\"@partner.com\"" ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.lang.String#endsWith(java.lang.String)",
+        "resolved" : "java.lang.String#endsWith(java.lang.String)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.math.BigDecimal#subtract(java.math.BigDecimal)",
+        "resolved" : "java.math.BigDecimal#subtract(java.math.BigDecimal)",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.time.LocalDate#getMonthValue()",
+        "resolved" : "java.time.LocalDate#getMonthValue()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.ComplexInvoiceService.InvoiceItem#isTaxable()",
+        "resolved" : "com.example.legacy.ComplexInvoiceService.InvoiceItem#isTaxable()",
+        "source" : "javaparser",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "com.example.legacy.ComplexInvoiceService$CalculationResult#com.example.legacy.ComplexInvoiceService$CalculationResult()",
+        "resolved" : "com.example.legacy.ComplexInvoiceService$CalculationResult#com.example.legacy.ComplexInvoiceService$CalculationResult()",
+        "source" : "spoon",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.util.List#add(java.lang.Object)",
+        "resolved" : "java.util.List#add(java.lang.Object)",
+        "source" : "spoon",
+        "status" : "RESOLVED"
+      }, {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.math.BigDecimal#java.math.BigDecimal(java.lang.String)",
+        "resolved" : "java.math.BigDecimal#java.math.BigDecimal(java.lang.String)",
+        "source" : "spoon",
+        "status" : "RESOLVED"
+      } ],
+      "called_methods" : [ "java.util.List#get(int)", "java.io.PrintStream#println(java.lang.String)", "com.example.legacy.ComplexInvoiceService.InvoiceItem#getItemId()", "java.math.BigDecimal#multiply(java.math.BigDecimal)", "java.math.BigDecimal#valueOf(double)", "com.example.legacy.ComplexInvoiceService.InvoiceItem#getUnitPrice()", "java.util.List#size()", "java.util.List#add(E)", "com.example.legacy.SimpleCustomerData#getEmail()", "java.math.BigDecimal#BigDecimal(java.lang.String)", "com.example.legacy.ComplexInvoiceService.InvoiceItem#getQuantity()", "com.example.legacy.ComplexInvoiceService.CalculationResult#CalculationResult()", "java.lang.String#startsWith(java.lang.String)", "java.lang.String#length()", "com.example.legacy.ComplexInvoiceService.InvoiceItem#isDiscountable()", "com.example.legacy.SimpleCustomerData#getFirstName()", "java.math.BigDecimal#add(java.math.BigDecimal)", "java.math.BigDecimal#setScale(int, java.math.RoundingMode)", "java.time.LocalDate#getDayOfWeek()", "com.example.legacy.ComplexInvoiceService.InvoiceItem#getCategory()", "java.util.List#isEmpty()", "java.lang.String#equals(java.lang.Object)", "java.math.BigDecimal#valueOf(long)", "java.math.BigDecimal#compareTo(java.math.BigDecimal)", "java.lang.String#endsWith(java.lang.String)", "java.math.BigDecimal#subtract(java.math.BigDecimal)", "java.time.LocalDate#getMonthValue()", "com.example.legacy.ComplexInvoiceService.InvoiceItem#isTaxable()", "com.example.legacy.ComplexInvoiceService$CalculationResult#com.example.legacy.ComplexInvoiceService$CalculationResult()", "java.util.List#add(java.lang.Object)", "java.math.BigDecimal#java.math.BigDecimal(java.lang.String)" ],
+      "code_hash" : "388849510b3a2dd61b9e394b270987949592fe06e00aff3bfaf8483722812b81",
+      "cyclomatic_complexity" : 32,
+      "dead_code" : false,
+      "duplicate" : false,
+      "duplicate_group" : null,
+      "dynamicFeatureTotal" : 0,
+      "dynamic_feature_has_service_loader" : false,
+      "dynamic_feature_high" : 0,
+      "dynamic_feature_low" : 0,
+      "dynamic_feature_medium" : 0,
+      "dynamic_resolutions" : [ ],
+      "has_conditionals" : true,
+      "has_loops" : true,
+      "is_static" : false,
+      "loc" : 166,
+      "max_nesting_depth" : 9,
+      "method_id" : "com.example.legacy.ComplexInvoiceService#calculateInvoice(com.example.legacy.SimpleCustomerData,java.util.List,java.lang.String,boolean,java.time.LocalDate)",
+      "name" : "calculateInvoice",
+      "parameter_count" : 5,
+      "part_of_cycle" : false,
+      "raw_signatures" : [ "calculateInvoice(SimpleCustomerData, List, String, boolean, LocalDate)", "calculateInvoice(com.example.legacy.SimpleCustomerData,java.util.List,java.lang.String,boolean,java.time.LocalDate)" ],
+      "representative_paths" : [ {
+        "description" : "Validation failure: Customer cannot be null",
+        "expected_outcome_hint" : "failure",
+        "id" : "path-1",
+        "required_conditions" : [ "customer == null" ]
+      }, {
+        "description" : "Validation failure: Item list cannot be empty",
+        "expected_outcome_hint" : "failure",
+        "id" : "path-2",
+        "required_conditions" : [ "items == null || items.isEmpty()" ]
+      }, {
+        "description" : "Validation failure: Invalid region code",
+        "expected_outcome_hint" : "failure",
+        "id" : "path-3",
+        "required_conditions" : [ "regionCode == null || regionCode.isEmpty()" ]
+      }, {
+        "description" : "Loop guard continue",
+        "expected_outcome_hint" : "loop-continue",
+        "id" : "path-4",
+        "required_conditions" : [ "item.getQuantity() <= 0" ]
+      }, {
+        "description" : "Loop guard break",
+        "expected_outcome_hint" : "loop-break",
+        "id" : "path-5",
+        "required_conditions" : [ "item.getUnitPrice() < 0" ]
+      }, {
+        "description" : "Main success path",
+        "expected_outcome_hint" : "success",
+        "id" : "path-13",
+        "required_conditions" : [ ]
+      }, {
+        "description" : "Switch case regionCode=\"JP\"",
+        "expected_outcome_hint" : "case-\"JP\"",
+        "id" : "path-6",
+        "required_conditions" : [ "regionCode == \"JP\"" ]
+      }, {
+        "description" : "Switch case regionCode=\"US_CA\"",
+        "expected_outcome_hint" : "case-\"US_CA\"",
+        "id" : "path-7",
+        "required_conditions" : [ "regionCode == \"US_CA\"" ]
+      }, {
+        "description" : "Switch case regionCode=\"US_NY\"",
+        "expected_outcome_hint" : "case-\"US_NY\"",
+        "id" : "path-8",
+        "required_conditions" : [ "regionCode == \"US_NY\"" ]
+      }, {
+        "description" : "Switch case regionCode=\"EU_DE\"",
+        "expected_outcome_hint" : "case-\"EU_DE\"",
+        "id" : "path-9",
+        "required_conditions" : [ "regionCode == \"EU_DE\"" ]
+      }, {
+        "description" : "Switch case regionCode=default",
+        "expected_outcome_hint" : "case-default",
+        "id" : "path-10",
+        "required_conditions" : [ "regionCode == default" ]
+      }, {
+        "description" : "Boundary condition processingDate.getDayOfWeek() == DayOfWeek.FRIDAY",
+        "expected_outcome_hint" : "boundary",
+        "id" : "path-11",
+        "required_conditions" : [ "processingDate.getDayOfWeek() == DayOfWeek.FRIDAY" ]
+      }, {
+        "description" : "Boundary condition processingDate.getMonthValue() == 12",
+        "expected_outcome_hint" : "boundary",
+        "id" : "path-12",
+        "required_conditions" : [ "processingDate.getMonthValue() == 12" ]
+      } ],
+      "signature" : "calculateInvoice(SimpleCustomerData, List, String, boolean, LocalDate)",
+      "source_code" : "/**\n * 請求金額計算を行う巨大なメソッド\n * 複雑なビジネスロジック、多数の分岐、ネストされたループを含む\n */\npublic CalculationResult calculateInvoice(SimpleCustomerData customer, List<InvoiceItem> items, String regionCode, boolean isExpedited, LocalDate processingDate) {\n    CalculationResult result = new CalculationResult();\n    BigDecimal subTotal = BigDecimal.ZERO;\n    BigDecimal totalTax = BigDecimal.ZERO;\n    BigDecimal totalDiscount = BigDecimal.ZERO;\n    result.success = true;\n    // 入力検証ブロック（ガード節になっていないためネストが深くなる）\n    if (customer != null) {\n        if (items != null && !items.isEmpty()) {\n            if (regionCode != null && !regionCode.isEmpty()) {\n                // 顧客ランク判定ロジック\n                // 0: Standard, 1: Silver, 2: Gold\n                int customerTier = 0;\n                if (customer.getEmail() != null && customer.getEmail().endsWith(\"@partner.com\")) {\n                    customerTier = 2;\n                } else if (customer.getFirstName() != null && customer.getFirstName().startsWith(\"VIP\")) {\n                    customerTier = 1;\n                }\n                // メインのアイテム処理ループ\n                for (int i = 0; i < items.size(); i++) {\n                    InvoiceItem item = items.get(i);\n                    // アイテム検証\n                    if (item.getQuantity() <= 0) {\n                        result.errorMessages.add(\"Item \" + item.getItemId() + \" (Index: \" + i + \") has invalid quantity.\");\n                        // 次のアイテムへ\n                        continue;\n                    }\n                    if (item.getUnitPrice() < 0) {\n                        result.success = false;\n                        result.errorMessages.add(\"Critical Error: Negative price for item \" + item.getItemId());\n                        // 処理中断\n                        break;\n                    }\n                    BigDecimal itemBasePrice = BigDecimal.valueOf(item.getUnitPrice()).multiply(BigDecimal.valueOf(item.getQuantity()));\n                    // 割引計算ロジック\n                    BigDecimal itemDiscount = BigDecimal.ZERO;\n                    if (item.isDiscountable()) {\n                        // 複雑な条件分岐\n                        if (customerTier == 2) {\n                            // 15% OFF\n                            itemDiscount = itemBasePrice.multiply(new BigDecimal(\"0.15\"));\n                        } else if (customerTier == 1) {\n                            if (itemBasePrice.compareTo(new BigDecimal(\"1000\")) > 0) {\n                                itemDiscount = itemBasePrice.multiply(new BigDecimal(\"0.10\"));\n                            } else {\n                                itemDiscount = itemBasePrice.multiply(new BigDecimal(\"0.05\"));\n                            }\n                        } else {\n                            // Standard customer logic\n                            if (processingDate.getDayOfWeek() == DayOfWeek.FRIDAY && \"ELECTRONICS\".equals(item.getCategory())) {\n                                // Fancy Friday\n                                itemDiscount = itemBasePrice.multiply(new BigDecimal(\"0.02\"));\n                                // discount\n                            } else if (item.getQuantity() >= 10) {\n                                // Bulk discount\n                                itemDiscount = itemBasePrice.multiply(new BigDecimal(\"0.03\"));\n                            }\n                        }\n                        // 季節性割引（ハードコード）\n                        if (processingDate.getMonthValue() == 12 && \"GIFT\".equals(item.getCategory())) {\n                            itemDiscount = itemDiscount.add(itemBasePrice.multiply(new BigDecimal(\"0.05\")));\n                        }\n                    }\n                    // 割引の上限チェック\n                    if (itemDiscount.compareTo(itemBasePrice.multiply(new BigDecimal(\"0.5\"))) > 0) {\n                        itemDiscount = itemBasePrice.multiply(new BigDecimal(\"0.5\"));\n                    }\n                    BigDecimal priceAfterDiscount = itemBasePrice.subtract(itemDiscount);\n                    totalDiscount = totalDiscount.add(itemDiscount);\n                    // 税計算ロジック\n                    BigDecimal itemTax = BigDecimal.ZERO;\n                    if (item.isTaxable()) {\n                        double taxRate = 0.0;\n                        // 地域別税率スイッチング\n                        switch(regionCode) {\n                            case \"JP\":\n                                taxRate = 0.10;\n                                // 軽減税率\n                                if (\"FOOD\".equals(item.getCategory())) {\n                                    taxRate = 0.08;\n                                }\n                                break;\n                            case \"US_CA\":\n                                taxRate = 0.0725;\n                                break;\n                            case \"US_NY\":\n                                // 簡易値\n                                taxRate = 0.088;\n                                if (priceAfterDiscount.compareTo(new BigDecimal(\"110\")) < 0 && \"CLOTHING\".equals(item.getCategory())) {\n                                    // 免税措置\n                                    taxRate = 0.0;\n                                }\n                                break;\n                            case \"EU_DE\":\n                                taxRate = 0.19;\n                                break;\n                            default:\n                                // Default international\n                                taxRate = 0.05;\n                        }\n                        itemTax = priceAfterDiscount.multiply(BigDecimal.valueOf(taxRate));\n                        // 税計算の端数処理ルール\n                        if (regionCode.startsWith(\"JP\")) {\n                            itemTax = itemTax.setScale(0, RoundingMode.DOWN);\n                        } else {\n                            itemTax = itemTax.setScale(2, RoundingMode.HALF_UP);\n                        }\n                    }\n                    totalTax = totalTax.add(itemTax);\n                    subTotal = subTotal.add(priceAfterDiscount);\n                }\n                // 急ぎ便の追加料金\n                if (isExpedited) {\n                    BigDecimal expeditedFee = new BigDecimal(\"500\");\n                    // ゴールド会員は無料\n                    if (customerTier == 2) {\n                        expeditedFee = BigDecimal.ZERO;\n                    } else if (subTotal.compareTo(new BigDecimal(\"10000\")) > 0) {\n                        expeditedFee = expeditedFee.multiply(new BigDecimal(\"0.5\"));\n                    }\n                    subTotal = subTotal.add(expeditedFee);\n                }\n                // 最終集計\n                if (result.success) {\n                    result.totalAmount = subTotal.add(totalTax);\n                    result.taxAmount = totalTax;\n                    result.discountAmount = totalDiscount;\n                }\n            } else {\n                result.success = false;\n                result.errorMessages.add(\"Invalid region code\");\n            }\n        } else {\n            result.success = false;\n            result.errorMessages.add(\"Item list cannot be empty\");\n        }\n    } else {\n        result.success = false;\n        result.errorMessages.add(\"Customer cannot be null\");\n    }\n    // 謎のレガシーロジック（値を丸めて文字列変換してから戻す等）\n    if (result.totalAmount != null && customer != null) {\n        // ログ出力用文字列生成（実際にはログに出すが、ここでは処理の一部として残っている）\n        String logSummary = \"CALC_END: \" + customer.getEmail() + \" | \" + result.totalAmount;\n        if (logSummary.length() > 200) {\n            // 異常に長い場合は何かフラグを立てる（副作用のあるロジック例）\n            System.out.println(\"Warning: Suspiciously large log entry\");\n        }\n    }\n    return result;\n}",
+      "static" : false,
+      "thrown_exceptions" : [ ],
+      "usage_count" : 0,
+      "uses_removed_apis" : false,
+      "visibility" : "public"
+    }, {
+      "annotations" : [ ],
+      "branch_summary" : {
+        "guards" : [ ],
+        "predicates" : [ ],
+        "switches" : [ ]
+      },
+      "brittle" : false,
+      "brittleness_signals" : [ ],
+      "called_method_refs" : [ {
+        "argument_literals" : [ ],
+        "candidates" : [ ],
+        "confidence" : 1.0,
+        "raw" : "java.lang.Object#java.lang.Object()",
+        "resolved" : "java.lang.Object#java.lang.Object()",
+        "source" : "spoon",
+        "status" : "RESOLVED"
+      } ],
+      "called_methods" : [ "java.lang.Object#java.lang.Object()" ],
+      "code_hash" : "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "cyclomatic_complexity" : 1,
+      "dead_code" : false,
+      "duplicate" : true,
+      "duplicate_group" : "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "dynamicFeatureTotal" : 0,
+      "dynamic_feature_has_service_loader" : false,
+      "dynamic_feature_high" : 0,
+      "dynamic_feature_low" : 0,
+      "dynamic_feature_medium" : 0,
+      "dynamic_resolutions" : [ ],
+      "has_conditionals" : false,
+      "has_loops" : false,
+      "is_static" : false,
+      "loc" : 0,
+      "max_nesting_depth" : 0,
+      "method_id" : "com.example.legacy.ComplexInvoiceService#<init>()",
+      "name" : "<init>",
+      "parameter_count" : 0,
+      "part_of_cycle" : false,
+      "raw_signatures" : [ "com.example.legacy.ComplexInvoiceService()" ],
+      "representative_paths" : [ ],
+      "signature" : "com.example.legacy.ComplexInvoiceService()",
+      "source_code" : "ComplexInvoiceService() {\n}",
+      "static" : false,
+      "thrown_exceptions" : [ ],
+      "usage_count" : 0,
+      "uses_removed_apis" : false,
+      "visibility" : "public"
+    } ],
+    "nestedClass" : false
+  } ],
+  "commit_hash" : null,
+  "project_id" : "my-project"
+}

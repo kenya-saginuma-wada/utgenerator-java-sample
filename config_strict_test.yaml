@@ -1,0 +1,21 @@
+project:
+  id: "sample-project"
+  path: "."
+  exclude_paths:
+    - "build"
+    - "target"
+    - ".gradle"
+
+analysis:
+  spoon:
+    no_classpath: true
+  source_root_mode: "STRICT"
+  source_root_paths:
+    - "src/main/java"
+  source_charset: "UTF-8"
+  dump_file_list: true
+
+selection_rules:
+  class_min_loc: 3
+  method_min_loc: 1
+  exclude_getters_setters: true

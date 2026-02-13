@@ -1,0 +1,68 @@
+{
+  "analysis_errors" : [ ],
+  "classes" : [ {
+    "abstract" : false,
+    "annotations" : [ ],
+    "anonymous" : false,
+    "deadCode" : false,
+    "extends_types" : [ ],
+    "fields" : [ {
+      "is_final" : false,
+      "is_injectable" : false,
+      "is_static" : false,
+      "mock_hint" : null,
+      "name" : "totalAmount",
+      "type" : "java.math.BigDecimal",
+      "visibility" : "public"
+    }, {
+      "is_final" : false,
+      "is_injectable" : false,
+      "is_static" : false,
+      "mock_hint" : null,
+      "name" : "taxAmount",
+      "type" : "java.math.BigDecimal",
+      "visibility" : "public"
+    }, {
+      "is_final" : false,
+      "is_injectable" : false,
+      "is_static" : false,
+      "mock_hint" : null,
+      "name" : "discountAmount",
+      "type" : "java.math.BigDecimal",
+      "visibility" : "public"
+    }, {
+      "is_final" : false,
+      "is_injectable" : false,
+      "is_static" : false,
+      "mock_hint" : null,
+      "name" : "errorMessages",
+      "type" : "java.util.List<java.lang.String>",
+      "visibility" : "public"
+    }, {
+      "is_final" : false,
+      "is_injectable" : false,
+      "is_static" : false,
+      "mock_hint" : null,
+      "name" : "success",
+      "type" : "boolean",
+      "visibility" : "public"
+    } ],
+    "file_path" : "src/main/java/com/example/legacy/ComplexInvoiceService.java",
+    "fqn" : "com.example.legacy.ComplexInvoiceService.CalculationResult",
+    "has_nested_classes" : false,
+    "implements_types" : [ ],
+    "imports" : [ "java.math.BigDecimal", "java.math.RoundingMode", "java.time.DayOfWeek", "java.time.LocalDate", "java.util.ArrayList", "java.util.List" ],
+    "interface" : false,
+    "is_abstract" : false,
+    "is_anonymous" : false,
+    "is_dead_code" : false,
+    "is_interface" : false,
+    "is_nested_class" : true,
+    "loc" : 7,
+    "method_count" : 0,
+    "methods" : [ ],
+    "nestedClass" : true
+  } ],
+  "commit_hash" : null,
+  "project_id" : "my-project"
+}

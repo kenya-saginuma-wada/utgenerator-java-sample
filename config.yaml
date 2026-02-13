@@ -1,0 +1,96 @@
+project:
+  id: "proj_00123"
+  repo_url: "https://github.com/example/repo.git"
+  commit: "HEAD"
+  build_tool: "gradle"
+  build_command: "./gradlew test"
+  exclude_paths:
+    - "src/test"
+    - "build"
+    - "target"
+
+selection_rules:
+  class_min_loc: 10
+  class_min_method_count: 1
+  method_min_loc: 1
+  method_max_loc: 2000
+  max_methods_per_class: 5
+  exclude_getters_setters: false
+  max_methods_per_package: null
+  exclude_annotations:
+    - Deprecated
+    - Generated
+  deprioritize_annotations:
+    - Experimental
+  complexity:
+    max_cyclomatic: 10
+    strategy: split
+
+llm:
+  provider: "openai"
+  max_retries: 3
+  fix_retries: 5
+  model_name: "gpt-4o"  # Options: gpt-4o, gpt-4o-mini, gpt-4-turbo, gpt-3.5-turbo
+  api_key: "${OPENAI_API_KEY}"  # 環境変数から読み込む
+  
+  # Smart retry strategy to reduce unnecessary LLM calls
+  smart_retry:
+    # Abort if the same error type repeats more than this many times
+    same_error_max_retries: 3
+    # Total LLM retry budget per task (across static + runtime fixes)
+    total_retry_budget_per_task: 5
+  
+  # OpenAI config example:
+  # provider: "openai"
+  # model_name: "gpt-4o-mini"
+  # api_key: "${OPENAI_API_KEY}"
+  
+  # Local / Ollama config example:
+  # provider: "local"
+  # url: "http://localhost:11434/api/generate"
+  # model_name: "ministral-3:3b"
+
+  # Azure OpenAI config example:
+  # provider: "azure-openai"
+  # url: "https://<resource-name>.openai.azure.com"
+  # azure_deployment: "<deployment-name>"
+  # azure_api_version: "2024-02-15-preview"
+  # api_key: "${AZURE_OPENAI_API_KEY}"
+
+  # Anthropic config example:
+  # provider: "anthropic"
+  # url: "https://api.anthropic.com/v1/messages" # optional override
+  # model_name: "claude-3-5-sonnet-latest"
+  # api_key: "${ANTHROPIC_API_KEY}"
+
+  # Vertex AI config example (OAuth access token):
+  # provider: "vertex"
+  # vertex_project: "<gcp-project-id>"
+  # vertex_location: "us-central1"
+  # vertex_model: "gemini-1.5-pro"
+  # api_key: "${VERTEX_AI_ACCESS_TOKEN}"
+
+  # Bedrock config example (AWS SigV4):
+  # provider: "bedrock"
+  # aws_region: "us-east-1"
+  # model_name: "anthropic.claude-3-5-sonnet-20240620-v1:0"
+  # aws_access_key_id: "${AWS_ACCESS_KEY_ID}"
+  # aws_secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
+  # aws_session_token: "${AWS_SESSION_TOKEN}" # optional
+
+execution:
+  per_task_isolation: true
+  logs_root: "logs"
+  # Number of times to retry fixing a test that fails at runtime (assertion failures, etc.)
+  # Only applies when per_task_isolation is true
+  runtime_fix_retries: 5
+
+llm:
+  provider: "gemini"
+  model_name: "gemini-2.0-flash-exp"
+  deterministic: true
+  seed: 42
+  fix_retries: 2
+  smart_retry:
+    same_error_max_retries: 1
+    total_retry_budget_per_task: 3

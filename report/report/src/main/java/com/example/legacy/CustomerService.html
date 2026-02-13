@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CustomerService - Documentation</title>
+  <style>
+:root {
+  /* Color Palette: Slate & Indigo */
+  --bg-body: #f8fafc;
+  --bg-card: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+
+  --primary-50: #eef2ff;
+  --primary-100: #e0e7ff;
+  --primary-500: #6366f1;
+  --primary-600: #4f46e5;
+  --primary-700: #4338ca;
+
+  --success-bg: #dcfce7;
+  --success-text: #166534;
+  --failure-bg: #fee2e2;
+  --failure-text: #991b1b;
+  --warning-bg: #fef3c7;
+  --warning-text: #92400e;
+  --info-bg: #dbeafe;
+  --info-text: #1e40af;
+  --neutral-bg: #f1f5f9;
+  --neutral-text: #475569;
+
+  /* Spacing */
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Base Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+      "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 4rem;
+}
+
+/* Layout */
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* Header */
+header {
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, var(--primary-700), var(--primary-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.meta {
+  display: flex;
+  gap: 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+/* Grid for Stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: center;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.stat-value.success {
+  color: #15803d;
+}
+
+.stat-value.failure {
+  color: #b91c1c;
+}
+
+/* General Card */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+}
+
+.card-header {
+  margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background: #fdfdfd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  margin-bottom: 1rem;
+}
+
+th {
+  text-align: left;
+  padding: 0.875rem 1.5rem;
+  background-color: #f8fafc;
+  color: var(--text-secondary);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-color);
+}
+
+td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: top;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background-color: #f8fafc;
+}
+
+table.sortable th[data-sort] {
+  cursor: pointer;
+  user-select: none;
+}
+
+table.sortable th.sort-asc::after {
+  content: " ^";
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+table.sortable th.sort-desc::after {
+  content: " v";
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+tr.attention-row td {
+  background-color: var(--warning-bg);
+}
+
+tr.attention-row td:first-child {
+  border-left: 4px solid var(--warning-text);
+}
+
+tr.attention-row:hover td {
+  background-color: #fde68a;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.badge-success {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.badge-failure {
+  background: var(--failure-bg);
+  color: var(--failure-text);
+}
+
+.badge-warning {
+  background: var(--warning-bg);
+  color: var(--warning-text);
+}
+
+.badge-info {
+  background: var(--info-bg);
+  color: var(--info-text);
+}
+
+.badge-neutral {
+  background: var(--neutral-bg);
+  color: var(--neutral-text);
+}
+
+/* Code Block */
+pre {
+  background: #0b1220;
+  color: #e2e8f0;
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  font-family: "JetBrains Mono", "Fira Code", "Menlo", "Monaco", "Consolas", monospace;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  tab-size: 2;
+}
+
+.code-panel {
+  border: 1px solid #334155;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin: 0.75rem 0 1rem;
+  background: #0f172a;
+  box-shadow: var(--shadow-sm);
+}
+
+.code-header {
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid #334155;
+  color: #cbd5e1;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+.code-panel pre {
+  margin: 0;
+  background: #0b1220;
+  color: #e2e8f0;
+  padding: 0.75rem 0.75rem 0.75rem 0;
+  overflow-x: auto;
+  font-family: "JetBrains Mono", "Fira Code", "Menlo", "Monaco", "Consolas", monospace;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  tab-size: 2;
+}
+
+.code-panel code {
+  display: block;
+}
+
+.code-line {
+  display: flex;
+  min-width: max-content;
+}
+
+.code-line-no {
+  width: 3.5rem;
+  padding-right: 0.75rem;
+  text-align: right;
+  color: #94a3b8;
+  user-select: none;
+  flex: 0 0 auto;
+}
+
+.code-line-text {
+  white-space: pre;
+}
+
+code {
+  font-family: "JetBrains Mono", "Fira Code", "Menlo", "Monaco", "Consolas", monospace;
+}
+
+p code {
+  background: var(--neutral-bg);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+  color: var(--text-primary);
+}
+
+/* Details/Summary */
+details {
+  margin: 1rem 0;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+summary:hover {
+  background-color: var(--neutral-bg);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-top: 4rem;
+  border-top: 1px dashed var(--border-color);
+  padding-top: 1rem;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-top">
+        <h1>CustomerService</h1>
+        <span class="badge badge-neutral">Doc</span>
+      </div>
+    </header>
+    <main class="markdown-content">
+      <h1 id="customerservice">CustomerService</h1>
+<h2 id="analysis-summary">Analysis Summary</h2>
+<p><strong>How to read</strong>: Start with high complexity, dead code, duplicate, and brittleness counts to prioritize risky areas.</p>
+<table><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody>
+<tr><td>Type</td><td>Class</td></tr>
+<tr><td>Lines</td><td>147</td></tr>
+<tr><td>Fields</td><td>1</td></tr>
+<tr><td>Methods</td><td>5</td></tr>
+<tr><td>High Complexity (&gt;=15)</td><td>0</td></tr>
+<tr><td>Dead Code Candidates</td><td>0</td></tr>
+<tr><td>Duplicate Code Candidates</td><td>0</td></tr>
+<tr><td>Removed API Usage</td><td>0</td></tr>
+<tr><td>Cycle Involvement</td><td>0</td></tr>
+<tr><td>Brittleness Signals</td><td>0</td></tr>
+</tbody></table>
+<h2 id="class-overview">Class Overview</h2>
+<p><strong>How to read</strong>: Check package/file location and class traits first to understand context before method-level details.</p>
+<p><strong>Type</strong>: Class</p>
+<p><strong>Attributes</strong>: Has inner classes</p>
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>Package</td><td><code>com.example.legacy</code></td></tr>
+<tr><td>File</td><td><code>src/main/java/com/example/legacy/CustomerService.java</code></td></tr>
+<tr><td>Lines</td><td>147</td></tr>
+<tr><td>Methods</td><td>5</td></tr>
+<tr><td>Fields</td><td>1</td></tr>
+</tbody></table>
+<h2 id="fields">Fields</h2>
+<p><strong>How to read</strong>: Review field types and visibility to understand state ownership and dependency boundaries.</p>
+<table><thead><tr><th>Name</th><th>Type</th><th>Visibility</th></tr></thead><tbody>
+<tr><td><code>customers</code></td><td><code>java.util.List&lt;com.example.legacy.CustomerService.Customer&gt;</code></td><td>Private</td></tr>
+</tbody></table>
+<h2 id="methods">Methods</h2>
+<p><strong>How to read</strong>: Use this table to find longer or more complex methods, then jump to the detailed sections.</p>
+<table><thead><tr><th>Method</th><th>Visibility</th><th>Lines</th><th>Complexity</th><th>Notes</th></tr></thead><tbody>
+<tr><td><a href="#addcustomer-customer"><code>addCustomer(Customer)</code></a></td><td>Public</td><td>9</td><td>3 (Low)</td><td>-</td></tr>
+<tr><td><a href="#findcustomerbyid-string"><code>findCustomerById(String)</code></a></td><td>Public</td><td>13</td><td>4 (Low)</td><td>-</td></tr>
+<tr><td><a href="#getactivecustomers"><code>getActiveCustomers()</code></a></td><td>Public</td><td>15</td><td>5 (Low)</td><td>-</td></tr>
+<tr><td><a href="#getcustomercount"><code>getCustomerCount()</code></a></td><td>Public</td><td>3</td><td>1 (Low)</td><td>-</td></tr>
+<tr><td><a href="#clearallcustomers"><code>clearAllCustomers()</code></a></td><td>Public</td><td>3</td><td>1 (Low)</td><td>-</td></tr>
+</tbody></table>
+<hr>
+<h3 id="addcustomer-customer">addCustomer(Customer)</h3>
+<p><strong>Summary</strong>: Public / Parameters 1</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">addCustomer(Customer)</span></span>
+</code></pre></div>
+<p><strong>Method Contract</strong>:</p>
+<p><strong>How to read</strong>: Use this contract as the specification baseline for I/O, constraints, and dependency behavior.</p>
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>Inputs</td><td>Customer customer</td></tr>
+<tr><td>Output</td><td>void</td></tr>
+<tr><td>Preconditions</td><td>customer == null / customer.getId() == null || customer.getId().isEmpty()</td></tr>
+<tr><td>Postconditions</td><td>Main success path -&gt; success</td></tr>
+<tr><td>Error/Boundary</td><td>customer.getId() == null =&gt; boundary / throws IllegalArgumentException</td></tr>
+<tr><td>Dependencies</td><td>Customer#getId / List#add / String#isEmpty</td></tr>
+</tbody></table>
+<p><strong>Source Code</strong>:</p>
+<p><strong>How to read</strong>: Read control flow and side effects carefully, especially input guards, external calls, and state changes.</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">public void addCustomer(Customer customer) {</span></span>
+<span class="code-line"><span class="code-line-no">2</span><span class="code-line-text">    if (customer == null) {</span></span>
+<span class="code-line"><span class="code-line-no">3</span><span class="code-line-text">        throw new IllegalArgumentException(&quot;Customer cannot be null&quot;);</span></span>
+<span class="code-line"><span class="code-line-no">4</span><span class="code-line-text">    }</span></span>
+<span class="code-line"><span class="code-line-no">5</span><span class="code-line-text">    if (customer.getId() == null || customer.getId().isEmpty()) {</span></span>
+<span class="code-line"><span class="code-line-no">6</span><span class="code-line-text">        throw new IllegalArgumentException(&quot;Customer ID cannot be empty&quot;);</span></span>
+<span class="code-line"><span class="code-line-no">7</span><span class="code-line-text">    }</span></span>
+<span class="code-line"><span class="code-line-no">8</span><span class="code-line-text">    customers.add(customer);</span></span>
+<span class="code-line"><span class="code-line-no">9</span><span class="code-line-text">}</span></span>
+</code></pre></div>
+<table><thead><tr><th>Metrics</th><th>Value</th></tr></thead><tbody>
+<tr><td>Lines</td><td>9</td></tr>
+<tr><td>Complexity</td><td>3 (Low)</td></tr>
+<tr><td>Nesting Depth</td><td>1</td></tr>
+<tr><td>Parameters</td><td>1</td></tr>
+<tr><td>Call Count</td><td>0</td></tr>
+<tr><td>Structure</td><td>Has conditionals</td></tr>
+</tbody></table>
+<p><strong>Branches/Guards</strong>:</p>
+<p><strong>How to read</strong>: Focus on guard conditions and notes to identify missing edge-case tests and early-return paths.</p>
+<table><thead><tr><th>Type</th><th>Condition</th><th>Notes</th></tr></thead><tbody>
+<tr><td>fail-guard</td><td>customer == null</td><td>5:5</td></tr>
+<tr><td>fail-guard</td><td>customer.getId() == null || customer.getId().isEmpty()</td><td>8:5</td></tr>
+<tr><td>predicate</td><td>customer == null</td><td>-</td></tr>
+<tr><td>predicate</td><td>customer.getId() == null</td><td>-</td></tr>
+</tbody></table>
+<p><strong>Representative Paths</strong>:</p>
+<p><strong>How to read</strong>: Use path type, condition, and expected result to design explicit test scenarios.</p>
+<table><thead><tr><th>ID</th><th>Type</th><th>Condition</th><th>Description</th><th>Notes</th></tr></thead><tbody>
+<tr><td>path-1</td><td>failure</td><td>customer == null</td><td>Exception throw path</td><td>failure</td></tr>
+<tr><td>path-2</td><td>failure</td><td>customer.getId() == null || customer.getId().isEmpty()</td><td>Exception throw path</td><td>failure</td></tr>
+<tr><td>path-4</td><td>success</td><td>-</td><td>Main success path</td><td>success</td></tr>
+<tr><td>path-3</td><td>boundary</td><td>customer.getId() == null</td><td>Boundary condition customer.getId() == null</td><td>boundary</td></tr>
+</tbody></table>
+<p><strong>Called Methods</strong>:</p>
+<p><strong>How to read</strong>: Check owners and signatures to understand coupling, mock targets, and integration impact.</p>
+<table><thead><tr><th>#</th><th>Owner</th><th>Method</th><th>Signature</th></tr></thead><tbody>
+<tr><td>1</td><td>IllegalArgumentException</td><td>IllegalArgumentException</td><td>IllegalArgumentException(String)</td></tr>
+<tr><td>2</td><td>List</td><td>add</td><td>add(E)</td></tr>
+<tr><td>3</td><td>String</td><td>isEmpty</td><td>isEmpty()</td></tr>
+<tr><td>4</td><td>Customer</td><td>getId</td><td>getId()</td></tr>
+</tbody></table>
+<p><strong>Exceptions</strong>:</p>
+<p><strong>How to read</strong>: Use exception lists to verify negative scenarios and expected failure behavior.</p>
+<ul>
+<li><code>IllegalArgumentException</code></li>
+</ul>
+<p><strong>Test Viewpoints</strong>:</p>
+<p><strong>How to read</strong>: Turn each path and signal into explicit test scenarios for normal, error, and boundary behavior.</p>
+<ul>
+<li>Path: Exception throw path / Condition: customer == null / Expected: failure</li>
+<li>Path: Exception throw path / Condition: customer.getId() == null || customer.getId().isEmpty() / Expected: failure</li>
+<li>Path: Main success path / Condition: - / Expected: success</li>
+<li>Path: Boundary condition customer.getId() == null / Condition: customer.getId() == null / Expected: boundary</li>
+<li>Verify exception scenarios and messages.</li>
+</ul>
+<h3 id="findcustomerbyid-string">findCustomerById(String)</h3>
+<p><strong>Summary</strong>: Public / Parameters 1</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">findCustomerById(String)</span></span>
+</code></pre></div>
+<p><strong>Method Contract</strong>:</p>
+<p><strong>How to read</strong>: Use this contract as the specification baseline for I/O, constraints, and dependency behavior.</p>
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>Inputs</td><td>String id</td></tr>
+<tr><td>Output</td><td>Customer</td></tr>
+<tr><td>Preconditions</td><td>id == null || id.isEmpty()</td></tr>
+<tr><td>Postconditions</td><td>Main success path -&gt; success</td></tr>
+<tr><td>Error/Boundary</td><td>id == null || id.isEmpty() =&gt; early-return / id == null =&gt; boundary</td></tr>
+<tr><td>Dependencies</td><td>Customer#getId / String#equals / String#isEmpty</td></tr>
+</tbody></table>
+<p><strong>Source Code</strong>:</p>
+<p><strong>How to read</strong>: Read control flow and side effects carefully, especially input guards, external calls, and state changes.</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">public Customer findCustomerById(String id) {</span></span>
+<span class="code-line"><span class="code-line-no">2</span><span class="code-line-text">    if (id == null || id.isEmpty()) {</span></span>
+<span class="code-line"><span class="code-line-no">3</span><span class="code-line-text">        return null;</span></span>
+<span class="code-line"><span class="code-line-no">4</span><span class="code-line-text">    }</span></span>
+<span class="code-line"><span class="code-line-no">5</span><span class="code-line-text">    for (Customer customer : customers) {</span></span>
+<span class="code-line"><span class="code-line-no">6</span><span class="code-line-text">        if (customer.getId().equals(id)) {</span></span>
+<span class="code-line"><span class="code-line-no">7</span><span class="code-line-text">            return customer;</span></span>
+<span class="code-line"><span class="code-line-no">8</span><span class="code-line-text">        }</span></span>
+<span class="code-line"><span class="code-line-no">9</span><span class="code-line-text">    }</span></span>
+<span class="code-line"><span class="code-line-no">10</span><span class="code-line-text">    return null;</span></span>
+<span class="code-line"><span class="code-line-no">11</span><span class="code-line-text">}</span></span>
+</code></pre></div>
+<table><thead><tr><th>Metrics</th><th>Value</th></tr></thead><tbody>
+<tr><td>Lines</td><td>13</td></tr>
+<tr><td>Complexity</td><td>4 (Low)</td></tr>
+<tr><td>Nesting Depth</td><td>2</td></tr>
+<tr><td>Parameters</td><td>1</td></tr>
+<tr><td>Call Count</td><td>0</td></tr>
+<tr><td>Structure</td><td>Has loops Has conditionals</td></tr>
+</tbody></table>
+<p><strong>Branches/Guards</strong>:</p>
+<p><strong>How to read</strong>: Focus on guard conditions and notes to identify missing edge-case tests and early-return paths.</p>
+<table><thead><tr><th>Type</th><th>Condition</th><th>Notes</th></tr></thead><tbody>
+<tr><td>fail-guard</td><td>id == null || id.isEmpty()</td><td>5:5</td></tr>
+<tr><td>predicate</td><td>id == null</td><td>-</td></tr>
+</tbody></table>
+<p><strong>Representative Paths</strong>:</p>
+<p><strong>How to read</strong>: Use path type, condition, and expected result to design explicit test scenarios.</p>
+<table><thead><tr><th>ID</th><th>Type</th><th>Condition</th><th>Description</th><th>Notes</th></tr></thead><tbody>
+<tr><td>path-1</td><td>early-return</td><td>id == null || id.isEmpty()</td><td>Early return path</td><td>early-return</td></tr>
+<tr><td>path-3</td><td>success</td><td>-</td><td>Main success path</td><td>success</td></tr>
+<tr><td>path-2</td><td>boundary</td><td>id == null</td><td>Boundary condition id == null</td><td>boundary</td></tr>
+</tbody></table>
+<p><strong>Called Methods</strong>:</p>
+<p><strong>How to read</strong>: Check owners and signatures to understand coupling, mock targets, and integration impact.</p>
+<table><thead><tr><th>#</th><th>Owner</th><th>Method</th><th>Signature</th></tr></thead><tbody>
+<tr><td>1</td><td>String</td><td>equals</td><td>equals(Object)</td></tr>
+<tr><td>2</td><td>String</td><td>isEmpty</td><td>isEmpty()</td></tr>
+<tr><td>3</td><td>Customer</td><td>getId</td><td>getId()</td></tr>
+</tbody></table>
+<p><strong>Test Viewpoints</strong>:</p>
+<p><strong>How to read</strong>: Turn each path and signal into explicit test scenarios for normal, error, and boundary behavior.</p>
+<ul>
+<li>Path: Early return path / Condition: id == null || id.isEmpty() / Expected: early-return</li>
+<li>Path: Main success path / Condition: - / Expected: success</li>
+<li>Path: Boundary condition id == null / Condition: id == null / Expected: boundary</li>
+</ul>
+<h3 id="getactivecustomers">getActiveCustomers()</h3>
+<p><strong>Summary</strong>: Public</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">getActiveCustomers()</span></span>
+</code></pre></div>
+<p><strong>Method Contract</strong>:</p>
+<p><strong>How to read</strong>: Use this contract as the specification baseline for I/O, constraints, and dependency behavior.</p>
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>Inputs</td><td>None</td></tr>
+<tr><td>Output</td><td>List&lt;Customer&gt;</td></tr>
+<tr><td>Preconditions</td><td>None</td></tr>
+<tr><td>Postconditions</td><td>Returns List&lt;Customer&gt;.</td></tr>
+<tr><td>Error/Boundary</td><td>None</td></tr>
+<tr><td>Dependencies</td><td>Customer#isActive / ArrayList#ArrayList / Customer#getBalance</td></tr>
+</tbody></table>
+<p><strong>Source Code</strong>:</p>
+<p><strong>How to read</strong>: Read control flow and side effects carefully, especially input guards, external calls, and state changes.</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">public List&lt;Customer&gt; getActiveCustomers() {</span></span>
+<span class="code-line"><span class="code-line-no">2</span><span class="code-line-text">    List&lt;Customer&gt; activeCustomers = new ArrayList&lt;&gt;();</span></span>
+<span class="code-line"><span class="code-line-no">3</span><span class="code-line-text">    for (Customer customer : customers) {</span></span>
+<span class="code-line"><span class="code-line-no">4</span><span class="code-line-text">        if (customer.isActive()) {</span></span>
+<span class="code-line"><span class="code-line-no">5</span><span class="code-line-text">            if (customer.getBalance() &gt; 0) {</span></span>
+<span class="code-line"><span class="code-line-no">6</span><span class="code-line-text">                activeCustomers.add(customer);</span></span>
+<span class="code-line"><span class="code-line-no">7</span><span class="code-line-text">            } else if (customer.isPremium()) {</span></span>
+<span class="code-line"><span class="code-line-no">8</span><span class="code-line-text">                activeCustomers.add(customer);</span></span>
+<span class="code-line"><span class="code-line-no">9</span><span class="code-line-text">            }</span></span>
+<span class="code-line"><span class="code-line-no">10</span><span class="code-line-text">        }</span></span>
+<span class="code-line"><span class="code-line-no">11</span><span class="code-line-text">    }</span></span>
+<span class="code-line"><span class="code-line-no">12</span><span class="code-line-text">    return activeCustomers;</span></span>
+<span class="code-line"><span class="code-line-no">13</span><span class="code-line-text">}</span></span>
+</code></pre></div>
+<table><thead><tr><th>Metrics</th><th>Value</th></tr></thead><tbody>
+<tr><td>Lines</td><td>15</td></tr>
+<tr><td>Complexity</td><td>5 (Low)</td></tr>
+<tr><td>Nesting Depth</td><td>4</td></tr>
+<tr><td>Parameters</td><td>0</td></tr>
+<tr><td>Call Count</td><td>0</td></tr>
+<tr><td>Structure</td><td>Has loops Has conditionals</td></tr>
+</tbody></table>
+<p><strong>Branches/Guards</strong>:</p>
+<p><strong>How to read</strong>: Focus on guard conditions and notes to identify missing edge-case tests and early-return paths.</p>
+<table><thead><tr><th>Type</th><th>Condition</th><th>Notes</th></tr></thead><tbody>
+<tr><td>predicate</td><td>customer.getBalance() &gt; 0</td><td>-</td></tr>
+</tbody></table>
+<p><strong>Called Methods</strong>:</p>
+<p><strong>How to read</strong>: Check owners and signatures to understand coupling, mock targets, and integration impact.</p>
+<table><thead><tr><th>#</th><th>Owner</th><th>Method</th><th>Signature</th></tr></thead><tbody>
+<tr><td>1</td><td>Customer</td><td>isActive</td><td>isActive()</td></tr>
+<tr><td>2</td><td>List</td><td>add</td><td>add(E)</td></tr>
+<tr><td>3</td><td>ArrayList</td><td>ArrayList</td><td>ArrayList()</td></tr>
+<tr><td>4</td><td>Customer</td><td>getBalance</td><td>getBalance()</td></tr>
+<tr><td>5</td><td>Customer</td><td>isPremium</td><td>isPremium()</td></tr>
+<tr><td>6</td><td>List</td><td>add</td><td>add(Object)</td></tr>
+</tbody></table>
+<h3 id="getcustomercount">getCustomerCount()</h3>
+<p><strong>Summary</strong>: Public</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">getCustomerCount()</span></span>
+</code></pre></div>
+<p><strong>Method Contract</strong>:</p>
+<p><strong>How to read</strong>: Use this contract as the specification baseline for I/O, constraints, and dependency behavior.</p>
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>Inputs</td><td>None</td></tr>
+<tr><td>Output</td><td>int</td></tr>
+<tr><td>Preconditions</td><td>None</td></tr>
+<tr><td>Postconditions</td><td>Returns int.</td></tr>
+<tr><td>Error/Boundary</td><td>None</td></tr>
+<tr><td>Dependencies</td><td>List#size</td></tr>
+</tbody></table>
+<p><strong>Source Code</strong>:</p>
+<p><strong>How to read</strong>: Read control flow and side effects carefully, especially input guards, external calls, and state changes.</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">public int getCustomerCount() {</span></span>
+<span class="code-line"><span class="code-line-no">2</span><span class="code-line-text">    return customers.size();</span></span>
+<span class="code-line"><span class="code-line-no">3</span><span class="code-line-text">}</span></span>
+</code></pre></div>
+<table><thead><tr><th>Metrics</th><th>Value</th></tr></thead><tbody>
+<tr><td>Lines</td><td>3</td></tr>
+<tr><td>Complexity</td><td>1 (Low)</td></tr>
+<tr><td>Nesting Depth</td><td>0</td></tr>
+<tr><td>Parameters</td><td>0</td></tr>
+<tr><td>Call Count</td><td>0</td></tr>
+</tbody></table>
+<p><strong>Called Methods</strong>:</p>
+<p><strong>How to read</strong>: Check owners and signatures to understand coupling, mock targets, and integration impact.</p>
+<table><thead><tr><th>#</th><th>Owner</th><th>Method</th><th>Signature</th></tr></thead><tbody>
+<tr><td>1</td><td>List</td><td>size</td><td>size()</td></tr>
+</tbody></table>
+<h3 id="clearallcustomers">clearAllCustomers()</h3>
+<p><strong>Summary</strong>: Public</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">clearAllCustomers()</span></span>
+</code></pre></div>
+<p><strong>Method Contract</strong>:</p>
+<p><strong>How to read</strong>: Use this contract as the specification baseline for I/O, constraints, and dependency behavior.</p>
+<table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>Inputs</td><td>None</td></tr>
+<tr><td>Output</td><td>void</td></tr>
+<tr><td>Preconditions</td><td>None</td></tr>
+<tr><td>Postconditions</td><td>Unknown</td></tr>
+<tr><td>Error/Boundary</td><td>None</td></tr>
+<tr><td>Dependencies</td><td>List#clear</td></tr>
+</tbody></table>
+<p><strong>Source Code</strong>:</p>
+<p><strong>How to read</strong>: Read control flow and side effects carefully, especially input guards, external calls, and state changes.</p>
+<div class="code-panel">
+  <div class="code-header">JAVA</div>
+  <pre><code class="language-java"><span class="code-line"><span class="code-line-no">1</span><span class="code-line-text">public void clearAllCustomers() {</span></span>
+<span class="code-line"><span class="code-line-no">2</span><span class="code-line-text">    customers.clear();</span></span>
+<span class="code-line"><span class="code-line-no">3</span><span class="code-line-text">}</span></span>
+</code></pre></div>
+<table><thead><tr><th>Metrics</th><th>Value</th></tr></thead><tbody>
+<tr><td>Lines</td><td>3</td></tr>
+<tr><td>Complexity</td><td>1 (Low)</td></tr>
+<tr><td>Nesting Depth</td><td>0</td></tr>
+<tr><td>Parameters</td><td>0</td></tr>
+<tr><td>Call Count</td><td>0</td></tr>
+</tbody></table>
+<p><strong>Called Methods</strong>:</p>
+<p><strong>How to read</strong>: Check owners and signatures to understand coupling, mock targets, and integration impact.</p>
+<table><thead><tr><th>#</th><th>Owner</th><th>Method</th><th>Signature</th></tr></thead><tbody>
+<tr><td>1</td><td>List</td><td>clear</td><td>clear()</td></tr>
+</tbody></table>
+
+      <div class="footer">
+        <p>Generated by FUL Document Command</p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
