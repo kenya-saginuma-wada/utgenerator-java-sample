@@ -20,7 +20,7 @@
     }
   },
   "project_root" : "/home/wada/workspaces/utgenerator-java-sample",
-  "timestamp" : "2026-02-13T03:35:08.464707268Z",
+  "timestamp" : "2026-02-14T09:04:18.396443088Z",
   "top_ambiguous_examples" : [ "java.util.List#isEmpty()" ],
   "top_unresolved_examples" : [ ],
   "type_resolution" : {

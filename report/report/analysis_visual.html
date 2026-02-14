@@ -243,12 +243,28 @@
         background: transparent;
         text-align: left;
         width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.42rem;
         padding: 0.25rem 0.4rem;
         border-radius: 0.5rem;
         font-size: 0.78rem;
         color: var(--ink);
         cursor: pointer;
         transition: background 0.2s ease, color 0.2s ease;
+      }
+
+      .tree-button::before {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 2rem;
+        padding: 0.08rem 0.34rem;
+        border-radius: 999px;
+        font-size: 0.56rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
       }
 
       .tree-button:hover {
@@ -266,9 +282,32 @@
         cursor: default;
       }
 
+      .tree-button.is-disabled::before {
+        opacity: 0.45;
+      }
+
+      .tree-package {
+        font-size: 0.79rem;
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      .tree-package::before {
+        content: "pkg";
+        background: rgba(31, 111, 92, 0.14);
+        color: var(--accent);
+      }
+
       .tree-file {
-        font-size: 0.75rem;
-        color: var(--muted);
+        font-size: 0.74rem;
+        color: #4b5563;
+        padding-left: 0.7rem;
+      }
+
+      .tree-file::before {
+        content: "src";
+        background: rgba(71, 85, 105, 0.13);
+        color: #475569;
       }
 
       .tree-item.is-collapsed > .tree-group {
@@ -393,6 +432,13 @@
         color: var(--ink);
       }
 
+      .dash-note {
+        margin-top: 0.35rem;
+        font-size: 0.68rem;
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
       .search-hint {
         position: absolute;
         top: 1.2rem;
@@ -447,6 +493,8 @@
       .swatch.external {
         background: var(--external);
         border-radius: 50%;
+        width: 0.86rem;
+        height: 0.86rem;
       }
 
       .map-hint {
@@ -680,6 +728,14 @@
         font-size: 0.88rem;
       }
 
+      .report-frame {
+        width: 100%;
+        min-height: min(72vh, 960px);
+        border: 1px solid rgba(31, 42, 55, 0.08);
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.88);
+      }
+
       .report-content h1,
       .report-content h2,
       .report-content h3,
@@ -796,6 +852,12 @@
         color: var(--ink);
       }
 
+      [data-theme="dark"] .report-frame {
+        background: rgba(30, 41, 59, 0.9);
+        border-color: rgba(148, 163, 184, 0.16);
+        box-shadow: 0 10px 24px rgba(2, 6, 23, 0.55);
+      }
+
       [data-theme="dark"] .control-button:hover {
         background: rgba(51, 65, 85, 0.95);
       }
@@ -816,6 +878,20 @@
       [data-theme="dark"] .workspace-tab.is-active {
         color: #0f172a;
         background: #7dd3fc;
+      }
+
+      [data-theme="dark"] .tree-package::before {
+        background: rgba(125, 211, 252, 0.18);
+        color: #7dd3fc;
+      }
+
+      [data-theme="dark"] .tree-file {
+        color: #cbd5e1;
+      }
+
+      [data-theme="dark"] .tree-file::before {
+        background: rgba(148, 163, 184, 0.24);
+        color: #cbd5e1;
       }
 
       [data-theme="dark"] .report-status {
@@ -881,25 +957,95 @@
         filter: drop-shadow(var(--glow));
       }
 
-      .external-node circle {
-        fill: rgba(148, 163, 184, 0.4);
-        stroke: rgba(148, 163, 184, 0.8);
+      .map-node.map-node-kind-package rect {
+        stroke: rgba(11, 111, 94, 0.46);
+        stroke-width: 2.3;
+      }
+
+      .map-node.map-node-kind-file rect {
+        stroke: rgba(31, 42, 55, 0.34);
+        stroke-width: 1.65;
+      }
+
+      .map-node.map-node-hop-2 {
+        opacity: 0.78;
+      }
+
+      .map-node.map-node-hop-2 rect {
+        stroke-dasharray: none;
+      }
+
+      .hop-badge rect {
+        fill: rgba(17, 24, 39, 0.92);
+        stroke: rgba(255, 255, 255, 0.68);
         stroke-width: 1;
       }
 
-      .external-node text {
-        font-size: 10px;
-        fill: rgba(31, 42, 55, 0.7);
+      .hop-badge text {
+        fill: #f8fafc;
         text-anchor: middle;
+        dominant-baseline: middle;
+        font-family: "Avenir Next", "Futura", "Gill Sans", sans-serif;
+        font-weight: 700;
+        font-size: 8px;
+        letter-spacing: 0.06em;
+        pointer-events: none;
+      }
+
+      .external-node circle {
+        fill: rgba(148, 163, 184, 0.62);
+        stroke: rgba(100, 116, 139, 0.92);
+        stroke-width: 1.8;
+      }
+
+      .external-node-label {
+        font-size: 11px;
+        fill: rgba(15, 23, 42, 0.94);
+        text-anchor: middle;
+        dominant-baseline: middle;
         pointer-events: none;
         font-family: "Avenir Next", "Futura", "Gill Sans", sans-serif;
-        font-weight: 500;
+        font-weight: 700;
+        paint-order: stroke;
+        stroke: rgba(255, 255, 255, 0.86);
+        stroke-width: 2.2px;
+      }
+
+      [data-theme="dark"] .external-node circle {
+        fill: rgba(100, 116, 139, 0.75);
+        stroke: rgba(203, 213, 225, 0.86);
+      }
+
+      [data-theme="dark"] .external-node-label {
+        fill: rgba(241, 245, 249, 0.98);
+        stroke: rgba(15, 23, 42, 0.86);
+      }
+
+      [data-theme="dark"] .map-node.map-node-kind-package rect {
+        stroke: rgba(125, 211, 252, 0.5);
+      }
+
+      [data-theme="dark"] .map-node.map-node-kind-file rect {
+        stroke: rgba(226, 232, 240, 0.46);
+      }
+
+      [data-theme="dark"] .hop-badge rect {
+        fill: rgba(15, 23, 42, 0.94);
+        stroke: rgba(226, 232, 240, 0.72);
       }
 
       .edge {
         fill: none;
         stroke: rgba(31, 42, 55, 0.18);
         stroke-width: 1;
+      }
+
+      .edge.edge-usage {
+        stroke-dasharray: none;
+      }
+
+      .edge.edge-inheritance {
+        stroke-dasharray: 6 5;
       }
 
       .edge.edge-focus {
@@ -909,7 +1055,6 @@
 
       .edge.external-edge {
         stroke: rgba(148, 163, 184, 0.7);
-        stroke-dasharray: 4 6;
       }
 
       .tooltip {
@@ -1136,6 +1281,10 @@
         .report-head {
           flex-direction: column;
         }
+
+        .report-frame {
+          min-height: min(60vh, 780px);
+        }
       }
     </style>
   </head>
@@ -1215,10 +1364,12 @@
             <div class="dashboard-item">
               <span class="dash-label" id="dash-hotspot-label">Hotspot Distribution</span>
               <div class="dash-distribution" id="hotspot-distribution"></div>
+              <div class="dash-note" id="hotspot-distribution-note"></div>
             </div>
             <div class="dashboard-item">
               <span class="dash-label" id="dash-primary-label">Primary Leverage Driver</span>
               <div class="dash-value" id="primary-driver">-</div>
+              <div class="dash-note" id="primary-driver-note"></div>
             </div>
           </div>
           <div class="search-hint" id="search-hint">Search: Cmd + K / Ctrl + K</div>
@@ -1317,14 +1468,15 @@
             <a
               class="report-raw-link"
               id="report-raw-link"
-              href="report.md"
+              href="report.html"
               target="_blank"
               rel="noopener noreferrer"
-              >Open Raw Markdown</a
+              >Open Raw Report</a
             >
           </div>
           <div class="report-status" id="report-status">Loading report...</div>
           <article class="report-content" id="report-content" hidden></article>
+          <iframe class="report-frame" id="report-frame" title="Detailed report file" hidden></iframe>
         </div>
       </section>
     </div>
@@ -1350,11 +1502,11 @@
     <div class="tooltip" id="tooltip"></div>
 
     <script type="application/json" id="analysis-data">
-{"classEdges":[{"from":"com.example.legacy.PaymentService","to":"com.example.legacy.PaymentService.Payment","weight":7},{"from":"com.example.legacy.PaymentService","to":"com.example.legacy.PaymentService.GatewayResponse","weight":6},{"from":"com.example.legacy.PaymentService","to":"com.example.legacy.PaymentService.PaymentRepository","weight":5},{"from":"com.example.legacy.PaymentService","to":"com.example.legacy.PaymentService.NotificationService","weight":2},{"from":"com.example.legacy.PaymentService","to":"com.example.legacy.PaymentService.PaymentResult","weight":2},{"from":"com.example.legacy.PaymentService","to":"com.example.legacy.PaymentService.RefundResult","weight":2},{"from":"com.example.legacy.PaymentService","to":"com.example.legacy.PaymentService.PaymentGateway","weight":2},{"from":"com.example.legacy.MessageService","to":"com.example.legacy.util.StringUtil","weight":3},{"from":"com.example.legacy.service.OrderService","to":"com.example.legacy.service.OrderRepository","weight":4},{"from":"com.example.legacy.service.OrderService","to":"com.example.legacy.service.NotificationService","weight":2},{"from":"com.example.legacy.service.OrderService","to":"com.example.legacy.service.Order","weight":2},{"from":"com.example.legacy.ComplexInvoiceService","to":"com.example.legacy.ComplexInvoiceService.InvoiceItem","weight":6},{"from":"com.example.legacy.ComplexInvoiceService","to":"com.example.legacy.ComplexInvoiceService.CalculationResult","weight":2},{"from":"com.example.legacy.ComplexInvoiceService","to":"com.example.legacy.SimpleCustomerData","weight":2},{"from":"com.example.legacy.CustomerService","to":"com.example.legacy.CustomerService.Customer","weight":6}],"classes":[{"complexityAvg":16.5,"complexityMax":32,"complexitySum":33,"detailLink":"src/main/java/com/example/legacy/ComplexInvoiceService.html","filePath":"src/main/java/com/example/legacy/ComplexInvoiceService.java","id":"com.example.legacy.ComplexInvoiceService","loc":225,"methodCount":2,"packageName":"com.example.legacy","simpleName":"ComplexInvoiceService"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":7,"detailLink":"src/main/java/com/example/legacy/ComplexInvoiceService_InvoiceItem.html","filePath":"src/main/java/com/example/legacy/ComplexInvoiceService.java","id":"com.example.legacy.ComplexInvoiceService.InvoiceItem","loc":43,"methodCount":7,"packageName":"com.example.legacy","simpleName":"InvoiceItem"},{"complexityAvg":0.0,"complexityMax":0,"complexitySum":0,"detailLink":"src/main/java/com/example/legacy/ComplexInvoiceService_CalculationResult.html","filePath":"src/main/java/com/example/legacy/ComplexInvoiceService.java","id":"com.example.legacy.ComplexInvoiceService.CalculationResult","loc":7,"methodCount":0,"packageName":"com.example.legacy","simpleName":"CalculationResult"},{"complexityAvg":2.5714285714285716,"complexityMax":5,"complexitySum":18,"detailLink":"src/main/java/com/example/legacy/CustomerService.html","filePath":"src/main/java/com/example/legacy/CustomerService.java","id":"com.example.legacy.CustomerService","loc":147,"methodCount":7,"packageName":"com.example.legacy","simpleName":"CustomerService"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":11,"detailLink":"src/main/java/com/example/legacy/CustomerService_Customer.html","filePath":"src/main/java/com/example/legacy/CustomerService.java","id":"com.example.legacy.CustomerService.Customer","loc":56,"methodCount":11,"packageName":"com.example.legacy","simpleName":"Customer"},{"complexityAvg":1.1111111111111112,"complexityMax":2,"complexitySum":10,"detailLink":"src/main/java/com/example/legacy/DynamicTestPatterns.html","filePath":"src/main/java/com/example/legacy/DynamicTestPatterns.java","id":"com.example.legacy.DynamicTestPatterns","loc":81,"methodCount":9,"packageName":"com.example.legacy","simpleName":"DynamicTestPatterns"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":4,"detailLink":"src/main/java/com/example/legacy/ICustomerRepository.html","filePath":"src/main/java/com/example/legacy/ICustomerRepository.java","id":"com.example.legacy.ICustomerRepository","loc":33,"methodCount":4,"packageName":"com.example.legacy","simpleName":"ICustomerRepository"},{"complexityAvg":2.0,"complexityMax":3,"complexitySum":4,"detailLink":"src/main/java/com/example/legacy/MessageService.html","filePath":"src/main/java/com/example/legacy/MessageService.java","id":"com.example.legacy.MessageService","loc":13,"methodCount":2,"packageName":"com.example.legacy","simpleName":"MessageService"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":3,"detailLink":"src/main/java/com/example/legacy/OrderProcessingService.html","filePath":"src/main/java/com/example/legacy/OrderProcessingService.java","id":"com.example.legacy.OrderProcessingService","loc":19,"methodCount":3,"packageName":"com.example.legacy","simpleName":"OrderProcessingService"},{"complexityAvg":3.0,"complexityMax":7,"complexitySum":18,"detailLink":"src/main/java/com/example/legacy/PaymentService.html","filePath":"src/main/java/com/example/legacy/PaymentService.java","id":"com.example.legacy.PaymentService","loc":300,"methodCount":6,"packageName":"com.example.legacy","simpleName":"PaymentService"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":2,"detailLink":"src/main/java/com/example/legacy/PaymentService_PaymentGateway.html","filePath":"src/main/java/com/example/legacy/PaymentService.java","id":"com.example.legacy.PaymentService.PaymentGateway","loc":5,"methodCount":2,"packageName":"com.example.legacy","simpleName":"PaymentGateway"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":2,"detailLink":"src/main/java/com/example/legacy/PaymentService_NotificationService.html","filePath":"src/main/java/com/example/legacy/PaymentService.java","id":"com.example.legacy.PaymentService.NotificationService","loc":5,"methodCount":2,"packageName":"com.example.legacy","simpleName":"NotificationService"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":4,"detailLink":"src/main/java/com/example/legacy/PaymentService_PaymentRepository.html","filePath":"src/main/java/com/example/legacy/PaymentService.java","id":"com.example.legacy.PaymentService.PaymentRepository","loc":9,"methodCount":4,"packageName":"com.example.legacy","simpleName":"PaymentRepository"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":6,"detailLink":"src/main/java/com/example/legacy/PaymentService_GatewayResponse.html","filePath":"src/main/java/com/example/legacy/PaymentService.java","id":"com.example.legacy.PaymentService.GatewayResponse","loc":31,"methodCount":6,"packageName":"com.example.legacy","simpleName":"GatewayResponse"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":9,"detailLink":"src/main/java/com/example/legacy/PaymentService_Payment.html","filePath":"src/main/java/com/example/legacy/PaymentService.java","id":"com.example.legacy.PaymentService.Payment","loc":52,"methodCount":9,"packageName":"com.example.legacy","simpleName":"Payment"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":3,"detailLink":"src/main/java/com/example/legacy/PaymentService_PaymentResult.html","filePath":"src/main/java/com/example/legacy/PaymentService.java","id":"com.example.legacy.PaymentService.PaymentResult","loc":21,"methodCount":3,"packageName":"com.example.legacy","simpleName":"PaymentResult"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":3,"detailLink":"src/main/java/com/example/legacy/PaymentService_RefundResult.html","filePath":"src/main/java/com/example/legacy/PaymentService.java","id":"com.example.legacy.PaymentService.RefundResult","loc":22,"methodCount":3,"packageName":"com.example.legacy","simpleName":"RefundResult"},{"complexityAvg":1.1333333333333333,"complexityMax":3,"complexitySum":17,"detailLink":"src/main/java/com/example/legacy/SimpleCustomerData.html","filePath":"src/main/java/com/example/legacy/SimpleCustomerData.java","id":"com.example.legacy.SimpleCustomerData","loc":73,"methodCount":15,"packageName":"com.example.legacy","simpleName":"SimpleCustomerData"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":1,"detailLink":"src/main/java/com/example/legacy/service/NotificationService.html","filePath":"src/main/java/com/example/legacy/service/NotificationService.java","id":"com.example.legacy.service.NotificationService","loc":3,"methodCount":1,"packageName":"com.example.legacy.service","simpleName":"NotificationService"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":8,"detailLink":"src/main/java/com/example/legacy/service/Order.html","filePath":"src/main/java/com/example/legacy/service/Order.java","id":"com.example.legacy.service.Order","loc":28,"methodCount":8,"packageName":"com.example.legacy.service","simpleName":"Order"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":2,"detailLink":"src/main/java/com/example/legacy/service/OrderRepository.html","filePath":"src/main/java/com/example/legacy/service/OrderRepository.java","id":"com.example.legacy.service.OrderRepository","loc":5,"methodCount":2,"packageName":"com.example.legacy.service","simpleName":"OrderRepository"},{"complexityAvg":2.0,"complexityMax":3,"complexitySum":8,"detailLink":"src/main/java/com/example/legacy/service/OrderService.html","filePath":"src/main/java/com/example/legacy/service/OrderService.java","id":"com.example.legacy.service.OrderService","loc":59,"methodCount":4,"packageName":"com.example.legacy.service","simpleName":"OrderService"},{"complexityAvg":1.75,"complexityMax":3,"complexitySum":7,"detailLink":"src/main/java/com/example/legacy/util/StringUtil.html","filePath":"src/main/java/com/example/legacy/util/StringUtil.java","id":"com.example.legacy.util.StringUtil","loc":23,"methodCount":4,"packageName":"com.example.legacy.util","simpleName":"StringUtil"}],"complexityThreshold":20,"externalEdges":[{"from":"com.example.legacy","to":"com.google","weight":4}],"externalLibraries":[{"callCount":4,"id":"com.google"}],"fileEdges":[{"from":"src/main/java/com/example/legacy/MessageService.java","to":"src/main/java/com/example/legacy/util/StringUtil.java","weight":3},{"from":"src/main/java/com/example/legacy/service/OrderService.java","to":"src/main/java/com/example/legacy/service/OrderRepository.java","weight":4},{"from":"src/main/java/com/example/legacy/service/OrderService.java","to":"src/main/java/com/example/legacy/service/Order.java","weight":2},{"from":"src/main/java/com/example/legacy/service/OrderService.java","to":"src/main/java/com/example/legacy/service/NotificationService.java","weight":2},{"from":"src/main/java/com/example/legacy/ComplexInvoiceService.java","to":"src/main/java/com/example/legacy/SimpleCustomerData.java","weight":2}],"fileExternalEdges":[{"from":"src/main/java/com/example/legacy/OrderProcessingService.java","to":"com.google","weight":4}],"files":[{"classCount":3,"complexityAvg":4.444444444444445,"complexityMax":32,"complexitySum":40,"id":"src/main/java/com/example/legacy/ComplexInvoiceService.java","lineCoverage":0.0,"loc":275,"methodCount":9,"name":"ComplexInvoiceService.java","packageName":"com.example.legacy","path":"src/main/java/com/example/legacy/ComplexInvoiceService.java"},{"classCount":2,"complexityAvg":1.6111111111111112,"complexityMax":5,"complexitySum":29,"id":"src/main/java/com/example/legacy/CustomerService.java","lineCoverage":0.0,"loc":203,"methodCount":18,"name":"CustomerService.java","packageName":"com.example.legacy","path":"src/main/java/com/example/legacy/CustomerService.java"},{"classCount":1,"complexityAvg":1.1111111111111112,"complexityMax":2,"complexitySum":10,"id":"src/main/java/com/example/legacy/DynamicTestPatterns.java","lineCoverage":0.0,"loc":81,"methodCount":9,"name":"DynamicTestPatterns.java","packageName":"com.example.legacy","path":"src/main/java/com/example/legacy/DynamicTestPatterns.java"},{"classCount":1,"complexityAvg":1.0,"complexityMax":1,"complexitySum":4,"id":"src/main/java/com/example/legacy/ICustomerRepository.java","lineCoverage":null,"loc":33,"methodCount":4,"name":"ICustomerRepository.java","packageName":"com.example.legacy","path":"src/main/java/com/example/legacy/ICustomerRepository.java"},{"classCount":1,"complexityAvg":2.0,"complexityMax":3,"complexitySum":4,"id":"src/main/java/com/example/legacy/MessageService.java","lineCoverage":0.0,"loc":13,"methodCount":2,"name":"MessageService.java","packageName":"com.example.legacy","path":"src/main/java/com/example/legacy/MessageService.java"},{"classCount":1,"complexityAvg":1.0,"complexityMax":1,"complexitySum":3,"id":"src/main/java/com/example/legacy/OrderProcessingService.java","lineCoverage":0.0,"loc":19,"methodCount":3,"name":"OrderProcessingService.java","packageName":"com.example.legacy","path":"src/main/java/com/example/legacy/OrderProcessingService.java"},{"classCount":8,"complexityAvg":1.3428571428571427,"complexityMax":7,"complexitySum":47,"id":"src/main/java/com/example/legacy/PaymentService.java","lineCoverage":10.416666666666666,"loc":445,"methodCount":35,"name":"PaymentService.java","packageName":"com.example.legacy","path":"src/main/java/com/example/legacy/PaymentService.java"},{"classCount":1,"complexityAvg":1.1333333333333333,"complexityMax":3,"complexitySum":17,"id":"src/main/java/com/example/legacy/SimpleCustomerData.java","lineCoverage":0.0,"loc":73,"methodCount":15,"name":"SimpleCustomerData.java","packageName":"com.example.legacy","path":"src/main/java/com/example/legacy/SimpleCustomerData.java"},{"classCount":1,"complexityAvg":1.0,"complexityMax":1,"complexitySum":1,"id":"src/main/java/com/example/legacy/service/NotificationService.java","lineCoverage":null,"loc":3,"methodCount":1,"name":"NotificationService.java","packageName":"com.example.legacy.service","path":"src/main/java/com/example/legacy/service/NotificationService.java"},{"classCount":1,"complexityAvg":1.0,"complexityMax":1,"complexitySum":8,"id":"src/main/java/com/example/legacy/service/Order.java","lineCoverage":0.0,"loc":28,"methodCount":8,"name":"Order.java","packageName":"com.example.legacy.service","path":"src/main/java/com/example/legacy/service/Order.java"},{"classCount":1,"complexityAvg":1.0,"complexityMax":1,"complexitySum":2,"id":"src/main/java/com/example/legacy/service/OrderRepository.java","lineCoverage":null,"loc":5,"methodCount":2,"name":"OrderRepository.java","packageName":"com.example.legacy.service","path":"src/main/java/com/example/legacy/service/OrderRepository.java"},{"classCount":1,"complexityAvg":2.0,"complexityMax":3,"complexitySum":8,"id":"src/main/java/com/example/legacy/service/OrderService.java","lineCoverage":0.0,"loc":59,"methodCount":4,"name":"OrderService.java","packageName":"com.example.legacy.service","path":"src/main/java/com/example/legacy/service/OrderService.java"},{"classCount":1,"complexityAvg":1.75,"complexityMax":3,"complexitySum":7,"id":"src/main/java/com/example/legacy/util/StringUtil.java","lineCoverage":0.0,"loc":23,"methodCount":4,"name":"StringUtil.java","packageName":"com.example.legacy.util","path":"src/main/java/com/example/legacy/util/StringUtil.java"}],"generatedAt":"2026-02-13T03:35:08.761653734Z","packageEdges":[{"from":"com.example.legacy","to":"com.example.legacy.util","weight":3}],"packages":[{"classCount":18,"complexityAvg":1.6210526315789473,"complexityMax":32,"complexitySum":154,"id":"com.example.legacy","lineCoverage":3.6421911421911424,"loc":1142,"methodCount":95,"shortName":"legacy"},{"classCount":4,"complexityAvg":1.2666666666666666,"complexityMax":3,"complexitySum":19,"id":"com.example.legacy.service","lineCoverage":0.0,"loc":95,"methodCount":15,"shortName":"service"},{"classCount":1,"complexityAvg":1.75,"complexityMax":3,"complexitySum":7,"id":"com.example.legacy.util","lineCoverage":0.0,"loc":23,"methodCount":4,"shortName":"util"}],"projectId":"my-project","runId":"20260213_123502_A4D0","summary":{"complexityAvg":1.5789473684210527,"complexityMax":32,"complexitySum":180,"totalClasses":23,"totalLoc":1260,"totalMethods":114}}
+{"classEdges":[{"from":"com.example.legacy.PaymentService","to":"com.example.legacy.PaymentService.Payment","weight":7},{"from":"com.example.legacy.PaymentService","to":"com.example.legacy.PaymentService.GatewayResponse","weight":6},{"from":"com.example.legacy.PaymentService","to":"com.example.legacy.PaymentService.PaymentRepository","weight":5},{"from":"com.example.legacy.PaymentService","to":"com.example.legacy.PaymentService.NotificationService","weight":2},{"from":"com.example.legacy.PaymentService","to":"com.example.legacy.PaymentService.PaymentResult","weight":2},{"from":"com.example.legacy.PaymentService","to":"com.example.legacy.PaymentService.RefundResult","weight":2},{"from":"com.example.legacy.PaymentService","to":"com.example.legacy.PaymentService.PaymentGateway","weight":2},{"from":"com.example.legacy.MessageService","to":"com.example.legacy.util.StringUtil","weight":3},{"from":"com.example.legacy.service.OrderService","to":"com.example.legacy.service.OrderRepository","weight":4},{"from":"com.example.legacy.service.OrderService","to":"com.example.legacy.service.NotificationService","weight":2},{"from":"com.example.legacy.service.OrderService","to":"com.example.legacy.service.Order","weight":2},{"from":"com.example.legacy.ComplexInvoiceService","to":"com.example.legacy.ComplexInvoiceService.InvoiceItem","weight":6},{"from":"com.example.legacy.ComplexInvoiceService","to":"com.example.legacy.ComplexInvoiceService.CalculationResult","weight":2},{"from":"com.example.legacy.ComplexInvoiceService","to":"com.example.legacy.SimpleCustomerData","weight":2},{"from":"com.example.legacy.CustomerService","to":"com.example.legacy.CustomerService.Customer","weight":6}],"classes":[{"complexityAvg":16.5,"complexityMax":32,"complexitySum":33,"detailLink":"src/main/java/com/example/legacy/ComplexInvoiceService.html","filePath":"src/main/java/com/example/legacy/ComplexInvoiceService.java","id":"com.example.legacy.ComplexInvoiceService","loc":225,"methodCount":2,"packageName":"com.example.legacy","simpleName":"ComplexInvoiceService"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":7,"detailLink":"src/main/java/com/example/legacy/ComplexInvoiceService_InvoiceItem.html","filePath":"src/main/java/com/example/legacy/ComplexInvoiceService.java","id":"com.example.legacy.ComplexInvoiceService.InvoiceItem","loc":43,"methodCount":7,"packageName":"com.example.legacy","simpleName":"InvoiceItem"},{"complexityAvg":0.0,"complexityMax":0,"complexitySum":0,"detailLink":"src/main/java/com/example/legacy/ComplexInvoiceService_CalculationResult.html","filePath":"src/main/java/com/example/legacy/ComplexInvoiceService.java","id":"com.example.legacy.ComplexInvoiceService.CalculationResult","loc":7,"methodCount":0,"packageName":"com.example.legacy","simpleName":"CalculationResult"},{"complexityAvg":2.5714285714285716,"complexityMax":5,"complexitySum":18,"detailLink":"src/main/java/com/example/legacy/CustomerService.html","filePath":"src/main/java/com/example/legacy/CustomerService.java","id":"com.example.legacy.CustomerService","loc":147,"methodCount":7,"packageName":"com.example.legacy","simpleName":"CustomerService"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":11,"detailLink":"src/main/java/com/example/legacy/CustomerService_Customer.html","filePath":"src/main/java/com/example/legacy/CustomerService.java","id":"com.example.legacy.CustomerService.Customer","loc":56,"methodCount":11,"packageName":"com.example.legacy","simpleName":"Customer"},{"complexityAvg":1.1111111111111112,"complexityMax":2,"complexitySum":10,"detailLink":"src/main/java/com/example/legacy/DynamicTestPatterns.html","filePath":"src/main/java/com/example/legacy/DynamicTestPatterns.java","id":"com.example.legacy.DynamicTestPatterns","loc":81,"methodCount":9,"packageName":"com.example.legacy","simpleName":"DynamicTestPatterns"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":4,"detailLink":"src/main/java/com/example/legacy/ICustomerRepository.html","filePath":"src/main/java/com/example/legacy/ICustomerRepository.java","id":"com.example.legacy.ICustomerRepository","loc":33,"methodCount":4,"packageName":"com.example.legacy","simpleName":"ICustomerRepository"},{"complexityAvg":2.0,"complexityMax":3,"complexitySum":4,"detailLink":"src/main/java/com/example/legacy/MessageService.html","filePath":"src/main/java/com/example/legacy/MessageService.java","id":"com.example.legacy.MessageService","loc":13,"methodCount":2,"packageName":"com.example.legacy","simpleName":"MessageService"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":3,"detailLink":"src/main/java/com/example/legacy/OrderProcessingService.html","filePath":"src/main/java/com/example/legacy/OrderProcessingService.java","id":"com.example.legacy.OrderProcessingService","loc":19,"methodCount":3,"packageName":"com.example.legacy","simpleName":"OrderProcessingService"},{"complexityAvg":3.0,"complexityMax":7,"complexitySum":18,"detailLink":"src/main/java/com/example/legacy/PaymentService.html","filePath":"src/main/java/com/example/legacy/PaymentService.java","id":"com.example.legacy.PaymentService","loc":300,"methodCount":6,"packageName":"com.example.legacy","simpleName":"PaymentService"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":2,"detailLink":"src/main/java/com/example/legacy/PaymentService_PaymentGateway.html","filePath":"src/main/java/com/example/legacy/PaymentService.java","id":"com.example.legacy.PaymentService.PaymentGateway","loc":5,"methodCount":2,"packageName":"com.example.legacy","simpleName":"PaymentGateway"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":2,"detailLink":"src/main/java/com/example/legacy/PaymentService_NotificationService.html","filePath":"src/main/java/com/example/legacy/PaymentService.java","id":"com.example.legacy.PaymentService.NotificationService","loc":5,"methodCount":2,"packageName":"com.example.legacy","simpleName":"NotificationService"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":4,"detailLink":"src/main/java/com/example/legacy/PaymentService_PaymentRepository.html","filePath":"src/main/java/com/example/legacy/PaymentService.java","id":"com.example.legacy.PaymentService.PaymentRepository","loc":9,"methodCount":4,"packageName":"com.example.legacy","simpleName":"PaymentRepository"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":6,"detailLink":"src/main/java/com/example/legacy/PaymentService_GatewayResponse.html","filePath":"src/main/java/com/example/legacy/PaymentService.java","id":"com.example.legacy.PaymentService.GatewayResponse","loc":31,"methodCount":6,"packageName":"com.example.legacy","simpleName":"GatewayResponse"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":9,"detailLink":"src/main/java/com/example/legacy/PaymentService_Payment.html","filePath":"src/main/java/com/example/legacy/PaymentService.java","id":"com.example.legacy.PaymentService.Payment","loc":52,"methodCount":9,"packageName":"com.example.legacy","simpleName":"Payment"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":3,"detailLink":"src/main/java/com/example/legacy/PaymentService_PaymentResult.html","filePath":"src/main/java/com/example/legacy/PaymentService.java","id":"com.example.legacy.PaymentService.PaymentResult","loc":21,"methodCount":3,"packageName":"com.example.legacy","simpleName":"PaymentResult"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":3,"detailLink":"src/main/java/com/example/legacy/PaymentService_RefundResult.html","filePath":"src/main/java/com/example/legacy/PaymentService.java","id":"com.example.legacy.PaymentService.RefundResult","loc":22,"methodCount":3,"packageName":"com.example.legacy","simpleName":"RefundResult"},{"complexityAvg":1.1333333333333333,"complexityMax":3,"complexitySum":17,"detailLink":"src/main/java/com/example/legacy/SimpleCustomerData.html","filePath":"src/main/java/com/example/legacy/SimpleCustomerData.java","id":"com.example.legacy.SimpleCustomerData","loc":73,"methodCount":15,"packageName":"com.example.legacy","simpleName":"SimpleCustomerData"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":1,"detailLink":"src/main/java/com/example/legacy/service/NotificationService.html","filePath":"src/main/java/com/example/legacy/service/NotificationService.java","id":"com.example.legacy.service.NotificationService","loc":3,"methodCount":1,"packageName":"com.example.legacy.service","simpleName":"NotificationService"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":8,"detailLink":"src/main/java/com/example/legacy/service/Order.html","filePath":"src/main/java/com/example/legacy/service/Order.java","id":"com.example.legacy.service.Order","loc":28,"methodCount":8,"packageName":"com.example.legacy.service","simpleName":"Order"},{"complexityAvg":1.0,"complexityMax":1,"complexitySum":2,"detailLink":"src/main/java/com/example/legacy/service/OrderRepository.html","filePath":"src/main/java/com/example/legacy/service/OrderRepository.java","id":"com.example.legacy.service.OrderRepository","loc":5,"methodCount":2,"packageName":"com.example.legacy.service","simpleName":"OrderRepository"},{"complexityAvg":2.0,"complexityMax":3,"complexitySum":8,"detailLink":"src/main/java/com/example/legacy/service/OrderService.html","filePath":"src/main/java/com/example/legacy/service/OrderService.java","id":"com.example.legacy.service.OrderService","loc":59,"methodCount":4,"packageName":"com.example.legacy.service","simpleName":"OrderService"},{"complexityAvg":1.75,"complexityMax":3,"complexitySum":7,"detailLink":"src/main/java/com/example/legacy/util/StringUtil.html","filePath":"src/main/java/com/example/legacy/util/StringUtil.java","id":"com.example.legacy.util.StringUtil","loc":23,"methodCount":4,"packageName":"com.example.legacy.util","simpleName":"StringUtil"}],"complexityThreshold":20,"externalEdges":[{"from":"com.example.legacy","to":"com.google","weight":4}],"externalLibraries":[{"callCount":4,"id":"com.google"}],"fileEdges":[{"from":"src/main/java/com/example/legacy/MessageService.java","to":"src/main/java/com/example/legacy/util/StringUtil.java","weight":3},{"from":"src/main/java/com/example/legacy/service/OrderService.java","to":"src/main/java/com/example/legacy/service/OrderRepository.java","weight":4},{"from":"src/main/java/com/example/legacy/service/OrderService.java","to":"src/main/java/com/example/legacy/service/Order.java","weight":2},{"from":"src/main/java/com/example/legacy/service/OrderService.java","to":"src/main/java/com/example/legacy/service/NotificationService.java","weight":2},{"from":"src/main/java/com/example/legacy/ComplexInvoiceService.java","to":"src/main/java/com/example/legacy/SimpleCustomerData.java","weight":2}],"fileExternalEdges":[{"from":"src/main/java/com/example/legacy/OrderProcessingService.java","to":"com.google","weight":4}],"files":[{"classCount":3,"complexityAvg":4.444444444444445,"complexityMax":32,"complexitySum":40,"id":"src/main/java/com/example/legacy/ComplexInvoiceService.java","lineCoverage":0.0,"loc":275,"methodCount":9,"name":"ComplexInvoiceService.java","packageName":"com.example.legacy","path":"src/main/java/com/example/legacy/ComplexInvoiceService.java"},{"classCount":2,"complexityAvg":1.6111111111111112,"complexityMax":5,"complexitySum":29,"id":"src/main/java/com/example/legacy/CustomerService.java","lineCoverage":0.0,"loc":203,"methodCount":18,"name":"CustomerService.java","packageName":"com.example.legacy","path":"src/main/java/com/example/legacy/CustomerService.java"},{"classCount":1,"complexityAvg":1.1111111111111112,"complexityMax":2,"complexitySum":10,"id":"src/main/java/com/example/legacy/DynamicTestPatterns.java","lineCoverage":0.0,"loc":81,"methodCount":9,"name":"DynamicTestPatterns.java","packageName":"com.example.legacy","path":"src/main/java/com/example/legacy/DynamicTestPatterns.java"},{"classCount":1,"complexityAvg":1.0,"complexityMax":1,"complexitySum":4,"id":"src/main/java/com/example/legacy/ICustomerRepository.java","lineCoverage":null,"loc":33,"methodCount":4,"name":"ICustomerRepository.java","packageName":"com.example.legacy","path":"src/main/java/com/example/legacy/ICustomerRepository.java"},{"classCount":1,"complexityAvg":2.0,"complexityMax":3,"complexitySum":4,"id":"src/main/java/com/example/legacy/MessageService.java","lineCoverage":0.0,"loc":13,"methodCount":2,"name":"MessageService.java","packageName":"com.example.legacy","path":"src/main/java/com/example/legacy/MessageService.java"},{"classCount":1,"complexityAvg":1.0,"complexityMax":1,"complexitySum":3,"id":"src/main/java/com/example/legacy/OrderProcessingService.java","lineCoverage":0.0,"loc":19,"methodCount":3,"name":"OrderProcessingService.java","packageName":"com.example.legacy","path":"src/main/java/com/example/legacy/OrderProcessingService.java"},{"classCount":8,"complexityAvg":1.3428571428571427,"complexityMax":7,"complexitySum":47,"id":"src/main/java/com/example/legacy/PaymentService.java","lineCoverage":7.335680751173709,"loc":445,"methodCount":35,"name":"PaymentService.java","packageName":"com.example.legacy","path":"src/main/java/com/example/legacy/PaymentService.java"},{"classCount":1,"complexityAvg":1.1333333333333333,"complexityMax":3,"complexitySum":17,"id":"src/main/java/com/example/legacy/SimpleCustomerData.java","lineCoverage":0.0,"loc":73,"methodCount":15,"name":"SimpleCustomerData.java","packageName":"com.example.legacy","path":"src/main/java/com/example/legacy/SimpleCustomerData.java"},{"classCount":1,"complexityAvg":1.0,"complexityMax":1,"complexitySum":1,"id":"src/main/java/com/example/legacy/service/NotificationService.java","lineCoverage":null,"loc":3,"methodCount":1,"name":"NotificationService.java","packageName":"com.example.legacy.service","path":"src/main/java/com/example/legacy/service/NotificationService.java"},{"classCount":1,"complexityAvg":1.0,"complexityMax":1,"complexitySum":8,"id":"src/main/java/com/example/legacy/service/Order.java","lineCoverage":0.0,"loc":28,"methodCount":8,"name":"Order.java","packageName":"com.example.legacy.service","path":"src/main/java/com/example/legacy/service/Order.java"},{"classCount":1,"complexityAvg":1.0,"complexityMax":1,"complexitySum":2,"id":"src/main/java/com/example/legacy/service/OrderRepository.java","lineCoverage":null,"loc":5,"methodCount":2,"name":"OrderRepository.java","packageName":"com.example.legacy.service","path":"src/main/java/com/example/legacy/service/OrderRepository.java"},{"classCount":1,"complexityAvg":2.0,"complexityMax":3,"complexitySum":8,"id":"src/main/java/com/example/legacy/service/OrderService.java","lineCoverage":0.0,"loc":59,"methodCount":4,"name":"OrderService.java","packageName":"com.example.legacy.service","path":"src/main/java/com/example/legacy/service/OrderService.java"},{"classCount":1,"complexityAvg":1.75,"complexityMax":3,"complexitySum":7,"id":"src/main/java/com/example/legacy/util/StringUtil.java","lineCoverage":0.0,"loc":23,"methodCount":4,"name":"StringUtil.java","packageName":"com.example.legacy.util","path":"src/main/java/com/example/legacy/util/StringUtil.java"}],"generatedAt":"2026-02-14T09:04:27.512500219Z","packageEdges":[{"from":"com.example.legacy","to":"com.example.legacy.util","weight":3}],"packages":[{"classCount":18,"complexityAvg":1.6210526315789473,"complexityMax":32,"complexitySum":154,"id":"com.example.legacy","lineCoverage":2.86697247706422,"loc":1142,"methodCount":95,"shortName":"legacy"},{"classCount":4,"complexityAvg":1.2666666666666666,"complexityMax":3,"complexitySum":19,"id":"com.example.legacy.service","lineCoverage":0.0,"loc":95,"methodCount":15,"shortName":"service"},{"classCount":1,"complexityAvg":1.75,"complexityMax":3,"complexitySum":7,"id":"com.example.legacy.util","lineCoverage":0.0,"loc":23,"methodCount":4,"shortName":"util"}],"projectId":"my-project","runId":"20260214_180413_19B9","summary":{"complexityAvg":1.5789473684210527,"complexityMax":32,"complexitySum":180,"totalClasses":23,"totalLoc":1260,"totalMethods":114}}
     </script>
 
     <script type="application/json" id="analysis-report-markdown">
-"# UT Generation Report\n\n- **Project**: my-project\n- **Run ID**: `20260213_123502_A4D0`\n- **Generated**: 2026-02-13 12:35:08\n\n## Summary\n\n| Metric | Value |\n|--------|-------|\n| Classes | 23 |\n| Methods | 114 |\n| Selected | 0 |\n| Excluded | 0 |\n\n## Analysis Hotspots\n\n| Metric | Value |\n|--------|-------|\n| High Complexity Methods (>= 15) | 1 |\n| Dead Code Candidates | 0 |\n| Duplicate Code Candidates | 20 |\n| Methods in Cycles | 0 |\n\n## Analyzed Classes\n\n| Class | Methods | LOC | Max Complexity | Avg Complexity |\n|-------|---------|-----|----------------|----------------|\n| [`com.example.legacy.ComplexInvoiceService`](src/main/java/com/example/legacy/ComplexInvoiceService.html) | 2 | 225 | 32 | 16.5 |\n| [`com.example.legacy.PaymentService`](src/main/java/com/example/legacy/PaymentService.html) | 6 | 300 | 7 | 3.0 |\n| [`com.example.legacy.CustomerService`](src/main/java/com/example/legacy/CustomerService.html) | 7 | 147 | 5 | 2.6 |\n| [`com.example.legacy.service.OrderService`](src/main/java/com/example/legacy/service/OrderService.html) | 4 | 59 | 3 | 2.0 |\n| [`com.example.legacy.MessageService`](src/main/java/com/example/legacy/MessageService.html) | 2 | 13 | 3 | 2.0 |\n| [`com.example.legacy.util.StringUtil`](src/main/java/com/example/legacy/util/StringUtil.html) | 4 | 23 | 3 | 1.8 |\n| [`com.example.legacy.SimpleCustomerData`](src/main/java/com/example/legacy/SimpleCustomerData.html) | 15 | 73 | 3 | 1.1 |\n| [`com.example.legacy.DynamicTestPatterns`](src/main/java/com/example/legacy/DynamicTestPatterns.html) | 9 | 81 | 2 | 1.1 |\n\n## Risky Methods\n\n| Class | Method | Complexity | LOC |\n|-------|--------|------------|-----|\n| `com.example.legacy.ComplexInvoiceService` | `calculateInvoice` | 32 | 166 |\n| `com.example.legacy.PaymentService` | `processPayment` | 7 | 45 |\n| `com.example.legacy.PaymentService` | `refundPayment` | 6 | 30 |\n| `com.example.legacy.CustomerService` | `getActiveCustomers` | 5 | 15 |\n| `com.example.legacy.CustomerService` | `findCustomerById` | 4 | 13 |\n| `com.example.legacy.service.OrderService` | `processOrder` | 3 | 19 |\n| `com.example.legacy.service.OrderService` | `cancelOrder` | 3 | 16 |\n| `com.example.legacy.SimpleCustomerData` | `equals` | 3 | 11 |\n| `com.example.legacy.MessageService` | `formatMessage` | 3 | 10 |\n| `com.example.legacy.CustomerService` | `addCustomer` | 3 | 9 |\n| `com.example.legacy.CustomerService` | `addCustomer` | 3 | 9 |\n| `com.example.legacy.util.StringUtil` | `truncate` | 3 | 9 |\n\n## Recommendations\n\n- Prioritize focused tests for `com.example.legacy.ComplexInvoiceService#calculateInvoice` (complexity=32).\n- Review `com.example.legacy.ComplexInvoiceService` for decomposition (methods=2, max complexity=32).\n- Maintain regression tests around payment, billing, and customer-facing business rules.\n\n"
+""
     </script>
 
     <script>
@@ -1400,6 +1552,17 @@
           externalNodeLimitMax: 12,
           detailConnectionLimit: 6,
           detailExternalLimit: 2,
+          fileRelatedLayout: {
+            mode: "parent-sector",
+            ring1Radius: 0.18,
+            ring2Radius: 0.3,
+            ring2RadiusMax: 0.4,
+            branchBaseSpread: 0.42,
+            branchSpreadStep: 0.14,
+            branchSpreadMax: 1.28,
+            branchTierCapacity: 5,
+            branchTierStepPx: 18,
+          },
           zoom: { min: 0.7, max: 2.8, step: 1.15 },
         },
         locales: {
@@ -1410,8 +1573,8 @@
             navSubtitle: "Packages & Files",
             navFooter: "Select a source to focus the map.",
             dashOverallRisk: "Overall System Risk",
-            dashHotspotDistribution: "Hotspot Distribution",
-            dashPrimaryDriver: "Primary Leverage Driver",
+            dashHotspotDistribution: "Hotspot Mix (count / share)",
+            dashPrimaryDriver: "Primary Risk Driver",
             searchHint: "Search: Cmd + K / Ctrl + K",
             tabsAriaLabel: "Analysis views",
             tabVisual: "Leverage Map",
@@ -1420,7 +1583,7 @@
             reportTitle: "Detailed Summary",
             reportSubtitle:
               "Read this narrative first, then check branch guards, representative paths, and called methods.",
-            reportRawLink: "Open Raw Markdown",
+            reportRawLink: "Open Raw Report",
             reportLoading: "Rendering report...",
             reportEmpty: "This run has no report.md output.",
             reportRenderError: "Failed to render report markdown.",
@@ -1455,8 +1618,19 @@
             drivers: {
               Impact: "Impact-driven",
               Complexity: "Complexity-driven",
-              TestGap: "TestGap-driven",
+              TestGap: "Test-gap driven",
             },
+            noData: "N/A",
+            hotspotChipTemplate: "{0}: {1} ({2}%)",
+            hotspotTotalTemplate: "Total hotspots: {0}",
+            driverCountSummaryTemplate: "({0}/{1} top hotspots)",
+            driverValueTemplate: "{0} {1}",
+            driverDetailTemplate: "Dominant factor among top {0} leverage hotspots.",
+            leverageTooltip: "Leverage: {0}",
+            hopTooltip: "Hop: {0}",
+            hopFocus: "Focus node",
+            hopOne: "1-hop",
+            hopTwo: "2-hop",
             emptyConnections: "No nearby connections",
             noDetailDocs: "No class detail reports",
             emptyNodes: "No nodes available",
@@ -1471,8 +1645,8 @@
             navSubtitle: "パッケージ & ファイル",
             navFooter: "ソースを選択してマップを絞り込みます。",
             dashOverallRisk: "システム全体リスク",
-            dashHotspotDistribution: "ホットスポット分布",
-            dashPrimaryDriver: "主要ドライバー",
+            dashHotspotDistribution: "ホットスポット分布（件数/割合）",
+            dashPrimaryDriver: "主なリスク要因",
             searchHint: "検索: Cmd + K / Ctrl + K",
             tabsAriaLabel: "分析ビュー",
             tabVisual: "レバレッジマップ",
@@ -1481,7 +1655,7 @@
             reportTitle: "詳細サマリー",
             reportSubtitle:
               "まず文章サマリーを確認し、その後に分岐ガード・代表パス・呼び出しメソッドを確認してください。",
-            reportRawLink: "元のMarkdownを開く",
+            reportRawLink: "レポートファイルを開く",
             reportLoading: "レポートを描画しています...",
             reportEmpty: "この実行には report.md がありません。",
             reportRenderError: "レポートMarkdownの描画に失敗しました。",
@@ -1516,8 +1690,19 @@
             drivers: {
               Impact: "影響主導",
               Complexity: "複雑度主導",
-              TestGap: "テスト不足主導",
+              TestGap: "テストギャップ主導",
             },
+            noData: "データなし",
+            hotspotChipTemplate: "{0}: {1}件 ({2}%)",
+            hotspotTotalTemplate: "対象ホットスポット: {0}件",
+            driverCountSummaryTemplate: "（上位{1}件中{0}件）",
+            driverValueTemplate: "{0}{1}",
+            driverDetailTemplate: "レバレッジ上位{0}件で最も優勢な要因です。",
+            leverageTooltip: "レバレッジ: {0}",
+            hopTooltip: "ホップ: {0}",
+            hopFocus: "起点ノード",
+            hopOne: "1ホップ",
+            hopTwo: "2ホップ",
             emptyConnections: "近隣の接続はありません",
             noDetailDocs: "クラス詳細レポートはありません",
             emptyNodes: "表示できるノードがありません",
@@ -1562,7 +1747,9 @@
       const breadcrumbs = document.getElementById("breadcrumbs");
       const overallRisk = document.getElementById("overall-risk");
       const hotspotDistribution = document.getElementById("hotspot-distribution");
+      const hotspotDistributionNote = document.getElementById("hotspot-distribution-note");
       const primaryDriver = document.getElementById("primary-driver");
+      const primaryDriverNote = document.getElementById("primary-driver-note");
       const detailTitle = document.getElementById("detail-title");
       const detailScore = document.getElementById("detail-score");
       const detailMetrics = document.getElementById("detail-metrics");
@@ -1581,13 +1768,19 @@
       const panelReport = document.getElementById("panel-report");
       const reportStatus = document.getElementById("report-status");
       const reportContent = document.getElementById("report-content");
+      const reportFrame = document.getElementById("report-frame");
       const reportRawLink = document.getElementById("report-raw-link");
       const treeIndex = new Map();
       const treeNodes = new Map();
       const treeState = new Map();
 
+      const viewModes = {
+        PACKAGE_CONTENT: "package-content",
+        FILE_RELATED: "file-related",
+      };
+
       const state = {
-        level: 0,
+        viewMode: viewModes.PACKAGE_CONTENT,
         selectedPackageId: null,
         selectedFileId: null,
         activeTab: "visual",
@@ -1613,6 +1806,25 @@
       const fileExternalEdges = data.fileExternalEdges || [];
       const { externalNodeLimitBase, externalNodeLimitMax, detailConnectionLimit, detailExternalLimit } =
         uiConfig.view;
+
+      function getDirectChildPackages(packageId) {
+        if (packageId === null || packageId === undefined) {
+          return [];
+        }
+        return packages
+          .filter((pkg) => {
+            const id = pkg.id || "";
+            if (packageId === "") {
+              return id !== "" && !id.includes(".");
+            }
+            if (!id.startsWith(`${packageId}.`)) {
+              return false;
+            }
+            const suffix = id.slice(packageId.length + 1);
+            return suffix.length > 0 && !suffix.includes(".");
+          })
+          .sort((a, b) => (a.id || "").localeCompare(b.id || ""));
+      }
 
       const zoomState = { scale: 1, translateX: 0, translateY: 0 };
       const zoomConfig = uiConfig.view.zoom;
@@ -1752,6 +1964,26 @@
 
       function escapeHtmlAttribute(value) {
         return escapeHtmlText(value).replace(/'/g, "&#39;");
+      }
+
+      function formatLabel(template, values) {
+        if (!template || typeof template !== "string") {
+          return values.join(" ");
+        }
+        return template.replace(/\{(\d+)\}/g, (match, indexText) => {
+          const index = Number(indexText);
+          if (!Number.isInteger(index) || index < 0 || index >= values.length) {
+            return match;
+          }
+          return String(values[index]);
+        });
+      }
+
+      function toPercent(count, total) {
+        if (!Number.isFinite(total) || total <= 0) {
+          return "0";
+        }
+        return String(Math.round((count / total) * 100));
       }
 
       function sanitizeHref(href) {
@@ -1975,12 +2207,30 @@
           return;
         }
         const markdownText = typeof reportMarkdown === "string" ? reportMarkdown : "";
+        const rawHref = reportRawLink ? (reportRawLink.getAttribute("href") || "").trim() : "";
+        const hasHtmlRawReport = /\.html?(?:[?#].*)?$/i.test(rawHref);
         if (!markdownText.trim()) {
+          if (hasHtmlRawReport && reportFrame) {
+            reportFrame.setAttribute("src", rawHref);
+            reportFrame.hidden = false;
+            reportContent.innerHTML = "";
+            reportContent.hidden = true;
+            reportStatus.hidden = true;
+            return;
+          }
+          if (reportFrame) {
+            reportFrame.removeAttribute("src");
+            reportFrame.hidden = true;
+          }
           reportContent.innerHTML = "";
           reportContent.hidden = true;
           reportStatus.hidden = false;
           reportStatus.textContent = activeLabels.reportEmpty;
           return;
+        }
+        if (reportFrame) {
+          reportFrame.removeAttribute("src");
+          reportFrame.hidden = true;
         }
         if (forceRender) {
           reportContent.dataset.locale = "";
@@ -2233,7 +2483,6 @@
       });
 
       const packageAdjacency = buildAdjacency(packageEdges);
-      const fileAdjacency = buildAdjacency(fileEdges);
 
       function getTopNode(nodes, scores) {
         if (!nodes.length) {
@@ -2490,7 +2739,11 @@
           return;
         }
         treeIndex.forEach((button) => button.classList.remove("is-active"));
-        if (state.level === 0 && state.selectedPackageId !== null && state.selectedPackageId !== undefined) {
+        if (
+          state.viewMode === viewModes.PACKAGE_CONTENT &&
+          state.selectedPackageId !== null &&
+          state.selectedPackageId !== undefined
+        ) {
           expandTreePath(state.selectedPackageId);
           const button = treeIndex.get(`package:${state.selectedPackageId}`);
           if (button) {
@@ -2504,6 +2757,14 @@
             expandTreePath(file.packageName || "");
           }
           const button = treeIndex.get(`file:${state.selectedFileId}`);
+          if (button) {
+            button.classList.add("is-active");
+            return;
+          }
+        }
+        if (state.selectedPackageId !== null && state.selectedPackageId !== undefined) {
+          expandTreePath(state.selectedPackageId);
+          const button = treeIndex.get(`package:${state.selectedPackageId}`);
           if (button) {
             button.classList.add("is-active");
           }
@@ -2531,11 +2792,11 @@
             return;
           }
           if (type === "package") {
-            state.level = 0;
+            state.viewMode = viewModes.PACKAGE_CONTENT;
             state.selectedPackageId = id;
             state.selectedFileId = null;
           } else {
-            state.level = 2;
+            state.viewMode = viewModes.FILE_RELATED;
             state.selectedFileId = id;
             const file = fileById.get(id);
             state.selectedPackageId = file ? file.packageName : null;
@@ -2551,28 +2812,124 @@
         if (packageId === null || packageId === undefined) {
           return files;
         }
-        return files.filter((file) => {
-          if (file.packageName === null || file.packageName === undefined) {
-            return false;
-          }
-          if (file.packageName === packageId) {
-            return true;
-          }
-          if (file.packageName && packageId) {
-            return file.packageName.startsWith(`${packageId}.`);
-          }
-          return false;
-        });
+        return files.filter((file) => (file.packageName || "") === packageId);
       }
 
-      function buildFileContext(packageId) {
+      function ensureSelectedPackage() {
+        if (
+          state.selectedPackageId !== null &&
+          state.selectedPackageId !== undefined &&
+          packageById.has(state.selectedPackageId)
+        ) {
+          return true;
+        }
+        const topPackage = getTopNode(packages, packageScores);
+        state.selectedPackageId = topPackage ? topPackage.id : null;
+        return (
+          state.selectedPackageId !== null &&
+          state.selectedPackageId !== undefined &&
+          packageById.has(state.selectedPackageId)
+        );
+      }
+
+      function buildFileScope(packageId) {
         const scopedFiles = filterFilesForPackage(packageId);
         const fileIds = new Set(scopedFiles.map((file) => file.id));
         const scopedEdges = fileEdges.filter(
           (edge) => fileIds.has(edge.from) && fileIds.has(edge.to)
         );
         const scopedAdjacency = buildAdjacency(scopedEdges);
-        return { scopedFiles, scopedEdges, scopedAdjacency };
+        return { scopedFiles, scopedEdges, scopedAdjacency, fileIds };
+      }
+
+      function buildPackageContentContext(packageId) {
+        if (packageId === null || packageId === undefined || !packageById.has(packageId)) {
+          return null;
+        }
+        const focusPackage = packageById.get(packageId);
+        const childPackages = getDirectChildPackages(packageId);
+        const directFiles = filterFilesForPackage(packageId);
+        const packageNodeIds = new Set(childPackages.map((pkg) => pkg.id));
+        const packageScopedEdges = packageEdges.filter(
+          (edge) => packageNodeIds.has(edge.from) && packageNodeIds.has(edge.to)
+        );
+        const { scopedEdges: directFileEdges, fileIds } = buildFileScope(packageId);
+        const scopedExternalEdges = externalEdges.filter((edge) => packageNodeIds.has(edge.from));
+        const scopedFileExternalEdges = fileExternalEdges.filter((edge) => fileIds.has(edge.from));
+        return {
+          focusPackage,
+          childPackages,
+          directFiles,
+          packageScopedEdges,
+          directFileEdges,
+          scopedExternalEdges,
+          scopedFileExternalEdges,
+        };
+      }
+
+      function buildFileRelatedContext(packageId, focusFileId) {
+        const { scopedFiles, scopedEdges, scopedAdjacency, fileIds } = buildFileScope(packageId);
+        if (!scopedFiles.length) {
+          return null;
+        }
+        let resolvedFocusId = focusFileId;
+        if (!resolvedFocusId || !fileIds.has(resolvedFocusId)) {
+          const topFile = getTopNode(scopedFiles, fileScores);
+          resolvedFocusId = topFile ? topFile.id : null;
+        }
+        const hopDistances = resolveHopDistances(scopedAdjacency, resolvedFocusId, 2);
+        const displayFiles = scopedFiles.filter(
+          (file) => file.id === resolvedFocusId || hopDistances.has(file.id)
+        );
+        const displayIds = new Set(displayFiles.map((file) => file.id));
+        const displayEdges = scopedEdges.filter(
+          (edge) => displayIds.has(edge.from) && displayIds.has(edge.to)
+        );
+        const hop1Files = displayFiles.filter((file) => hopDistances.get(file.id) === 1);
+        const hop2Files = displayFiles.filter((file) => hopDistances.get(file.id) === 2);
+        const parentCandidates = new Map();
+        const primaryHopParent = new Map();
+        const hop2PrimaryWeights = new Map();
+        hop2Files.forEach((file) => {
+          const neighbors = scopedAdjacency.get(file.id) || new Map();
+          const candidates = Array.from(neighbors.entries())
+            .filter(([neighborId]) => hopDistances.get(neighborId) === 1)
+            .map(([neighborId, weight]) => ({
+              id: neighborId,
+              weight: Number.isFinite(weight) ? weight : 0,
+            }))
+            .sort((a, b) => {
+              if (b.weight !== a.weight) {
+                return b.weight - a.weight;
+              }
+              return (a.id || "").localeCompare(b.id || "");
+            });
+          parentCandidates.set(
+            file.id,
+            candidates.map((candidate) => candidate.id)
+          );
+          if (candidates.length > 0) {
+            primaryHopParent.set(file.id, candidates[0].id);
+            hop2PrimaryWeights.set(file.id, candidates[0].weight);
+          }
+        });
+        const scopedFileExternalEdges = fileExternalEdges.filter((edge) => displayIds.has(edge.from));
+        return {
+          scopedFiles,
+          scopedEdges,
+          scopedAdjacency,
+          resolvedFocusId,
+          hopDistances,
+          displayFiles,
+          displayIds,
+          displayEdges,
+          hop1Files,
+          hop2Files,
+          parentCandidates,
+          primaryHopParent,
+          hop2PrimaryWeights,
+          scopedFileExternalEdges,
+        };
       }
 
       function resolveHopDistances(adjacency, focusId, maxHop) {
@@ -2647,17 +3004,21 @@
           data.projectId && data.projectId !== "unknown"
             ? data.projectId
             : activeLabels.systemRoot;
-        const parts = [{ label: rootLabel, level: 0 }];
-        if (state.level >= 1 && state.selectedPackageId !== null && state.selectedPackageId !== undefined) {
+        const parts = [{ label: rootLabel, kind: "root" }];
+        if (
+          state.selectedPackageId !== null &&
+          state.selectedPackageId !== undefined &&
+          packageById.has(state.selectedPackageId)
+        ) {
           const packageLabel =
             state.selectedPackageId === ""
               ? activeLabels.defaultPackage
               : state.selectedPackageId;
-          parts.push({ label: packageLabel, level: 1 });
+          parts.push({ label: packageLabel, kind: "package" });
         }
-        if (state.level === 2 && state.selectedFileId) {
+        if (state.viewMode === viewModes.FILE_RELATED && state.selectedFileId) {
           const file = fileById.get(state.selectedFileId);
-          parts.push({ label: file ? file.name : state.selectedFileId, level: 2 });
+          parts.push({ label: file ? file.name : state.selectedFileId, kind: "file" });
         }
 
         parts.forEach((part, index) => {
@@ -2667,17 +3028,20 @@
             button.classList.add("is-active");
           }
           button.textContent = part.label;
-          button.dataset.level = part.level;
+          button.dataset.kind = part.kind;
           button.addEventListener("click", () => {
             if (index === parts.length - 1) {
               return;
             }
-            if (part.level === 0) {
-              state.level = 0;
+            if (part.kind === "root") {
+              const topPackage = getTopNode(packages, packageScores);
+              state.selectedPackageId = topPackage ? topPackage.id : null;
+              state.viewMode = viewModes.PACKAGE_CONTENT;
               state.selectedFileId = null;
             }
-            if (part.level === 1) {
-              state.level = 1;
+            if (part.kind === "package") {
+              state.viewMode = viewModes.PACKAGE_CONTENT;
+              state.selectedFileId = null;
             }
             resetZoom();
             renderAll();
@@ -2701,7 +3065,8 @@
           }
         });
 
-        const total = nodes.length || 1;
+        const nodeCount = nodes.length;
+        const total = nodeCount || 1;
         const highRatio = distribution.High / total;
         let risk = activeLabels.riskLevels.Low;
         if (highRatio >= 0.3) {
@@ -2709,21 +3074,31 @@
         } else if (highRatio >= 0.15) {
           risk = activeLabels.riskLevels.Medium;
         }
-        overallRisk.textContent = risk;
+        overallRisk.textContent = nodeCount > 0 ? risk : activeLabels.noData || "-";
 
         hotspotDistribution.innerHTML = "";
         ["High", "Medium", "Low"].forEach((level) => {
           const chip = document.createElement("span");
           chip.className = "dash-chip";
           const label = activeLabels.riskLevels[level] || level;
-          chip.textContent = `${label} ${distribution[level]}`;
+          chip.textContent = formatLabel(activeLabels.hotspotChipTemplate, [
+            label,
+            distribution[level],
+            toPercent(distribution[level], nodeCount),
+          ]);
           hotspotDistribution.appendChild(chip);
         });
+        if (hotspotDistributionNote) {
+          hotspotDistributionNote.textContent = formatLabel(activeLabels.hotspotTotalTemplate, [
+            nodeCount,
+          ]);
+        }
 
         const topNodes = nodes
           .slice()
           .sort((a, b) => scores.get(b.id).leverageScore - scores.get(a.id).leverageScore)
           .slice(0, 8);
+        const topNodeCount = topNodes.length;
         const driverCounts = { Impact: 0, Complexity: 0, TestGap: 0 };
         let hasCoverage = false;
         topNodes.forEach((node) => {
@@ -2753,8 +3128,27 @@
         if (hasCoverage && driverCounts.TestGap > driverCounts[driver]) {
           driver = "TestGap";
         }
-        primaryDriver.textContent =
-          activeLabels.drivers[driver] || activeLabels.drivers.Impact;
+        if (topNodeCount <= 0) {
+          primaryDriver.textContent = activeLabels.noData || "-";
+          if (primaryDriverNote) {
+            primaryDriverNote.textContent = "";
+          }
+          return;
+        }
+        const driverLabel = activeLabels.drivers[driver] || activeLabels.drivers.Impact || driver;
+        const driverCountSummary = formatLabel(activeLabels.driverCountSummaryTemplate, [
+          driverCounts[driver],
+          topNodeCount,
+        ]);
+        primaryDriver.textContent = formatLabel(activeLabels.driverValueTemplate, [
+          driverLabel,
+          driverCountSummary,
+        ]).trim();
+        if (primaryDriverNote) {
+          primaryDriverNote.textContent = formatLabel(activeLabels.driverDetailTemplate, [
+            topNodeCount,
+          ]);
+        }
       }
 
       function updateDetailPanel(selection) {
@@ -3042,31 +3436,32 @@
         };
       }
 
-      function resolveCircleLabelFit(text, minDiameter) {
-        const fontSize = clampValue(minDiameter * 0.18, 7, 11);
-        const padding = Math.max(4, fontSize * 0.7);
-        const avgCharWidth = fontSize * 0.55;
-        const requiredDiameter = Math.max(
-          minDiameter,
-          text.length * avgCharWidth + padding * 2
-        );
+      function resolvePackageLabelFit(text, width, height) {
+        const base = resolveLabelFit(text, width, height);
+        const fontSize = clampValue(base.fontSize * 1.2, 8, 12.5);
         return {
-          text,
+          text: base.text,
           fontSize,
           offsetY: Math.max(3, fontSize * 0.35),
-          radius: requiredDiameter / 2,
         };
       }
 
-      function resolveBelowLabelFit(text, width) {
-        const fontSize = clampValue(width * 0.08, 9, 12);
-        const avgCharWidth = fontSize * 0.56;
-        const maxWidth = Math.min(200, Math.max(width * 2.1, 120));
-        const maxChars = Math.max(6, Math.floor(maxWidth / avgCharWidth));
+      function resolveCircleLabelFit(text, minDiameter) {
+        const fontSize = clampValue(minDiameter * 0.17, 10, 14);
+        const padding = Math.max(4, fontSize * 0.7);
+        const avgCharWidth = fontSize * 0.55;
+        const maxDiameter = minDiameter * 1.9;
+        const maxChars = Math.max(7, Math.floor((maxDiameter - padding * 2) / avgCharWidth));
+        const fittedText = truncateLabel(text, maxChars);
+        const requiredDiameter = Math.min(
+          maxDiameter,
+          Math.max(minDiameter, fittedText.length * avgCharWidth + padding * 2)
+        );
         return {
-          text: truncateLabel(text, maxChars),
+          text: fittedText,
           fontSize,
-          offsetY: fontSize + 8,
+          offsetY: 0,
+          radius: requiredDiameter / 2,
         };
       }
 
@@ -3087,6 +3482,54 @@
         }
         const clamped = Math.min(Math.max(value, 0), 100);
         return `${formatDecimal(clamped, 1)}%`;
+      }
+
+      function computePackageMagnitude(pkg) {
+        if (!pkg) {
+          return 0;
+        }
+        const classCount = Number.isFinite(pkg.classCount) ? pkg.classCount : 0;
+        const methodCount = Number.isFinite(pkg.methodCount) ? pkg.methodCount : 0;
+        const loc = Number.isFinite(pkg.loc) ? pkg.loc : 0;
+        const complexitySum = Number.isFinite(pkg.complexitySum) ? pkg.complexitySum : 0;
+        return classCount * 4 + methodCount * 1.4 + complexitySum * 0.55 + loc * 0.09;
+      }
+
+      function buildPackageSizeScaleMap(packageNodes) {
+        const scales = new Map();
+        if (!packageNodes || packageNodes.length === 0) {
+          return scales;
+        }
+        const magnitudes = packageNodes.map((pkg) => ({
+          id: pkg.id,
+          magnitude: computePackageMagnitude(pkg),
+        }));
+        const values = magnitudes.map((entry) => entry.magnitude);
+        const min = Math.min(...values);
+        const max = Math.max(...values);
+        magnitudes.forEach((entry) => {
+          const normalized = normalize(entry.magnitude, min, max);
+          const scale = 0.82 + normalized * 0.72;
+          scales.set(entry.id, scale);
+        });
+        return scales;
+      }
+
+      function edgeRelationClass(edge) {
+        const relation = (edge && typeof edge.relation === "string" ? edge.relation : "")
+          .trim()
+          .toLowerCase();
+        if (!relation) {
+          return "edge-usage";
+        }
+        if (
+          relation === "inheritance" ||
+          relation === "extends" ||
+          relation === "implements"
+        ) {
+          return "edge-inheritance";
+        }
+        return "edge-usage";
       }
 
       function sortDetailClasses(classList) {
@@ -3156,12 +3599,251 @@
         const step = (Math.PI * 2) / nodes.length;
         nodes.forEach((node, index) => {
           const angle = step * index - Math.PI / 2;
-          const jitter = (index % 2 === 0 ? 1 : -1) * 6;
+          const jitter = (index % 2 === 0 ? 1 : -1) * 4;
           const x = center.x + (radius + jitter) * Math.cos(angle + jitterSeed * 0.1);
           const y = center.y + (radius + jitter) * Math.sin(angle + jitterSeed * 0.1);
           positions.set(node.id, { x, y });
         });
         return positions;
+      }
+
+      function resolveAdjacencyWeight(adjacency, fromId, toId) {
+        if (!adjacency || !fromId || !toId || !adjacency.has(fromId)) {
+          return 0;
+        }
+        const neighbors = adjacency.get(fromId);
+        if (!neighbors) {
+          return 0;
+        }
+        const value = neighbors.get(toId);
+        return Number.isFinite(value) ? value : 0;
+      }
+
+      function buildCenteredOffsets(count, step) {
+        if (!Number.isFinite(count) || count <= 0) {
+          return [];
+        }
+        if (!Number.isFinite(step) || count === 1) {
+          return [0];
+        }
+        const centerIndex = (count - 1) / 2;
+        const offsets = [];
+        for (let index = 0; index < count; index += 1) {
+          offsets.push((index - centerIndex) * step);
+        }
+        return offsets;
+      }
+
+      function buildParentSectors(parentNodes, positions, center) {
+        const sectors = new Map();
+        const entries = parentNodes
+          .map((node) => {
+            const point = positions.get(node.id);
+            if (!point) {
+              return null;
+            }
+            return {
+              id: node.id,
+              angle: Math.atan2(point.y - center.y, point.x - center.x),
+            };
+          })
+          .filter(Boolean)
+          .sort((a, b) => a.angle - b.angle);
+        if (!entries.length) {
+          return sectors;
+        }
+        if (entries.length === 1) {
+          const single = entries[0];
+          sectors.set(single.id, {
+            angle: single.angle,
+            start: single.angle - Math.PI,
+            end: single.angle + Math.PI,
+            span: Math.PI * 2,
+          });
+          return sectors;
+        }
+        entries.forEach((entry, index) => {
+          const previous = entries[(index - 1 + entries.length) % entries.length];
+          const next = entries[(index + 1) % entries.length];
+          let previousAngle = previous.angle;
+          let nextAngle = next.angle;
+          if (index === 0) {
+            previousAngle -= Math.PI * 2;
+          }
+          if (index === entries.length - 1) {
+            nextAngle += Math.PI * 2;
+          }
+          const start = entry.angle - (entry.angle - previousAngle) / 2;
+          const end = entry.angle + (nextAngle - entry.angle) / 2;
+          sectors.set(entry.id, {
+            angle: entry.angle,
+            start,
+            end,
+            span: end - start,
+          });
+        });
+        return sectors;
+      }
+
+      function resolveFileRelatedLayout(context, center, ringBase) {
+        const focusId = context ? context.resolvedFocusId : null;
+        const positions = new Map();
+        if (focusId) {
+          positions.set(focusId, { x: center.x, y: center.y });
+        }
+
+        const scopedAdjacency = context?.scopedAdjacency || new Map();
+        const primaryHopParent = context?.primaryHopParent || new Map();
+        const hop2PrimaryWeights = context?.hop2PrimaryWeights || new Map();
+        const ring1Nodes = context?.hop1Files ? context.hop1Files.slice() : [];
+        const ring2Nodes = context?.hop2Files ? context.hop2Files.slice() : [];
+
+        ring1Nodes.sort((a, b) => {
+          const edgeDiff =
+            resolveAdjacencyWeight(scopedAdjacency, focusId, b.id) -
+            resolveAdjacencyWeight(scopedAdjacency, focusId, a.id);
+          if (edgeDiff !== 0) {
+            return edgeDiff;
+          }
+          const leverageDiff =
+            (fileScores.get(b.id)?.leverageScore || 0) - (fileScores.get(a.id)?.leverageScore || 0);
+          if (leverageDiff !== 0) {
+            return leverageDiff;
+          }
+          return (a.id || "").localeCompare(b.id || "");
+        });
+
+        ring2Nodes.sort((a, b) => {
+          const parentA = primaryHopParent.get(a.id) || "";
+          const parentB = primaryHopParent.get(b.id) || "";
+          if (parentA !== parentB) {
+            return parentA.localeCompare(parentB);
+          }
+          const primaryWeightDiff =
+            (hop2PrimaryWeights.get(b.id) || 0) - (hop2PrimaryWeights.get(a.id) || 0);
+          if (primaryWeightDiff !== 0) {
+            return primaryWeightDiff;
+          }
+          const leverageDiff =
+            (fileScores.get(b.id)?.leverageScore || 0) - (fileScores.get(a.id)?.leverageScore || 0);
+          if (leverageDiff !== 0) {
+            return leverageDiff;
+          }
+          return (a.id || "").localeCompare(b.id || "");
+        });
+
+        const settings = uiConfig.view.fileRelatedLayout || {};
+        const mode = settings.mode || "parent-sector";
+        const ring1RadiusRatio = Number.isFinite(settings.ring1Radius) ? settings.ring1Radius : 0.18;
+        const ring2RadiusRatio = Number.isFinite(settings.ring2Radius) ? settings.ring2Radius : 0.3;
+        const ring2RadiusMaxRatio = Number.isFinite(settings.ring2RadiusMax)
+          ? settings.ring2RadiusMax
+          : 0.4;
+        const branchBaseSpread = Number.isFinite(settings.branchBaseSpread)
+          ? settings.branchBaseSpread
+          : 0.42;
+        const branchSpreadStep = Number.isFinite(settings.branchSpreadStep)
+          ? settings.branchSpreadStep
+          : 0.14;
+        const branchSpreadMax = Number.isFinite(settings.branchSpreadMax)
+          ? settings.branchSpreadMax
+          : 1.28;
+        const branchTierCapacity = Number.isFinite(settings.branchTierCapacity)
+          ? Math.max(1, Math.floor(settings.branchTierCapacity))
+          : 5;
+        const branchTierStepPx = Number.isFinite(settings.branchTierStepPx)
+          ? Math.max(0, settings.branchTierStepPx)
+          : 18;
+
+        const ring1Radius = ringBase * ring1RadiusRatio;
+        const ring2Radius = ringBase * ring2RadiusRatio;
+        const ring2RadiusMax = Math.max(ring2Radius, ringBase * ring2RadiusMaxRatio);
+
+        if (ring1Nodes.length) {
+          layoutRing(ring1Nodes, ring1Radius, center, 0.3).forEach((value, key) => {
+            positions.set(key, value);
+          });
+        }
+
+        if (mode !== "parent-sector" || ring1Nodes.length === 0) {
+          layoutRing(ring2Nodes, ring2Radius, center, 0.6).forEach((value, key) => {
+            positions.set(key, value);
+          });
+        } else {
+          const parentSectors = buildParentSectors(ring1Nodes, positions, center);
+          const groupedByParent = new Map();
+          const unparentedNodes = [];
+
+          ring2Nodes.forEach((node) => {
+            const parentId = primaryHopParent.get(node.id);
+            if (parentId && parentSectors.has(parentId)) {
+              if (!groupedByParent.has(parentId)) {
+                groupedByParent.set(parentId, []);
+              }
+              groupedByParent.get(parentId).push(node);
+              return;
+            }
+            unparentedNodes.push(node);
+          });
+
+          groupedByParent.forEach((children, parentId) => {
+            const sector = parentSectors.get(parentId);
+            if (!sector) {
+              unparentedNodes.push(...children);
+              return;
+            }
+            const count = children.length;
+            const maxSpread = Math.max(0.2, Math.min(branchSpreadMax, sector.span * 0.78));
+            const spread = clampValue(
+              branchBaseSpread + Math.max(0, count - 1) * branchSpreadStep,
+              0.2,
+              maxSpread
+            );
+
+            for (let offsetStart = 0; offsetStart < count; offsetStart += branchTierCapacity) {
+              const tierChildren = children.slice(offsetStart, offsetStart + branchTierCapacity);
+              const tierIndex = Math.floor(offsetStart / branchTierCapacity);
+              const tierRadius = Math.min(ring2RadiusMax, ring2Radius + tierIndex * branchTierStepPx);
+              const step =
+                tierChildren.length <= 1 ? 0 : spread / Math.max(1, tierChildren.length - 1);
+              const offsets = buildCenteredOffsets(tierChildren.length, step);
+
+              tierChildren.forEach((child, index) => {
+                const rawAngle = sector.angle + offsets[index];
+                const minAngle = sector.start + 0.04;
+                const maxAngle = sector.end - 0.04;
+                const angle = minAngle <= maxAngle ? clampValue(rawAngle, minAngle, maxAngle) : sector.angle;
+                positions.set(child.id, {
+                  x: center.x + tierRadius * Math.cos(angle),
+                  y: center.y + tierRadius * Math.sin(angle),
+                });
+              });
+            }
+          });
+
+          if (unparentedNodes.length) {
+            layoutRing(unparentedNodes, ring2Radius, center, 0.77).forEach((value, key) => {
+              positions.set(key, value);
+            });
+          }
+        }
+
+        const hopDistanceById = new Map(context?.hopDistances || []);
+        if (focusId) {
+          hopDistanceById.set(focusId, 0);
+        }
+        const renderOrder = ring2Nodes.concat(ring1Nodes);
+        const focusFile = focusId ? fileById.get(focusId) : null;
+        if (focusFile) {
+          renderOrder.push(focusFile);
+        }
+        return {
+          positions,
+          ring1Nodes,
+          ring2Nodes,
+          renderOrder,
+          hopDistanceById,
+        };
       }
 
       function buildExternalContext(edges, focusIds) {
@@ -3231,7 +3913,7 @@
         if (!context.nodes.length) {
           return null;
         }
-        const minDiameter = 48;
+        const minDiameter = 96;
         const labelLayouts = new Map();
         let maxRadius = minDiameter / 2;
         context.nodes.forEach((node) => {
@@ -3256,7 +3938,7 @@
           }
           const path = createSvgElement("path", {
             d: `M ${from.x} ${from.y} L ${to.x} ${to.y}`,
-            class: "edge external-edge",
+            class: "edge edge-usage external-edge",
           });
           edgeGroup.appendChild(path);
         });
@@ -3276,6 +3958,7 @@
             r: radiusValue,
           });
           const label = createSvgElement("text", {
+            class: "external-node-label",
             x: position.x,
             y: position.y + (labelFit ? labelFit.offsetY : 0),
           });
@@ -3306,6 +3989,355 @@
         mapSvg.appendChild(text);
       }
 
+      function renderPackageNodeInMap(pkg, position, index, selectedPackageId, sizeScale) {
+        const score = packageScores.get(pkg.id) || {
+          level: "Low",
+          impactScore: 0,
+          complexityScore: 0,
+        };
+        const scale = Number.isFinite(sizeScale) ? clampValue(sizeScale, 0.7, 1.7) : 1;
+        const size = (96 + score.impactScore * 110) * scale;
+        const width = size * 1.4;
+        const height = size * 0.7;
+        const labelFit = resolvePackageLabelFit(packageShortLabel(pkg), width, height);
+        const group = createSvgElement("g", {
+          class: `map-node node-score-${score.level.toLowerCase()}${
+            pkg.id === selectedPackageId ? " node-selected" : ""
+          } map-node-kind-package`,
+        });
+        group.setAttribute("data-id", pkg.id);
+        group.setAttribute("data-type", "package");
+        group.style.animation = `fadeRise 400ms ease ${index * 40}ms both`;
+        const rectNode = createSvgElement("rect", {
+          x: position.x - width / 2,
+          y: position.y - height / 2,
+          width,
+          height,
+          rx: 14,
+          ry: 14,
+        });
+        const label = createSvgElement("text", {
+          x: position.x,
+          y: position.y + labelFit.offsetY,
+        });
+        label.textContent = labelFit.text;
+        label.style.fontSize = `${labelFit.fontSize}px`;
+        group.appendChild(rectNode);
+        group.appendChild(label);
+        group.addEventListener("mouseenter", (event) => {
+          showTooltip(packageDisplayName(pkg), [`Leverage: ${score.level}`], event);
+        });
+        group.addEventListener("mouseleave", hideTooltip);
+        group.addEventListener("click", (event) => {
+          event.stopPropagation();
+          state.viewMode = viewModes.PACKAGE_CONTENT;
+          state.selectedPackageId = pkg.id;
+          state.selectedFileId = null;
+          resetZoom();
+          renderAll();
+        });
+        return group;
+      }
+
+      function resolveFileHopLabel(hopDistance) {
+        if (!Number.isFinite(hopDistance)) {
+          return null;
+        }
+        if (hopDistance <= 0) {
+          return activeLabels.hopFocus || "Focus node";
+        }
+        if (hopDistance === 1) {
+          return activeLabels.hopOne || "1-hop";
+        }
+        if (hopDistance === 2) {
+          return activeLabels.hopTwo || "2-hop";
+        }
+        return `${hopDistance}-hop`;
+      }
+
+      function renderFileNodeInMap(file, position, index, focusFileId, hopDistance, onClick) {
+        const score = fileScores.get(file.id) || {
+          level: "Low",
+          impactScore: 0,
+          complexityScore: 0,
+        };
+        const size = 84 + score.impactScore * 90;
+        const width = size * 1.5;
+        const height = size * 0.7;
+        const labelFit = resolveLabelFit(file.name, width, height);
+        const hopClass = Number.isFinite(hopDistance) ? ` map-node-hop-${hopDistance}` : "";
+        const group = createSvgElement("g", {
+          class: `map-node node-score-${score.level.toLowerCase()}${
+            file.id === focusFileId ? " node-selected" : ""
+          } map-node-kind-file${hopClass}`,
+        });
+        group.setAttribute("data-id", file.id);
+        group.setAttribute("data-type", "file");
+        group.style.animation = `fadeRise 400ms ease ${index * 40}ms both`;
+        const rectNode = createSvgElement("rect", {
+          x: position.x - width / 2,
+          y: position.y - height / 2,
+          width,
+          height,
+          rx: 12,
+          ry: 12,
+        });
+        const label = createSvgElement("text", {
+          x: position.x,
+          y: position.y + labelFit.offsetY,
+        });
+        label.textContent = labelFit.text;
+        label.style.fontSize = `${labelFit.fontSize}px`;
+        group.appendChild(rectNode);
+        group.appendChild(label);
+        if (hopDistance === 2) {
+          const badgeWidth = 22;
+          const badgeHeight = 12;
+          const badgeCenterX = position.x + width / 2 - badgeWidth / 2 - 6;
+          const badgeCenterY = position.y - height / 2 + badgeHeight / 2 + 6;
+          const badge = createSvgElement("g", { class: "hop-badge" });
+          const badgeRect = createSvgElement("rect", {
+            x: badgeCenterX - badgeWidth / 2,
+            y: badgeCenterY - badgeHeight / 2,
+            width: badgeWidth,
+            height: badgeHeight,
+            rx: 6,
+            ry: 6,
+          });
+          const badgeText = createSvgElement("text", {
+            x: badgeCenterX,
+            y: badgeCenterY + 0.5,
+          });
+          badgeText.textContent = "2H";
+          badge.appendChild(badgeRect);
+          badge.appendChild(badgeText);
+          group.appendChild(badge);
+        }
+        group.addEventListener("mouseenter", (event) => {
+          const lines = [
+            formatLabel(activeLabels.leverageTooltip || "Leverage: {0}", [score.level]),
+          ];
+          const hopLabel = resolveFileHopLabel(hopDistance);
+          if (hopLabel) {
+            lines.push(formatLabel(activeLabels.hopTooltip || "Hop: {0}", [hopLabel]));
+          }
+          showTooltip(file.name, lines, event);
+        });
+        group.addEventListener("mouseleave", hideTooltip);
+        group.addEventListener("click", onClick);
+        return group;
+      }
+
+      function renderPackageContentMap(center, ringBase, viewBox) {
+        if (!ensureSelectedPackage()) {
+          renderEmptyState(viewBox);
+          return;
+        }
+        const context = buildPackageContentContext(state.selectedPackageId);
+        if (!context) {
+          renderEmptyState(viewBox);
+          return;
+        }
+        const focusPackage = context.focusPackage;
+        const childPackages = context.childPackages.slice();
+        const directFiles = context.directFiles.slice();
+        if (!childPackages.length && !directFiles.length) {
+          renderEmptyState(viewBox);
+          return;
+        }
+        childPackages.sort(
+          (a, b) =>
+            (packageScores.get(b.id)?.leverageScore || 0) -
+            (packageScores.get(a.id)?.leverageScore || 0)
+        );
+        directFiles.sort(
+          (a, b) =>
+            (fileScores.get(b.id)?.leverageScore || 0) - (fileScores.get(a.id)?.leverageScore || 0)
+        );
+        const childPackageSizeScales = buildPackageSizeScaleMap(childPackages);
+
+        const positions = new Map();
+        if (childPackages.length === 1) {
+          positions.set(childPackages[0].id, { x: center.x, y: center.y });
+        } else if (childPackages.length > 1) {
+          layoutRing(childPackages, ringBase * 0.2, center, 0.35).forEach((value, key) => {
+            positions.set(key, value);
+          });
+        }
+        if (childPackages.length === 0 && directFiles.length === 1) {
+          positions.set(directFiles[0].id, { x: center.x, y: center.y });
+        } else {
+          const fileRingRadius = childPackages.length > 0 ? ringBase * 0.32 : ringBase * 0.22;
+          layoutRing(directFiles, fileRingRadius, center, 0.65).forEach((value, key) => {
+            positions.set(key, value);
+          });
+        }
+
+        const edgesGroup = createSvgElement("g", {});
+        context.packageScopedEdges.forEach((edge) => {
+          const from = positions.get(edge.from);
+          const to = positions.get(edge.to);
+          if (!from || !to) {
+            return;
+          }
+          const path = createSvgElement("path", {
+            d: `M ${from.x} ${from.y} L ${to.x} ${to.y}`,
+            class: `edge ${edgeRelationClass(edge)}`,
+          });
+          edgesGroup.appendChild(path);
+        });
+        context.directFileEdges.forEach((edge) => {
+          const from = positions.get(edge.from);
+          const to = positions.get(edge.to);
+          if (!from || !to) {
+            return;
+          }
+          const path = createSvgElement("path", {
+            d: `M ${from.x} ${from.y} L ${to.x} ${to.y}`,
+            class: `edge ${edgeRelationClass(edge)}`,
+          });
+          edgesGroup.appendChild(path);
+        });
+
+        const nodesGroup = createSvgElement("g", {});
+        childPackages.forEach((pkg, index) => {
+          const position = positions.get(pkg.id);
+          if (!position) {
+            return;
+          }
+          nodesGroup.appendChild(
+            renderPackageNodeInMap(
+              pkg,
+              position,
+              index,
+              null,
+              childPackageSizeScales.get(pkg.id)
+            )
+          );
+        });
+        directFiles.forEach((file, index) => {
+          const position = positions.get(file.id);
+          if (!position) {
+            return;
+          }
+          nodesGroup.appendChild(
+            renderFileNodeInMap(
+              file,
+              position,
+              childPackages.length + index + 1,
+              null,
+              null,
+              (event) => {
+                event.stopPropagation();
+                state.viewMode = viewModes.FILE_RELATED;
+                state.selectedPackageId = focusPackage.id;
+                state.selectedFileId = file.id;
+                resetZoom();
+                renderAll();
+              }
+            )
+          );
+        });
+
+        const displayIds = new Set(positions.keys());
+        const externalLayer = renderExternalLayer(
+          context.scopedExternalEdges.concat(context.scopedFileExternalEdges),
+          displayIds,
+          positions,
+          center,
+          ringBase * 0.5,
+          0.95
+        );
+
+        mapLayer = createSvgElement("g", {});
+        mapLayer.appendChild(edgesGroup);
+        if (externalLayer) {
+          mapLayer.appendChild(externalLayer.edgeGroup);
+        }
+        mapLayer.appendChild(nodesGroup);
+        if (externalLayer) {
+          mapLayer.appendChild(externalLayer.nodesGroup);
+        }
+        mapSvg.appendChild(mapLayer);
+        applyTransform();
+      }
+
+      function renderFileRelatedMap(center, ringBase, viewBox) {
+        if (!ensureSelectedPackage()) {
+          renderEmptyState(viewBox);
+          return;
+        }
+        const context = buildFileRelatedContext(state.selectedPackageId, state.selectedFileId);
+        if (!context || !context.resolvedFocusId) {
+          renderEmptyState(viewBox);
+          return;
+        }
+        state.selectedFileId = context.resolvedFocusId;
+        const focusId = context.resolvedFocusId;
+        const layout = resolveFileRelatedLayout(context, center, ringBase);
+        const positions = layout.positions;
+
+        const edgesGroup = createSvgElement("g", {});
+        context.displayEdges.forEach((edge) => {
+          const from = positions.get(edge.from);
+          const to = positions.get(edge.to);
+          if (!from || !to) {
+            return;
+          }
+          const path = createSvgElement("path", {
+            d: `M ${from.x} ${from.y} L ${to.x} ${to.y}`,
+            class: `edge ${edgeRelationClass(edge)}${
+              edge.from === focusId || edge.to === focusId ? " edge-focus" : ""
+            }`,
+          });
+          edgesGroup.appendChild(path);
+        });
+
+        const nodesGroup = createSvgElement("g", {});
+        layout.renderOrder.forEach((file, index) => {
+          const position = positions.get(file.id);
+          if (!position) {
+            return;
+          }
+          nodesGroup.appendChild(
+            renderFileNodeInMap(
+              file,
+              position,
+              index,
+              focusId,
+              layout.hopDistanceById.get(file.id),
+              (event) => {
+                event.stopPropagation();
+                state.viewMode = viewModes.FILE_RELATED;
+                state.selectedFileId = file.id;
+                resetZoom();
+                renderAll();
+              }
+            )
+          );
+        });
+
+        const externalLayer = renderExternalLayer(
+          context.scopedFileExternalEdges,
+          context.displayIds,
+          positions,
+          center,
+          ringBase * 0.46,
+          0.9
+        );
+        mapLayer = createSvgElement("g", {});
+        mapLayer.appendChild(edgesGroup);
+        if (externalLayer) {
+          mapLayer.appendChild(externalLayer.edgeGroup);
+        }
+        mapLayer.appendChild(nodesGroup);
+        if (externalLayer) {
+          mapLayer.appendChild(externalLayer.nodesGroup);
+        }
+        mapSvg.appendChild(mapLayer);
+        applyTransform();
+      }
+
       function renderMap() {
         while (mapSvg.firstChild) {
           mapSvg.removeChild(mapSvg.firstChild);
@@ -3317,324 +4349,38 @@
         const height = rect.height || 600;
         const viewBox = { width, height };
         mapSvg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-
         const center = { x: width / 2, y: height / 2 };
         const ringBase = Math.min(width, height);
 
-        if (state.level === 0) {
-          if (
-            state.selectedPackageId === null ||
-            state.selectedPackageId === undefined ||
-            !packageById.has(state.selectedPackageId)
-          ) {
-            const topPackage = getTopNode(packages, packageScores);
-            state.selectedPackageId = topPackage ? topPackage.id : null;
-          }
-
-          if (state.selectedPackageId === null || state.selectedPackageId === undefined) {
-            renderEmptyState(viewBox);
-            return;
-          }
-
-          const focusId = state.selectedPackageId;
-          const hopDistances = resolveHopDistances(packageAdjacency, focusId, 2);
-          const displayNodes = packages.filter(
-            (pkg) => pkg.id === focusId || hopDistances.has(pkg.id)
-          );
-          const displayIds = new Set(displayNodes.map((node) => node.id));
-          const displayEdges = packageEdges.filter(
-            (edge) => displayIds.has(edge.from) && displayIds.has(edge.to)
-          );
-
-          const ring1Nodes = displayNodes.filter((node) => hopDistances.get(node.id) === 1);
-          const ring2Nodes = displayNodes.filter((node) => hopDistances.get(node.id) === 2);
-          ring1Nodes.sort(
-            (a, b) =>
-              (packageScores.get(b.id).edgeWeight || 0) -
-              (packageScores.get(a.id).edgeWeight || 0)
-          );
-          ring2Nodes.sort(
-            (a, b) =>
-              packageScores.get(b.id).leverageScore - packageScores.get(a.id).leverageScore
-          );
-
-          const positions = new Map();
-          positions.set(focusId, { x: center.x, y: center.y });
-
-          const ring1Radius = ringBase * 0.22;
-          const ring2Radius = ringBase * 0.36;
-          layoutRing(ring1Nodes, ring1Radius, center, 0.4).forEach((value, key) => {
-            positions.set(key, value);
-          });
-          layoutRing(ring2Nodes, ring2Radius, center, 0.8).forEach((value, key) => {
-            positions.set(key, value);
-          });
-
-          const edgesGroup = createSvgElement("g", {});
-          displayEdges.forEach((edge) => {
-            const from = positions.get(edge.from);
-            const to = positions.get(edge.to);
-            if (!from || !to) {
-              return;
-            }
-            const path = createSvgElement("path", {
-              d: `M ${from.x} ${from.y} L ${to.x} ${to.y}`,
-              class: `edge${edge.from === focusId || edge.to === focusId ? " edge-focus" : ""}`,
-            });
-            edgesGroup.appendChild(path);
-          });
-
-          const nodesGroup = createSvgElement("g", {});
-          displayNodes.forEach((pkg, index) => {
-            const position = positions.get(pkg.id);
-            if (!position) {
-              return;
-            }
-            const score = packageScores.get(pkg.id);
-            const size = 96 + score.impactScore * 110;
-            const width = size * 1.4;
-            const height = size * 0.7;
-            const labelFit = resolveLabelFit(packageShortLabel(pkg), width, height);
-            const group = createSvgElement("g", {
-              class: `map-node node-score-${score.level.toLowerCase()}${
-                pkg.id === focusId ? " node-selected" : ""
-              }`,
-            });
-            group.setAttribute("data-id", pkg.id);
-            group.setAttribute("data-type", "package");
-            group.style.animation = `fadeRise 400ms ease ${index * 40}ms both`;
-
-            const rectNode = createSvgElement("rect", {
-              x: position.x - width / 2,
-              y: position.y - height / 2,
-              width,
-              height,
-              rx: 14,
-              ry: 14,
-            });
-            const label = createSvgElement("text", {
-              x: position.x,
-              y: position.y + labelFit.offsetY,
-            });
-            label.textContent = labelFit.text;
-            label.style.fontSize = `${labelFit.fontSize}px`;
-
-            group.appendChild(rectNode);
-            group.appendChild(label);
-            group.addEventListener("mouseenter", (event) => {
-              showTooltip(packageDisplayName(pkg), [`Leverage: ${score.level}`], event);
-            });
-            group.addEventListener("mouseleave", hideTooltip);
-            group.addEventListener("click", (event) => {
-              event.stopPropagation();
-              state.selectedPackageId = pkg.id;
-              resetZoom();
-              renderAll();
-            });
-            group.addEventListener("dblclick", (event) => {
-              event.stopPropagation();
-              state.level = 1;
-              state.selectedPackageId = pkg.id;
-              state.selectedFileId = null;
-              resetZoom();
-              renderAll();
-            });
-            nodesGroup.appendChild(group);
-          });
-
-          const externalLayer = renderExternalLayer(
-            externalEdges,
-            displayIds,
-            positions,
-            center,
-            ringBase * 0.48,
-            1.1
-          );
-
-          mapLayer = createSvgElement("g", {});
-          mapLayer.appendChild(edgesGroup);
-          if (externalLayer) {
-            mapLayer.appendChild(externalLayer.edgeGroup);
-          }
-          mapLayer.appendChild(nodesGroup);
-          if (externalLayer) {
-            mapLayer.appendChild(externalLayer.nodesGroup);
-          }
-
-          mapSvg.appendChild(mapLayer);
-          applyTransform();
+        if (state.viewMode === viewModes.FILE_RELATED) {
+          renderFileRelatedMap(center, ringBase, viewBox);
           return;
         }
-
-        if (state.level === 1 || state.level === 2) {
-          if (
-            state.selectedPackageId === null ||
-            state.selectedPackageId === undefined ||
-            !packageById.has(state.selectedPackageId)
-          ) {
-            const topPackage = getTopNode(packages, packageScores);
-            state.selectedPackageId = topPackage ? topPackage.id : null;
-          }
-          const { scopedFiles, scopedEdges, scopedAdjacency } = buildFileContext(
-            state.selectedPackageId
-          );
-          if (!scopedFiles.length) {
-            renderEmptyState(viewBox);
-            return;
-          }
-
-          const scopedFileIds = new Set(scopedFiles.map((file) => file.id));
-          if (!state.selectedFileId || !scopedFileIds.has(state.selectedFileId)) {
-            const topFile = getTopNode(scopedFiles, fileScores);
-            state.selectedFileId = topFile ? topFile.id : null;
-          }
-          const focusId = state.selectedFileId;
-          const maxHop = state.level === 2 ? 1 : 2;
-          const hopDistances = resolveHopDistances(scopedAdjacency, focusId, maxHop);
-          const displayNodes = scopedFiles.filter(
-            (file) => file.id === focusId || hopDistances.has(file.id)
-          );
-          const displayIds = new Set(displayNodes.map((node) => node.id));
-          const displayEdges = scopedEdges.filter(
-            (edge) => displayIds.has(edge.from) && displayIds.has(edge.to)
-          );
-
-          const ring1Nodes = displayNodes.filter((node) => hopDistances.get(node.id) === 1);
-          const ring2Nodes = displayNodes.filter((node) => hopDistances.get(node.id) === 2);
-          ring1Nodes.sort(
-            (a, b) =>
-              (fileScores.get(b.id).edgeWeight || 0) - (fileScores.get(a.id).edgeWeight || 0)
-          );
-          ring2Nodes.sort(
-            (a, b) => fileScores.get(b.id).leverageScore - fileScores.get(a.id).leverageScore
-          );
-
-          const positions = new Map();
-          positions.set(focusId, { x: center.x, y: center.y });
-
-          const ring1Radius = ringBase * 0.2;
-          const ring2Radius = ringBase * 0.32;
-          layoutRing(ring1Nodes, ring1Radius, center, 0.3).forEach((value, key) => {
-            positions.set(key, value);
-          });
-          layoutRing(ring2Nodes, ring2Radius, center, 0.6).forEach((value, key) => {
-            positions.set(key, value);
-          });
-
-          const edgesGroup = createSvgElement("g", {});
-          displayEdges.forEach((edge) => {
-            const from = positions.get(edge.from);
-            const to = positions.get(edge.to);
-            if (!from || !to) {
-              return;
-            }
-            const path = createSvgElement("path", {
-              d: `M ${from.x} ${from.y} L ${to.x} ${to.y}`,
-              class: `edge${edge.from === focusId || edge.to === focusId ? " edge-focus" : ""}`,
-            });
-            edgesGroup.appendChild(path);
-          });
-
-          const nodesGroup = createSvgElement("g", {});
-          displayNodes.forEach((file, index) => {
-            const position = positions.get(file.id);
-            if (!position) {
-              return;
-            }
-            const score = fileScores.get(file.id);
-            const size = 84 + score.impactScore * 90;
-            const width = size * 1.5;
-            const height = size * 0.7;
-            const labelFit = resolveLabelFit(file.name, width, height);
-            const group = createSvgElement("g", {
-              class: `map-node node-score-${score.level.toLowerCase()}${
-                file.id === focusId ? " node-selected" : ""
-              }`,
-            });
-            group.setAttribute("data-id", file.id);
-            group.setAttribute("data-type", "file");
-            group.style.animation = `fadeRise 400ms ease ${index * 40}ms both`;
-
-            const rectNode = createSvgElement("rect", {
-              x: position.x - width / 2,
-              y: position.y - height / 2,
-              width,
-              height,
-              rx: 12,
-              ry: 12,
-            });
-            const label = createSvgElement("text", {
-              x: position.x,
-              y: position.y + labelFit.offsetY,
-            });
-            label.textContent = labelFit.text;
-            label.style.fontSize = `${labelFit.fontSize}px`;
-
-            group.appendChild(rectNode);
-            group.appendChild(label);
-            group.addEventListener("mouseenter", (event) => {
-              showTooltip(file.name, [`Leverage: ${score.level}`], event);
-            });
-            group.addEventListener("mouseleave", hideTooltip);
-            group.addEventListener("click", (event) => {
-              event.stopPropagation();
-              state.selectedFileId = file.id;
-              resetZoom();
-              renderAll();
-            });
-            group.addEventListener("dblclick", (event) => {
-              if (state.level === 1) {
-                event.stopPropagation();
-                state.level = 2;
-                state.selectedFileId = file.id;
-                resetZoom();
-                renderAll();
-              }
-            });
-            nodesGroup.appendChild(group);
-          });
-
-          const externalLayer = renderExternalLayer(
-            fileExternalEdges,
-            displayIds,
-            positions,
-            center,
-            ringBase * 0.42,
-            0.9
-          );
-
-          mapLayer = createSvgElement("g", {});
-          mapLayer.appendChild(edgesGroup);
-          if (externalLayer) {
-            mapLayer.appendChild(externalLayer.edgeGroup);
-          }
-          mapLayer.appendChild(nodesGroup);
-          if (externalLayer) {
-            mapLayer.appendChild(externalLayer.nodesGroup);
-          }
-          mapSvg.appendChild(mapLayer);
-          applyTransform();
-        }
+        renderPackageContentMap(center, ringBase, viewBox);
       }
 
       function buildSelection() {
-        if (state.level === 0) {
-          if (
-            state.selectedPackageId === null ||
-            state.selectedPackageId === undefined ||
-            !packageById.has(state.selectedPackageId)
-          ) {
+        if (state.viewMode === viewModes.PACKAGE_CONTENT) {
+          if (!ensureSelectedPackage()) {
             return null;
           }
           const pkg = packageById.get(state.selectedPackageId);
+          const contentContext = buildPackageContentContext(pkg.id);
           const score = packageScores.get(pkg.id) || {
             level: "Low",
             impactScore: 0,
             complexityScore: 0,
           };
+          const directChildPackages = contentContext ? contentContext.childPackages : [];
+          const childPackageIds = new Set(directChildPackages.map((child) => child.id));
+          const hierarchyConnections = directChildPackages.map((childPkg) => ({
+            label: packageShortLabel(childPkg),
+            score: packageScores.get(childPkg.id) || { level: "Low" },
+          }));
           const adjacency = packageAdjacency.get(pkg.id) || new Map();
           const internalConnections = Array.from(adjacency.entries())
             .sort((a, b) => b[1] - a[1])
+            .filter(([id]) => !childPackageIds.has(id))
             .map(([id]) => {
               const target = packageById.get(id);
               const targetScore = packageScores.get(id) || { level: "Low" };
@@ -3648,7 +4394,8 @@
             pkg.id,
             detailExternalLimit
           );
-          const connections = internalConnections
+          const connections = hierarchyConnections
+            .concat(internalConnections)
             .slice(0, Math.max(0, detailConnectionLimit - externalConnections.length))
             .concat(externalConnections);
           const metrics = [
@@ -3657,6 +4404,11 @@
             { label: "LOC", value: formatCount(pkg.loc) },
             { label: "Complexity Max", value: formatCount(pkg.complexityMax) },
             { label: "Coverage", value: formatCoverage(pkg.lineCoverage) },
+            { label: "Direct Packages", value: formatCount(directChildPackages.length) },
+            {
+              label: "Direct Sources",
+              value: formatCount(contentContext ? contentContext.directFiles.length : 0),
+            },
           ];
           return {
             type: "Package",
@@ -3669,14 +4421,19 @@
           };
         }
 
-        if (state.selectedFileId && fileById.has(state.selectedFileId)) {
+        if (
+          state.viewMode === viewModes.FILE_RELATED &&
+          state.selectedFileId &&
+          fileById.has(state.selectedFileId)
+        ) {
           const file = fileById.get(state.selectedFileId);
           const score = fileScores.get(file.id) || {
             level: "Low",
             impactScore: 0,
             complexityScore: 0,
           };
-          const { scopedAdjacency } = buildFileContext(state.selectedPackageId);
+          const fileContext = buildFileRelatedContext(state.selectedPackageId, file.id);
+          const scopedAdjacency = fileContext ? fileContext.scopedAdjacency : new Map();
           const adjacency = scopedAdjacency.get(file.id) || new Map();
           const internalConnections = Array.from(adjacency.entries())
             .sort((a, b) => b[1] - a[1])
@@ -3718,11 +4475,28 @@
 
       function renderAll() {
         updateBreadcrumbs();
-        if (state.level === 0) {
-          updateDashboard(packages, packageScores);
+        if (state.viewMode === viewModes.FILE_RELATED) {
+          const fileContext = buildFileRelatedContext(state.selectedPackageId, state.selectedFileId);
+          if (fileContext && fileContext.resolvedFocusId) {
+            state.selectedFileId = fileContext.resolvedFocusId;
+            updateDashboard(fileContext.displayFiles, fileScores);
+          } else {
+            const scopedFiles = filterFilesForPackage(state.selectedPackageId);
+            updateDashboard(scopedFiles, fileScores);
+          }
         } else {
-          const scopedFiles = filterFilesForPackage(state.selectedPackageId);
-          updateDashboard(scopedFiles, fileScores);
+          if (ensureSelectedPackage()) {
+            const packageContext = buildPackageContentContext(state.selectedPackageId);
+            if (packageContext && packageContext.directFiles.length > 0) {
+              updateDashboard(packageContext.directFiles, fileScores);
+            } else if (packageContext) {
+              updateDashboard(packageContext.childPackages, packageScores);
+            } else {
+              updateDashboard(packages, packageScores);
+            }
+          } else {
+            updateDashboard(packages, packageScores);
+          }
         }
         renderMap();
         updateDetailPanel(buildSelection());
@@ -3867,11 +4641,11 @@
 
       function selectSearchItem(item) {
         if (item.type === "Package") {
-          state.level = 0;
+          state.viewMode = viewModes.PACKAGE_CONTENT;
           state.selectedPackageId = item.id;
           state.selectedFileId = null;
         } else {
-          state.level = 2;
+          state.viewMode = viewModes.FILE_RELATED;
           state.selectedFileId = item.id;
           state.selectedPackageId = item.packageName;
         }
