@@ -1,0 +1,44 @@
+{
+  "focus_test_targets" : [ "src/main/java/com/example/legacy/DynamicTestPatterns.java" ],
+  "generated_at" : "2026-02-15T09:32:29.642297256Z",
+  "quality" : {
+    "classpath" : {
+      "entries" : 166,
+      "javaparser" : "WITH",
+      "spoon" : "WITH"
+    },
+    "dynamic_feature_score" : 52,
+    "penalties" : {
+      "dynamic_features" : 30
+    },
+    "preprocess" : {
+      "mode" : "OFF",
+      "status" : "SKIPPED",
+      "tool_used" : null
+    },
+    "score" : 69,
+    "type_resolution_rate" : 0.99
+  },
+  "recommendations" : [ "High dynamic feature score (52). Consider reviewing reflection or proxy usage for potential static resolution.", "Focus testing on dynamic hotspots: src/main/java/com/example/legacy/DynamicTestPatterns.java." ],
+  "top_ambiguous_examples" : [ "java.util.List#isEmpty()" ],
+  "top_dynamic_files" : [ {
+    "count" : 22,
+    "file" : "src/main/java/com/example/legacy/DynamicTestPatterns.java"
+  } ],
+  "top_dynamic_types" : [ {
+    "count" : 6,
+    "subtype" : "GET_METHOD"
+  }, {
+    "count" : 6,
+    "subtype" : "CONSTRUCTOR_NEWINSTANCE"
+  }, {
+    "count" : 4,
+    "subtype" : "CLASS_FORNAME"
+  }, {
+    "count" : 2,
+    "subtype" : "METHOD_INVOKE"
+  }, {
+    "count" : 2,
+    "subtype" : "GET_DECLARED_METHOD"
+  } ]
+}

@@ -683,36 +683,41 @@ footer {
     </span>
     <span class="meta-item">
       <span class="meta-label">Run ID</span>
-      <span class="meta-value"><code>20260214_180413_19B9</code></span>
+      <span class="meta-value"><code>20260215_183223_102A</code></span>
     </span>
     <span class="meta-item">
       <span class="meta-label">Generated</span>
-      <span class="meta-value">2026-02-14 18:04:27</span>
+      <span class="meta-value">2026-02-15 18:36:00</span>
+    </span>
+    <span class="meta-item">
+      <span class="meta-label">Duration</span>
+      <span class="meta-value">3 min 32 s</span>
     </span>
   </div>
 </header>
 <nav class="section-nav" aria-label="Report sections">
   <a class="section-link" href="#section-summary">Summary</a>
   <a class="section-link" href="#section-analysis-summary">Analysis Insight</a>
+  <a class="section-link" href="#section-coverage">Coverage</a>
   <a class="section-link" href="#section-classes">Analyzed Classes</a>
 </nav>
 <section class="report-section" id="section-summary">
 <h2>Summary</h2>
 <div class="stats-grid">
 <div class="stat-card">
-  <div class="stat-label">Classes</div>
-  <div class="stat-value">23</div>
+  <div class="stat-label">Total Tasks</div>
+  <div class="stat-value">0</div>
 </div>
 <div class="stat-card">
-  <div class="stat-label">Methods</div>
-  <div class="stat-value">114</div>
-</div>
-<div class="stat-card">
-  <div class="stat-label">Selected</div>
+  <div class="stat-label">Succeeded</div>
   <div class="stat-value success">0</div>
 </div>
 <div class="stat-card">
-  <div class="stat-label">Excluded</div>
+  <div class="stat-label">Failed</div>
+  <div class="stat-value failure">0</div>
+</div>
+<div class="stat-card">
+  <div class="stat-label">Skipped</div>
   <div class="stat-value">0</div>
 </div>
 </div>
@@ -720,17 +725,32 @@ footer {
 <section class="report-section" id="section-analysis-summary">
 <h2>Analysis Insight</h2>
 <div class="card">
-  <div class="analysis-summary-text">Overall, the codebase looks generally maintainable, but it has one clear high-risk complexity hotspot centered in invoice calculation logic.
+  <div class="analysis-summary-text">The static analysis of &quot;my-project&quot; indicates that while most methods are manageable, there is a significant complexity issue in one particular method that requires attention.
 
-- com.example.legacy.ComplexInvoiceService is the primary risk area: only 2 methods, but very high complexity (max CC=32, avg CC=16.5) and substantial size (225 LOC), suggesting dense business rules and many branching paths that are hard to reason about and easy to break.
-- ComplexInvoiceService#calculateInvoice (CC=32, 166 LOC) is the single standout hotspot; the number of decision paths implies a high chance of missed edge cases, inconsistent rule handling, and regressions when requirements change.
-- com.example.legacy.PaymentService is large (300 LOC) with moderate complexity in processPayment (CC=7) and refundPayment (CC=6); payment flows typically involve external dependencies and error handling, so even moderate branching can hide failure-mode bugs (timeouts, retries, partial failures).
-- CustomerService methods are relatively low complexity, but they are likely core domain entry points (getActiveCustomers, findCustomerById); correctness and performance risks can still exist due to data access patterns and assumptions about customer state.
-- SimpleCustomerData#equals at CC=3 is not complex, but equals implementations are correctness-sensitive; subtle issues (null handling, symmetry/transitivity, field selection) can cause hard-to-diagnose collection and caching bugs.
+- The &quot;ComplexInvoiceService&quot; class has a method &quot;calculateInvoice&quot; with a cyclomatic complexity of 32, which is significantly higher than the rest and poses a major risk for maintainability and potential defects.
+- The &quot;PaymentService&quot; class, although less complex than &quot;ComplexInvoiceService,&quot; has two methods, &quot;processPayment&quot; and &quot;refundPayment,&quot; with complexities of 7 and 6, respectively, which could be optimized for better readability and maintenance.
+- The &quot;CustomerService&quot; class has methods with moderate complexity, but the &quot;getActiveCustomers&quot; method, with a complexity of 5, should be reviewed for potential simplification.
+- The &quot;OrderService&quot; class methods have low complexity, but consistent review and testing are recommended to ensure they remain efficient and error-free.
+- The &quot;MessageService&quot; class is the least complex, indicating it is well-structured and likely low-risk.
 
-Actionable testing recommendations:
-1) Add a comprehensive, table-driven unit test suite for ComplexInvoiceService#calculateInvoice that covers all major rule branches (discounts, taxes, rounding, edge-case line items, and boundary values) and locks expected outputs with golden test cases.  
-2) Add integration tests for PaymentService processPayment/refundPayment that simulate external gateway behaviors (success, decline, timeout, retry, duplicate callbacks) and verify idempotency and consistent state transitions.  </div>
+To address these findings, it is recommended to:
+1. Conduct focused unit testing on the &quot;calculateInvoice&quot; method in &quot;ComplexInvoiceService&quot; to ensure all logical paths are covered and potential errors are identified.
+2. Perform code refactoring on the &quot;processPayment&quot; and &quot;refundPayment&quot; methods in &quot;PaymentService&quot; to reduce complexity and improve maintainability.  </div>
+</div>
+</section>
+<section class="report-section" id="section-coverage">
+<h2>Coverage</h2>
+<div class="card">
+  <div class="card-header">
+    <span class="card-title">Line Coverage</span>
+  </div>
+<div class="table-wrap">
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Line Coverage</td><td>1.4%</td></tr>
+<tr><td>Branch Coverage</td><td>0.0%</td></tr>
+</table>
+</div>
 </div>
 </section>
 <section class="report-section" id="section-classes">

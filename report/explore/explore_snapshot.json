@@ -1,0 +1,259 @@
+{
+  "edges" : [ {
+    "from" : "com.example.legacy.ComplexInvoiceService",
+    "to" : "com.example.legacy.SimpleCustomerData",
+    "weight" : 1
+  }, {
+    "from" : "com.example.legacy.MessageService",
+    "to" : "com.example.legacy.util.StringUtil",
+    "weight" : 1
+  }, {
+    "from" : "com.example.legacy.service.OrderService",
+    "to" : "com.example.legacy.service.NotificationService",
+    "weight" : 1
+  }, {
+    "from" : "com.example.legacy.service.OrderService",
+    "to" : "com.example.legacy.service.Order",
+    "weight" : 1
+  }, {
+    "from" : "com.example.legacy.service.OrderService",
+    "to" : "com.example.legacy.service.OrderRepository",
+    "weight" : 1
+  } ],
+  "externalLibraries" : [ {
+    "classCount" : 1,
+    "importCount" : 2,
+    "name" : "com.google"
+  } ],
+  "generatedAt" : "2026-02-15T09:36:01.032350476Z",
+  "nodes" : [ {
+    "className" : "ComplexInvoiceService",
+    "complexity" : 32,
+    "detailLinks" : [ {
+      "href" : "../analysis/com/example/legacy/analysis_ComplexInvoiceService.json",
+      "label" : "Analysis JSON"
+    } ],
+    "externalLibraries" : [ ],
+    "id" : "com.example.legacy.ComplexInvoiceService",
+    "loc" : 225,
+    "methodCount" : 2,
+    "packageCluster" : "legacy",
+    "packageName" : "com.example.legacy",
+    "packageRole" : "legacy",
+    "risk" : 78
+  }, {
+    "className" : "CustomerService",
+    "complexity" : 5,
+    "detailLinks" : [ {
+      "href" : "../analysis/com/example/legacy/analysis_CustomerService.json",
+      "label" : "Analysis JSON"
+    } ],
+    "externalLibraries" : [ ],
+    "id" : "com.example.legacy.CustomerService",
+    "loc" : 147,
+    "methodCount" : 7,
+    "packageCluster" : "legacy",
+    "packageName" : "com.example.legacy",
+    "packageRole" : "legacy",
+    "risk" : 28
+  }, {
+    "className" : "DynamicTestPatterns",
+    "complexity" : 2,
+    "detailLinks" : [ {
+      "href" : "../analysis/com/example/legacy/analysis_DynamicTestPatterns.json",
+      "label" : "Analysis JSON"
+    } ],
+    "externalLibraries" : [ ],
+    "id" : "com.example.legacy.DynamicTestPatterns",
+    "loc" : 81,
+    "methodCount" : 9,
+    "packageCluster" : "legacy",
+    "packageName" : "com.example.legacy",
+    "packageRole" : "legacy",
+    "risk" : 22
+  }, {
+    "className" : "ICustomerRepository",
+    "complexity" : 1,
+    "detailLinks" : [ {
+      "href" : "../analysis/com/example/legacy/analysis_ICustomerRepository.json",
+      "label" : "Analysis JSON"
+    } ],
+    "externalLibraries" : [ ],
+    "id" : "com.example.legacy.ICustomerRepository",
+    "loc" : 33,
+    "methodCount" : 4,
+    "packageCluster" : "legacy",
+    "packageName" : "com.example.legacy",
+    "packageRole" : "legacy",
+    "risk" : 10
+  }, {
+    "className" : "MessageService",
+    "complexity" : 3,
+    "detailLinks" : [ {
+      "href" : "../analysis/com/example/legacy/analysis_MessageService.json",
+      "label" : "Analysis JSON"
+    } ],
+    "externalLibraries" : [ ],
+    "id" : "com.example.legacy.MessageService",
+    "loc" : 13,
+    "methodCount" : 2,
+    "packageCluster" : "legacy",
+    "packageName" : "com.example.legacy",
+    "packageRole" : "legacy",
+    "risk" : 10
+  }, {
+    "className" : "OrderProcessingService",
+    "complexity" : 1,
+    "detailLinks" : [ {
+      "href" : "../analysis/com/example/legacy/analysis_OrderProcessingService.json",
+      "label" : "Analysis JSON"
+    } ],
+    "externalLibraries" : [ "com.google" ],
+    "id" : "com.example.legacy.OrderProcessingService",
+    "loc" : 19,
+    "methodCount" : 3,
+    "packageCluster" : "legacy",
+    "packageName" : "com.example.legacy",
+    "packageRole" : "legacy",
+    "risk" : 8
+  }, {
+    "className" : "PaymentService",
+    "complexity" : 7,
+    "detailLinks" : [ {
+      "href" : "../analysis/com/example/legacy/analysis_PaymentService.json",
+      "label" : "Analysis JSON"
+    } ],
+    "externalLibraries" : [ ],
+    "id" : "com.example.legacy.PaymentService",
+    "loc" : 300,
+    "methodCount" : 6,
+    "packageCluster" : "legacy",
+    "packageName" : "com.example.legacy",
+    "packageRole" : "legacy",
+    "risk" : 39
+  }, {
+    "className" : "SimpleCustomerData",
+    "complexity" : 3,
+    "detailLinks" : [ {
+      "href" : "../analysis/com/example/legacy/analysis_SimpleCustomerData.json",
+      "label" : "Analysis JSON"
+    } ],
+    "externalLibraries" : [ ],
+    "id" : "com.example.legacy.SimpleCustomerData",
+    "loc" : 73,
+    "methodCount" : 15,
+    "packageCluster" : "legacy",
+    "packageName" : "com.example.legacy",
+    "packageRole" : "legacy",
+    "risk" : 26
+  }, {
+    "className" : "NotificationService",
+    "complexity" : 1,
+    "detailLinks" : [ {
+      "href" : "../analysis/com/example/legacy/service/analysis_NotificationService.json",
+      "label" : "Analysis JSON"
+    } ],
+    "externalLibraries" : [ ],
+    "id" : "com.example.legacy.service.NotificationService",
+    "loc" : 3,
+    "methodCount" : 1,
+    "packageCluster" : "service",
+    "packageName" : "com.example.legacy.service",
+    "packageRole" : "service",
+    "risk" : 8
+  }, {
+    "className" : "Order",
+    "complexity" : 1,
+    "detailLinks" : [ {
+      "href" : "../analysis/com/example/legacy/service/analysis_Order.json",
+      "label" : "Analysis JSON"
+    } ],
+    "externalLibraries" : [ ],
+    "id" : "com.example.legacy.service.Order",
+    "loc" : 28,
+    "methodCount" : 8,
+    "packageCluster" : "service",
+    "packageName" : "com.example.legacy.service",
+    "packageRole" : "service",
+    "risk" : 15
+  }, {
+    "className" : "OrderRepository",
+    "complexity" : 1,
+    "detailLinks" : [ {
+      "href" : "../analysis/com/example/legacy/service/analysis_OrderRepository.json",
+      "label" : "Analysis JSON"
+    } ],
+    "externalLibraries" : [ ],
+    "id" : "com.example.legacy.service.OrderRepository",
+    "loc" : 5,
+    "methodCount" : 2,
+    "packageCluster" : "service",
+    "packageName" : "com.example.legacy.service",
+    "packageRole" : "service",
+    "risk" : 8
+  }, {
+    "className" : "OrderService",
+    "complexity" : 3,
+    "detailLinks" : [ {
+      "href" : "../analysis/com/example/legacy/service/analysis_OrderService.json",
+      "label" : "Analysis JSON"
+    } ],
+    "externalLibraries" : [ ],
+    "id" : "com.example.legacy.service.OrderService",
+    "loc" : 59,
+    "methodCount" : 4,
+    "packageCluster" : "service",
+    "packageName" : "com.example.legacy.service",
+    "packageRole" : "service",
+    "risk" : 15
+  }, {
+    "className" : "StringUtil",
+    "complexity" : 3,
+    "detailLinks" : [ {
+      "href" : "../analysis/com/example/legacy/util/analysis_StringUtil.json",
+      "label" : "Analysis JSON"
+    } ],
+    "externalLibraries" : [ ],
+    "id" : "com.example.legacy.util.StringUtil",
+    "loc" : 23,
+    "methodCount" : 4,
+    "packageCluster" : "util",
+    "packageName" : "com.example.legacy.util",
+    "packageRole" : "utility",
+    "risk" : 13
+  } ],
+  "packages" : [ {
+    "classCount" : 8,
+    "cluster" : "legacy",
+    "depth" : 3,
+    "name" : "com.example.legacy",
+    "role" : "legacy"
+  }, {
+    "classCount" : 4,
+    "cluster" : "service",
+    "depth" : 4,
+    "name" : "com.example.legacy.service",
+    "role" : "service"
+  }, {
+    "classCount" : 1,
+    "cluster" : "util",
+    "depth" : 4,
+    "name" : "com.example.legacy.util",
+    "role" : "utility"
+  } ],
+  "reportLinks" : [ {
+    "href" : "../report/analysis_visual.html",
+    "label" : "Analysis Visual Report"
+  }, {
+    "href" : "../report/report.html",
+    "label" : "Detailed Report (HTML)"
+  }, {
+    "href" : "../analysis/quality_report.md",
+    "label" : "Quality Report (Markdown)"
+  } ],
+  "runId" : "20260215_183223_102A",
+  "topComplexity" : "com.example.legacy.ComplexInvoiceService#calculateInvoice (CC=32)",
+  "totalClasses" : 13,
+  "totalMethods" : 67,
+  "totalPackages" : 3
+}

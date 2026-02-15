@@ -115,8 +115,8 @@
         "predicates" : [ "amount == null", "amount.compareTo(BigDecimal.ZERO) <= 0", "customerId == null", "orderId == null" ],
         "switches" : [ ]
       },
-      "brittle" : false,
-      "brittleness_signals" : [ ],
+      "brittle" : true,
+      "brittleness_signals" : [ "TIME" ],
       "called_method_refs" : [ {
         "argument_literals" : [ ],
         "candidates" : [ ],

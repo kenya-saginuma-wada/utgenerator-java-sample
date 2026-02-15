@@ -1,4 +1,57 @@
 {
+  "annotations" : {
+    "top" : [ {
+      "count" : 3,
+      "name" : "Override"
+    } ],
+    "unique_count" : 1
+  },
+  "dynamic_features" : {
+    "by_severity" : {
+      "HIGH" : 8,
+      "MEDIUM" : 14
+    },
+    "by_type" : {
+      "REFLECTION" : 20,
+      "SERVICELOADER" : 2
+    },
+    "dynamic_score" : 52,
+    "top_files" : [ {
+      "count" : 22,
+      "file" : "src/main/java/com/example/legacy/DynamicTestPatterns.java"
+    } ],
+    "top_subtypes" : [ {
+      "count" : 6,
+      "subtype" : "GET_METHOD"
+    }, {
+      "count" : 6,
+      "subtype" : "CONSTRUCTOR_NEWINSTANCE"
+    }, {
+      "count" : 4,
+      "subtype" : "CLASS_FORNAME"
+    }, {
+      "count" : 2,
+      "subtype" : "METHOD_INVOKE"
+    }, {
+      "count" : 2,
+      "subtype" : "GET_DECLARED_METHOD"
+    } ],
+    "total_events" : 22
+  },
+  "dynamic_resolutions" : {
+    "average_confidence" : 0.82,
+    "by_subtype" : {
+      "CLASS_FORNAME_LITERAL" : 2,
+      "METHOD_RESOLVE" : 3,
+      "SERVICELOADER_PROVIDERS" : 1
+    },
+    "by_trust_level" : {
+      "HIGH" : 3,
+      "LOW" : 1,
+      "MEDIUM" : 2
+    },
+    "total" : 6
+  },
   "per_source" : {
     "javaparser" : {
       "ambiguous" : 0,
@@ -19,8 +72,17 @@
       "unresolved" : 0
     }
   },
+  "preprocess" : {
+    "duration_ms" : 0,
+    "mode" : "OFF",
+    "source_roots_after" : [ "/home/wada/workspaces/utgenerator-java-sample/src/main/java" ],
+    "source_roots_before" : [ "/home/wada/workspaces/utgenerator-java-sample/src/main/java" ],
+    "status" : "SKIPPED",
+    "tool_used" : null,
+    "work_dir" : "/home/wada/workspaces/utgenerator-java-sample/.utg/preprocess"
+  },
   "project_root" : "/home/wada/workspaces/utgenerator-java-sample",
-  "timestamp" : "2026-02-14T09:04:18.396443088Z",
+  "timestamp" : "2026-02-15T09:32:29.466230463Z",
   "top_ambiguous_examples" : [ "java.util.List#isEmpty()" ],
   "top_unresolved_examples" : [ ],
   "type_resolution" : {
